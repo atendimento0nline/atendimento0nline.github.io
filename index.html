@@ -1,0 +1,1294 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066FF;
+            --primary-dark: #0052CC;
+            --secondary: #00D4AA;
+            --dark: #0A0E27;
+            --dark-light: #1A1F3A;
+            --gray: #6B7280;
+            --gray-light: #F3F4F6;
+            --white: #FFFFFF;
+            --danger: #EF4444;
+            --warning: #F59E0B;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--white);
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--gray-light);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 4px;
+        }
+
+        /* Header */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            width: 36px;
+            height: 36px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero */
+        .hero {
+            margin-top: 80px;
+            padding: 6rem 2rem;
+            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 50%, var(--primary-dark) 100%);
+            color: var(--white);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0,102,255,0.1) 0%, transparent 70%);
+            animation: pulse 15s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.1);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            line-height: 1.1;
+        }
+
+        .hero h1 span {
+            background: linear-gradient(135deg, var(--secondary), #00FF88);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            font-weight: 300;
+        }
+
+        .hero-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .hero-info-item {
+            text-align: center;
+        }
+
+        .hero-info-item .number {
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--secondary);
+            display: block;
+        }
+
+        .hero-info-item .label {
+            font-size: 0.85rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Sections */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-header p {
+            color: var(--gray);
+            font-size: 1.1rem;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .section-divider {
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            margin: 1rem auto;
+            border-radius: 2px;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .card {
+            background: var(--white);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.3s;
+            transform-origin: left;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .card p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+
+        /* Company Info */
+        .company-info {
+            background: var(--gray-light);
+            border-radius: 24px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .info-item-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--primary);
+            font-size: 1.25rem;
+            flex-shrink: 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+
+        .info-item-content h4 {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--gray);
+            margin-bottom: 0.25rem;
+        }
+
+        .info-item-content p {
+            font-weight: 600;
+            font-size: 1rem;
+            color: var(--dark);
+        }
+
+        /* Licenses */
+        .license-card {
+            background: linear-gradient(135deg, var(--dark), var(--dark-light));
+            color: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .license-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(0,102,255,0.2) 0%, transparent 70%);
+        }
+
+        .license-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0,212,170,0.2);
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .license-badge::before {
+            content: '✓';
+            width: 18px;
+            height: 18px;
+            background: var(--secondary);
+            color: var(--dark);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+        }
+
+        .license-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .license-card p {
+            opacity: 0.9;
+            position: relative;
+        }
+
+        .license-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-top: 2rem;
+            position: relative;
+        }
+
+        .license-detail-item {
+            background: rgba(255,255,255,0.05);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .license-detail-item h4 {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 0.5rem;
+        }
+
+        .license-detail-item p {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        /* Legal Sections */
+        .legal-section {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 3rem;
+            margin-bottom: 3rem;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .legal-section h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .legal-section h3 .icon {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+        }
+
+        .legal-content {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        .legal-content h4 {
+            color: var(--dark);
+            font-weight: 600;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.1rem;
+        }
+
+        .legal-content p {
+            margin-bottom: 1rem;
+        }
+
+        .legal-content ul {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .legal-content li {
+            margin-bottom: 0.5rem;
+        }
+
+        .highlight-box {
+            background: var(--gray-light);
+            border-left: 4px solid var(--primary);
+            padding: 1.5rem;
+            border-radius: 0 12px 12px 0;
+            margin: 1.5rem 0;
+        }
+
+        .highlight-box p {
+            margin: 0;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 4rem 2rem 2rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+        }
+
+        .footer-section h4 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+        }
+
+        .footer-section p, .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            line-height: 1.8;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: var(--secondary);
+        }
+
+        .footer-bottom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            text-align: center;
+            color: rgba(255,255,255,0.5);
+            font-size: 0.85rem;
+        }
+
+        .footer-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(0,212,170,0.1);
+            color: var(--secondary);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            .mobile-menu-btn {
+                display: block;
+            }
+            .hero h1 {
+                font-size: 2rem;
+            }
+            .hero-info {
+                gap: 1.5rem;
+            }
+            .section-header h2 {
+                font-size: 1.75rem;
+            }
+            .company-info, .legal-section {
+                padding: 1.5rem;
+            }
+            .license-card {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Table */
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+        }
+
+        .data-table th {
+            background: var(--gray-light);
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--dark);
+            border-bottom: 2px solid var(--primary);
+        }
+
+        .data-table td {
+            padding: 1rem;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            color: var(--gray);
+        }
+
+        .data-table tr:hover td {
+            background: var(--gray-light);
+            color: var(--dark);
+        }
+
+        /* Status Badge */
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: rgba(0,212,170,0.15);
+            color: #059669;
+        }
+
+        .status-active::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #059669;
+            border-radius: 50%;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            padding-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            background: var(--primary);
+            border-radius: 50%;
+            margin-left: -5px;
+        }
+
+        .timeline-item h4 {
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item .date {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item p {
+            color: var(--gray);
+            font-size: 0.95rem;
+        }
+    </style>
+<base target="_blank">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <a href="#" class="logo">
+                <div class="logo-icon">C</div>
+                CELCOIN SCD
+            </a>
+            <ul class="nav-links">
+                <li><a href="#empresa">Empresa</a></li>
+                <li><a href="#licencas">Licenças</a></li>
+                <li><a href="#servicos">Serviços</a></li>
+                <li><a href="#privacidade">Privacidade</a></li>
+                <li><a href="#termos">Termos</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button class="mobile-menu-btn">☰</button>
+        </nav>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="hero-content fade-in">
+            <div class="hero-badge">🏦 Instituição Financeira Regulada pelo Banco Central</div>
+            <h1>CELCOIN <span>SOCIEDADE DE CRÉDITO DIRETO S.A</span></h1>
+            <p class="hero-subtitle">Infraestrutura financeira completa com todas as licenças e autorizações do Banco Central do Brasil para operações de crédito e pagamentos.</p>
+            <div class="hero-info">
+                <div class="hero-info-item">
+                    <span class="number">750+</span>
+                    <span class="label">Clientes Atendidos</span>
+                </div>
+                <div class="hero-info-item">
+                    <span class="number">R$380M</span>
+                    <span class="label">Patrimônio Líquido</span>
+                </div>
+                <div class="hero-info-item">
+                    <span class="number">3.500+</span>
+                    <span class="label">Municípios</span>
+                </div>
+                <div class="hero-info-item">
+                    <span class="number">B Corp</span>
+                    <span class="label">Certificação</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Info -->
+    <section id="empresa">
+        <div class="section-header">
+            <h2>Informações Corporativas</h2>
+            <div class="section-divider"></div>
+            <p>Dados cadastrais e informações institucionais oficiais da CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.</p>
+        </div>
+
+        <div class="company-info">
+            <div class="info-grid">
+                <div class="info-item">
+                    <div class="info-item-icon">🏢</div>
+                    <div class="info-item-content">
+                        <h4>Razão Social</h4>
+                        <p>CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-icon">🆔</div>
+                    <div class="info-item-content">
+                        <h4>CNPJ</h4>
+                        <p>48.632.754/0001-90</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-icon">📅</div>
+                    <div class="info-item-content">
+                        <h4>Data de Fundação</h4>
+                        <p>16 de Novembro de 2022</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-icon">📍</div>
+                    <div class="info-item-content">
+                        <h4>Endereço</h4>
+                        <p>Alameda Xingu, 350, Conjunto 2104<br>Alphaville Centro Industrial e Empresarial<br>Barueri - SP, 06455-030, Brasil</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-icon">🏛️</div>
+                    <div class="info-item-content">
+                        <h4>Natureza Jurídica</h4>
+                        <p>Sociedade Anônima - Sociedade de Crédito Direto (SCD)</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-item-icon">✅</div>
+                    <div class="info-item-content">
+                        <h4>Status</h4>
+                        <p>Ativa - Regulada pelo Banco Central do Brasil</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="date">2016</div>
+                <h4>Fundação do Grupo Celcoin</h4>
+                <p>Início das operações como infraestrutura de tecnologia financeira, fornecendo APIs e soluções para transações de Pix, Open Banking, pagamentos e recargas.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="date">Abril 2022</div>
+                <h4>Certificação B Corporation</h4>
+                <p>Certificação internacional que reconhece empresas que atendem aos mais altos padrões de performance social e ambiental, transparência e responsabilidade.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="date">Novembro 2022</div>
+                <h4>Constituição da Via Capital SCD</h4>
+                <p>Constituição da Sociedade de Crédito Direto que posteriormente seria renomeada para CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="date">Julho 2024</div>
+                <h4>Aquisição pela Celcoin</h4>
+                <p>A Celcoin adquire participação minoritária na Via Capital SCD, iniciando o processo de consolidação da vertical de crédito do grupo.</p>
+            </div>
+            <div class="timeline-item">
+                <div class="date">Fevereiro 2026</div>
+                <h4>Aprovação do Banco Central</h4>
+                <p>Aprovação definitiva do Banco Central para a aquisição de 100% da Via Capital SCD, com aumento de capital de R$ 1,5 milhão para R$ 11,5 milhões.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Licenses -->
+    <section id="licencas">
+        <div class="section-header">
+            <h2>Autorizações e Licenças</h2>
+            <div class="section-divider"></div>
+            <p>Todas as autorizações e licenças concedidas pelo Banco Central do Brasil para operação no Sistema Financeiro Nacional.</p>
+        </div>
+
+        <div class="license-card">
+            <div class="license-badge">Autorização Ativa</div>
+            <h3>🏛️ Sociedade de Crédito Direto (SCD)</h3>
+            <p>A CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A. opera como Sociedade de Crédito Direto, modalidade regulada pelo Banco Central do Brasil que permite a realização de operações de crédito utilizando recursos próprios, sem a captação de depósitos à vista do público.</p>
+            <div class="license-details">
+                <div class="license-detail-item">
+                    <h4>Órgão Regulador</h4>
+                    <p>Banco Central do Brasil</p>
+                </div>
+                <div class="license-detail-item">
+                    <h4>Capital Social</h4>
+                    <p>R$ 11.500.000,00</p>
+                </div>
+                <div class="license-detail-item">
+                    <h4>Status</h4>
+                    <p>Ativa e Regular</p>
+                </div>
+                <div class="license-detail-item">
+                    <h4>Atividade</h4>
+                    <p>Operações de Crédito</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="license-card" style="background: linear-gradient(135deg, #1a365d, #2c5282);">
+            <div class="license-badge" style="background: rgba(0,102,255,0.2); color: #60a5fa;">Conglomerado</div>
+            <h3>🏛️ Instituição de Pagamento (IP) - CELCOIN IP S.A.</h3>
+            <p>O grupo Celcoin também opera através da CELCOIN IP S.A., Instituição de Pagamento autorizada pelo Banco Central, permitindo a emissão de moeda eletrônica, iniciação de transações de pagamento, participação direta no Pix e emissão de cartões.</p>
+            <div class="license-details">
+                <div class="license-detail-item">
+                    <h4>Participação no Pix</h4>
+                    <p>Direta - Pontos de Saque e Troco</p>
+                </div>
+                <div class="license-detail-item">
+                    <h4>Rede Física</h4>
+                    <p>40.000+ Pontos Celcoin</p>
+                </div>
+                <div class="license-detail-item">
+                    <h4>Transações Mensais</h4>
+                    <p>15.000.000+</p>
+                </div>
+                <div class="license-detail-item">
+                    <h4>Volume Mensal</h4>
+                    <p>R$ 3.000.000.000+</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">📋</div>
+                <h3>Resolução Conjunta nº 14/2026</h3>
+                <p>Conforme as normativas vigentes, a instituição mantém capital social e patrimônio líquido adequados às operações realizadas, em conformidade com a metodologia definida pelo Banco Central.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔒</div>
+                <h3>Segregação Patrimonial</h3>
+                <p>Manutenção de patrimônio segregado conforme exigências regulatórias, garantindo a proteção dos recursos dos usuários e a redução de risco sistêmico.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📊</div>
+                <h3>Reportes Regulatórios</h3>
+                <p>Envio automatizado de relatórios ao Banco Central (CCS, CADOCs, COSIF, DIMP) através de conexão direta com RSFN e SPB.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🛡️</div>
+                <h3>Compliance e AML</h3>
+                <p>Programas de Know Your Customer (KYC), Anti-Money Laundering (AML) e prevenção à fraude integrados aos fluxos operacionais.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔐</div>
+                <h3>Segurança da Informação</h3>
+                <p>Infraestrutura com controles de acesso, trilhas de auditoria, segurança cibernética e laudos técnicos independentes conforme exigências do Banco Central.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🌐</div>
+                <h3>Open Finance</h3>
+                <p>Participação no ecossistema Open Finance Brasil, permitindo o compartilhamento seguro de dados financeiros com autorização expressa dos clientes.</p>
+            </div>
+        </div>
+
+        
+    </section>
+
+    <!-- Services -->
+    <section id="servicos">
+        <div class="section-header">
+            <h2>Serviços e Produtos</h2>
+            <div class="section-divider"></div>
+            <p>Soluções financeiras oferecidas através da infraestrutura regulada da CELCOIN SCD e do grupo Celcoin.</p>
+        </div>
+        <div class="cards-grid">
+            <div class="card">
+                <div class="card-icon">💳</div>
+                <h3>Crédito Direto</h3>
+                <p>Operações de crédito com capital próprio, incluindo soluções como Consignado as a Service, empréstimos pessoais e financiamentos, com motor de crédito proprietário e análise de risco com Inteligência Artificial.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">⚡</div>
+                <h3>Pix e Transferências</h3>
+                <p>Participação direta no Sistema de Pagamentos Brasileiro (SPB) com suporte a Pix, TED, pagamento de boletos e DDA, com liquidação em tempo real.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🏧</div>
+                <h3>Pix Saque e Troco</h3>
+                <p>Rede própria com mais de 40.000 pontos físicos distribuídos em mais de 3.500 municípios brasileiros para saques e trocos via Pix.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">📱</div>
+                <h3>Contas Digitais</h3>
+                <p>Infraestrutura completa para emissão de contas digitais com cartões físicos e virtuais, extratos e gestão de saldos.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🔄</div>
+                <h3>Open Finance</h3>
+                <p>Integração com o ecossistema Open Finance Brasil para compartilhamento seguro de dados e iniciação de pagamentos.</p>
+            </div>
+            <div class="card">
+                <div class="card-icon">🤖</div>
+                <h3>Banking as a Service (BaaS)</h3>
+                <p>Permite que empresas operem serviços financeiros usando a licença da Celcoin como Instituição de Pagamento e SCD, com APIs modulares e white-label.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Privacy Policy -->
+    <section id="privacidade">
+        <div class="section-header">
+            <h2>Política de Privacidade</h2>
+            <div class="section-divider"></div>
+            <p>Compromisso com a proteção de dados pessoais e conformidade com a LGPD.</p>
+        </div>
+
+        <div class="legal-section">
+            <h3><span class="icon">🔐</span>Política de Privacidade da CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.</h3>
+            <div class="legal-content">
+                <p><strong>Última atualização:</strong> 23 de junho de 2026</p>
+
+                <h4>1. Introdução</h4>
+                <p>A CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A., inscrita no CNPJ sob o nº 48.632.754/0001-90, com sede na Alameda Xingu, 350, Conjunto 2104, Alphaville Centro Industrial e Empresarial, Barueri/SP, CEP 06455-030, respeita a privacidade de seus usuários e está comprometida com a proteção de seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD).</p>
+
+                <h4>2. Dados Coletados</h4>
+                <p>Coletamos os seguintes tipos de dados pessoais:</p>
+                <ul>
+                    <li><strong>Dados de identificação:</strong> nome completo, CPF, RG, data de nascimento, filiação, nacionalidade, estado civil;</li>
+                    <li><strong>Dados de contato:</strong> endereço residencial, e-mail, telefone celular;</li>
+                    <li><strong>Dados financeiros:</strong> renda, patrimônio, informações bancárias, histórico de crédito, dados de transações;</li>
+                    <li><strong>Dados de navegação:</strong> endereço IP, cookies, logs de acesso, informações sobre dispositivo e navegador;</li>
+                    <li><strong>Dados biométricos:</strong> quando necessário para autenticação e prevenção à fraude, com consentimento específico.</li>
+                </ul>
+
+                <h4>3. Finalidades do Tratamento</h4>
+                <p>Os dados pessoais são tratados para as seguintes finalidades:</p>
+                <ul>
+                    <li>Identificação e autenticação de clientes (KYC);</li>
+                    <li>Análise de crédito e concessão de operações de financiamento;</li>
+                    <li>Cumprimento de obrigações legais e regulatórias impostas pelo Banco Central do Brasil;</li>
+                    <li>Prevenção à lavagem de dinheiro e financiamento ao terrorismo (AML);</li>
+                    <li>Prevenção e investigação de fraudes;</li>
+                    <li>Envio de comunicações sobre produtos e serviços, quando autorizado;</li>
+                    <li>Melhoria de produtos, serviços e experiência do usuário;</li>
+                    <li>Cumprimento de ordens judiciais ou administrativas.</li>
+                </ul>
+
+                <h4>4. Base Legal para o Tratamento</h4>
+                <p>O tratamento de dados pessoais é realizado com base nas seguintes hipóteses legais previstas na LGPD:</p>
+                <ul>
+                    <li><strong>Cumprimento de obrigação legal ou regulatória:</strong> obrigações impostas pelo Banco Central, Receita Federal, COAF e outras autoridades competentes;</li>
+                    <li><strong>Execução de contrato:</strong> para a prestação dos serviços financeiros contratados;</li>
+                    <li><strong>Legítimo interesse:</strong> para prevenção de fraudes e segurança da informação;</li>
+                    <li><strong>Consentimento:</strong> para finalidades de marketing, compartilhamento com parceiros e tratamento de dados sensíveis.</li>
+                </ul>
+
+                <h4>5. Compartilhamento de Dados</h4>
+                <p>Os dados pessoais poderão ser compartilhados com:</p>
+                <ul>
+                    <li>Banco Central do Brasil e demais órgãos reguladores;</li>
+                    <li>Órgãos de fiscalização e controle (COAF, Receita Federal, Procon);</li>
+                    <li>Bureaus de crédito (Serasa Experian, Boa Vista SCPC, Quod);</li>
+                    <li>Prestadores de serviços essenciais à operação (processamento de pagamentos, análise de risco, tecnologia);</li>
+                    <li>Instituições financeiras parceiras, quando necessário para a execução de serviços;</li>
+                    <li>Autoridades judiciais ou administrativas, mediante ordem legal.</li>
+                </ul>
+
+                <h4>6. Segurança da Informação</h4>
+                <p>Adotamos medidas técnicas e administrativas adequadas para proteger os dados pessoais contra acessos não autorizados, situações acidentais ou ilícitas de destruição, perda, alteração, comunicação ou difusão, incluindo:</p>
+                <ul>
+                    <li>Criptografia de dados em trânsito e em repouso;</li>
+                    <li>Controles de acesso baseados em função e necessidade;</li>
+                    <li>Autenticação multifator (MFA);</li>
+                    <li>Monitoramento contínuo e detecção de anomalias;</li>
+                    <li>Planos de resposta a incidentes de segurança;</li>
+                    <li>Treinamento periódico de colaboradores.</li>
+                </ul>
+
+                <h4>7. Retenção e Exclusão</h4>
+                <p>Os dados pessoais são mantidos pelo período necessário ao cumprimento das finalidades para as quais foram coletados, observados os prazos de retenção legal e regulatória (inclusive o prazo prescricional para exercício de direitos). Após esse período, os dados são anonimizados ou excluídos de forma segura.</p>
+
+                <h4>8. Direitos dos Titulares</h4>
+                <p>Em conformidade com a LGPD, o titular dos dados possui os seguintes direitos:</p>
+                <ul>
+                    <li>Confirmação da existência de tratamento;</li>
+                    <li>Acesso aos dados pessoais tratados;</li>
+                    <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
+                    <li>Anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade;</li>
+                    <li>Portabilidade dos dados a outro fornecedor de serviço ou produto;</li>
+                    <li>Eliminação dos dados pessoais tratados com consentimento;</li>
+                    <li>Informação sobre entidades públicas e privadas com as quais compartilhamos dados;</li>
+                    <li>Informação sobre a possibilidade de não fornecer consentimento e sobre as consequências;</li>
+                    <li>Revogação do consentimento.</li>
+                </ul>
+
+                <h4>9. Encarregado de Dados (DPO)</h4>
+                <p>A CELCOIN SCD nomeou um Encarregado de Proteção de Dados Pessoais (DPO), responsável por atuar como canal de comunicação entre a empresa, os titulares de dados e a Autoridade Nacional de Proteção de Dados (ANPD).</p>
+                <div class="highlight-box">
+                    <p><strong>Contato do DPO:</strong> dpo@celcoin.com.br</p>
+                </div>
+
+                <h4>10. Cookies e Tecnologias de Rastreamento</h4>
+                <p>Utilizamos cookies e tecnologias similares para melhorar a experiência de navegação, analisar o tráfego, personalizar conteúdo e anúncios, e fornecer recursos de mídia social. O usuário pode gerenciar suas preferências de cookies através das configurações do navegador.</p>
+
+                <h4>11. Alterações na Política</h4>
+                <p>Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças em nossas práticas, serviços ou obrigações legais. Recomendamos a revisão regular deste documento. As alterações entrarão em vigor na data de publicação atualizada.</p>
+
+                <h4>12. Disposições Gerais</h4>
+                <p>Esta política é regida pelas leis da República Federativa do Brasil. Quaisquer dúvidas ou solicitações relacionadas a esta Política de Privacidade devem ser encaminhadas ao DPO ou através dos canais de atendimento disponibilizados.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Terms of Use -->
+    <section id="termos">
+        <div class="section-header">
+            <h2>Termos de Uso</h2>
+            <div class="section-divider"></div>
+            <p>Condições gerais para utilização dos serviços e produtos oferecidos pela CELCOIN SCD.</p>
+        </div>
+
+        <div class="legal-section">
+            <h3><span class="icon">📜</span>Termos e Condições de Uso</h3>
+            <div class="legal-content">
+                <p><strong>Vigência:</strong> 23 de junho de 2026</p>
+                <p><strong>Version:</strong> 1.0</p>
+
+                <h4>1. Definições</h4>
+                <p>Para fins destes Termos de Uso, aplicam-se as seguintes definições:</p>
+                <ul>
+                    <li><strong>"CELCOIN SCD"</strong> ou <strong>"Instituição"</strong>: CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A., pessoa jurídica de direito privado, inscrita no CNPJ sob o nº 48.632.754/0001-90;</li>
+                    <li><strong>"Usuário"</strong> ou <strong>"Cliente"</strong>: pessoa física ou jurídica que utiliza ou pretende utilizar os serviços oferecidos pela CELCOIN SCD;</li>
+                    <li><strong>"Serviços"</strong>: produtos e serviços financeiros oferecidos pela CELCOIN SCD, incluindo mas não se limitando a operações de crédito, pagamentos, transferências e serviços de Banking as a Service;</li>
+                    <li><strong>"Plataforma"</strong>: conjunto de sistemas, aplicativos, APIs e interfaces digitais disponibilizadas pela CELCOIN SCD;</li>
+                    <li><strong>"Parte"</strong>: CELCOIN SCD ou Usuário, individualmente considerados;</li>
+                    <li><strong>"Partes"</strong>: CELCOIN SCD e Usuário, conjuntamente considerados.</li>
+                </ul>
+
+                <h4>2. Objeto</h4>
+                <p>Estes Termos de Uso regulam o acesso e a utilização dos Serviços oferecidos pela CELCOIN SCD, estabelecendo as condições, direitos e obrigações entre as Partes. Ao acessar ou utilizar a Plataforma, o Usuário declara que leu, compreendeu e concorda com estes Termos.</p>
+
+                <h4>3. Elegibilidade e Cadastro</h4>
+                <p>3.1. Para utilizar os Serviços, o Usuário deve:</p>
+                <ul>
+                    <li>Ser pessoa física maior de 18 (dezoito) anos, plenamente capaz, ou pessoa jurídica regularmente constituída;</li>
+                    <li>Possuir CPF ou CNPJ válido e regular perante a Receita Federal;</li>
+                    <li>Fornecer informações verdadeiras, precisas, atuais e completas durante o processo de cadastro (KYC);</li>
+                    <li>Manter seus dados cadastrais atualizados;</li>
+                    <li>Não constar em listas de restrições ao crédito, sanções internacionais ou listas de pessoas e entidades vinculadas ao terrorismo.</li>
+                </ul>
+                <p>3.2. A CELCOIN SCD se reserva o direito de recusar cadastros, suspender ou cancelar contas que apresentem informações inconsistentes, falsas ou que violem estes Termos ou a legislação vigente.</p>
+
+                <h4>4. Serviços Oferecidos</h4>
+                <p>4.1. A CELCOIN SCD, enquanto Sociedade de Crédito Direto (SCD) autorizada pelo Banco Central do Brasil, oferece serviços de:</p>
+                <ul>
+                    <li>Concessão de operações de crédito com recursos próprios;</li>
+                    <li>Intermediação de operações de crédito;</li>
+                    <li>Serviços de infraestrutura financeira (BaaS) para parceiros;</li>
+                    <li>Emissão e gestão de títulos de crédito (CCBs, notas comerciais);</li>
+                    <li>Gestão de carteira de crédito e cobrança;</li>
+                    <li>Análise de risco de crédito e antifraude.</li>
+                </ul>
+                <p>4.2. A disponibilidade de serviços específicos está sujeita à análise de crédito, perfil de risco e aprovação interna da CELCOIN SCD.</p>
+
+                <h4>5. Obrigações do Usuário</h4>
+                <p>O Usuário se compromete a:</p>
+                <ul>
+                    <li>Utilizar os Serviços de forma lícita, ética e em conformidade com estes Termos e a legislação aplicável;</li>
+                    <li>Não utilizar a Plataforma para fins ilícitos, fraudulentos ou que possam causar danos à CELCOIN SCD ou a terceiros;</li>
+                    <li>Manter a confidencialidade de suas credenciais de acesso (login, senha, tokens, PINs);</li>
+                    <li>Notificar imediatamente a CELCOIN SCD sobre qualquer uso não autorizado de sua conta ou vulnerabilidade de segurança;</li>
+                    <li>Fornecer documentos e informações adicionais quando solicitado para fins de compliance, KYC ou AML;</li>
+                    <li>Honrar os compromissos financeiros assumidos nas operações de crédito contratadas.</li>
+                </ul>
+
+                <h4>6. Obrigações da CELCOIN SCD</h4>
+                <p>A CELCOIN SCD se compromete a:</p>
+                <ul>
+                    <li>Manter as licenças e autorizações necessárias para a operação regular junto ao Banco Central do Brasil;</li>
+                    <li>Prestar os Serviços com zelo, diligência e conformidade às normas regulatórias;</li>
+                    <li>Proteger os dados pessoais e financeiros do Usuário conforme sua Política de Privacidade e a LGPD;</li>
+                    <li>Informar o Usuário sobre alterações relevantes nos Serviços, Termos ou tarifas;</li>
+                    <li>Disponibilizar canais de atendimento para dúvidas, reclamações e solicitações.</li>
+                </ul>
+
+                <h4>7. Tarifas e Custos</h4>
+                <p>7.1. Os valores das tarifas, taxas de juros, encargos e demais custos dos Serviços serão informados previamente ao Usuário, de forma clara e transparente, antes da contratação.</p>
+                <p>7.2. As taxas de juros e encargos observarão os limites legais estabelecidos na legislação vigente, incluindo a Taxa Máxima de Juros (TMJ) quando aplicável.</p>
+                <p>7.3. A CELCOIN SCD poderá alterar as tarifas mediante comunicação prévia ao Usuário, nos termos e prazos regulamentares.</p>
+
+                <h4>8. Propriedade Intelectual</h4>
+                <p>8.1. Todos os direitos de propriedade intelectual relacionados à Plataforma, marcas, logotipos, softwares, APIs, conteúdos e materiais são de propriedade exclusiva da CELCOIN SCD ou de seus licenciadores.</p>
+                <p>8.2. É vedado ao Usuário copiar, modificar, distribuir, transmitir, exibir, reproduzir, publicar, licenciar, criar trabalhos derivados, transferir ou vender qualquer informação, software, produto ou serviço obtido da Plataforma sem autorização expressa.</p>
+
+                <h4>9. Limitação de Responsabilidade</h4>
+                <p>9.1. A CELCOIN SCD não será responsável por:</p>
+                <ul>
+                    <li>Danos decorrentes de uso indevido da Plataforma por parte do Usuário;</li>
+                    <li>Interrupções temporárias dos Serviços necessárias para manutenção, atualização ou por caso fortuito ou força maior;</li>
+                    <li>Atos de terceiros que violem as medidas de segurança implementadas, exceto em caso de culpa ou dolo da CELCOIN SCD;</li>
+                    <li>Decisões de investimento ou contratação de serviços tomadas pelo Usuário com base em informações disponibilizadas na Plataforma.</li>
+                </ul>
+                <p>9.2. Em nenhuma hipótese a responsabilidade da CELCOIN SCD excederá o valor total pago pelo Usuário nos últimos 12 (doze) meses ou o valor da operação específica que deu origem à reclamação.</p>
+
+                <h4>10. Rescisão e Suspensão</h4>
+                <p>10.1. A CELCOIN SCD poderá suspender ou rescindir o acesso do Usuário à Plataforma, total ou parcialmente, nas seguintes hipóteses:</p>
+                <ul>
+                    <li>Violação destes Termos ou da Política de Privacidade;</li>
+                    <li>Descumprimento de obrigações financeiras;</li>
+                    <li>Suspeita de fraude, lavagem de dinheiro ou financiamento ao terrorismo;</li>
+                    <li>Ordem judicial ou administrativa;</li>
+                    <li>Necessidade de proteger a integridade da Plataforma ou de outros usuários.</li>
+                </ul>
+                <p>10.2. O Usuário poderá solicitar o encerramento de sua conta a qualquer momento, desde que não existam obrigações pendentes.</p>
+
+                <h4>11. Disposições Regulatórias</h4>
+                <p>11.1. As operações de crédito estão sujeitas às normas do Banco Central do Brasil, incluindo:</p>
+                <ul>
+                    <li>Resolução CMN nº 4.656/2018 (regulamenta as SCDs);</li>
+                    <li>Resolução CMN nº 4.893/2021 (transparência das operações de crédito);</li>
+                    <li>Resolução Conjunta nº 14/2026 (capital mínimo e patrimônio líquido);</li>
+                    <li>Circular BCB nº 3.952/2011 (crédito ao consumidor);</li>
+                    <li>Lei nº 8.078/1990 (Código de Defesa do Consumidor).</li>
+                </ul>
+                <p>11.2. O Usuário reconhece que a CELCOIN SCD não capta depósitos à vista do público, operando exclusivamente com recursos próprios e/ou de terceiros obtidos mediante operações ativas, conforme regulamentação das SCDs.</p>
+
+                <h4>12. Resolução de Conflitos</h4>
+                <p>12.1. As Partes comprometem-se a resolver eventuais controvérsias de forma amigável, mediante negociação direta.</p>
+                <p>12.2. Persistindo o conflito, fica eleito o Foro da Comarca de Barueri, Estado de São Paulo, para dirimir quaisquer questões oriundas destes Termos, com exclusão de qualquer outro, por mais privilegiado que seja.</p>
+                <p>12.3. O Usuário poderá recorrer aos mecanismos de resolução de conflitos disponibilizados pelo Banco Central do Brasil e pelo Sistema de Defesa do Consumidor.</p>
+
+                <h4>13. Alterações dos Termos</h4>
+                <p>A CELCOIN SCD poderá alterar estes Termos de Uso a qualquer momento, mediante publicação da versão atualizada na Plataforma com prévio aviso ao Usuário. O uso continuado dos Serviços após a publicação das alterações constituirá aceitação dos novos Termos.</p>
+
+                <h4>14. Comunicações</h4>
+                <p>As comunicações entre as Partes poderão ser realizadas por meio eletrônico (e-mail, notificações na Plataforma, SMS), desde que garantida a confirmação de recebimento. O endereço de e-mail oficial da CELCOIN SCD para comunicações regulatórias é: pixcomunicados@celcoin.com.br</p>
+
+                <h4>15. Disposições Gerais</h4>
+                <p>15.1. Estes Termos de Uso constituem o acordo integral entre as Partes, substituindo quaisquer entendimentos anteriores.</p>
+                <p>15.2. A tolerância ou omissão da CELCOIN SCD em exigir o cumprimento de qualquer disposição destes Termos não constituirá renúncia ou novação.</p>
+                <p>15.3. Se qualquer disposição destes Termos for considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito.</p>
+                <p>15.4. Estes Termos são regidos pelas leis da República Federativa do Brasil.</p>
+
+                
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <div class="footer-badge">B Corporation Certified</div>
+                <h4>CELCOIN SCD</h4>
+                <p>CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.<br>CNPJ: 48.632.754/0001-90<br>Instituição Financeira regulada pelo Banco Central do Brasil.</p>
+            </div>
+            <div class="footer-section">
+                <h4>Links Rápidos</h4>
+                <p><a href="#empresa">Sobre a Empresa</a><br><a href="#licencas">Licenças</a><br><a href="#servicos">Serviços</a><br><a href="#privacidade">Privacidade</a><br><a href="#termos">Termos de Uso</a></p>
+            </div>
+            <div class="footer-section">
+                <h4>Regulamentação</h4>
+                <p>Sociedade de Crédito Direto (SCD)<br>Autorizada pelo Banco Central<br>Resolução CMN nº 4.656/2018<br>Capital Social: R$ 11.500.000,00</p>
+            </div>
+            <div class="footer-section">
+                <h4>Contato</h4>
+                <p>Alameda Xingu, 350, CJ 2104<br>Alphaville, Barueri/SP<br>CEP: 06455-030<br>dpo@celcoin.com.br</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2026 CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A. Todos os direitos reservados.</p>
+            <p style="margin-top: 0.5rem; font-size: 0.75rem;">Este site é fornecido para fins informativos e não constitui oferta de produtos ou serviços financeiros. As condições comerciais são estabelecidas em contratos específicos.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header scroll effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
+            } else {
+                header.style.boxShadow = 'none';
+            }
+        });
+
+        // Mobile menu
+        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+            navLinks.style.position = 'absolute';
+            navLinks.style.top = '100%';
+            navLinks.style.left = '0';
+            navLinks.style.right = '0';
+            navLinks.style.background = 'white';
+            navLinks.style.flexDirection = 'column';
+            navLinks.style.padding = '2rem';
+            navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
+        });
+    </script>
+</body>
+</html>
