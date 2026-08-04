@@ -3,22 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <title>Plano de Saúde</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --primary: #0066FF;
-            --primary-dark: #0052CC;
-            --secondary: #00D4AA;
-            --dark: #0A0E27;
-            --dark-light: #1A1F3A;
-            --gray: #6B7280;
-            --gray-light: #F3F4F6;
-            --white: #FFFFFF;
-            --danger: #EF4444;
-            --warning: #F59E0B;
-        }
-
         * {
             margin: 0;
             padding: 0;
@@ -26,1269 +13,912 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            color: var(--dark);
-            line-height: 1.6;
-            background: var(--white);
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: var(--gray-light);
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        /* Header */
+        /* ===== HEADER ===== */
         header {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            padding: 20px 0;
             position: fixed;
+            width: 100%;
             top: 0;
-            left: 0;
-            right: 0;
             z-index: 1000;
-            background: rgba(255,255,255,0.95);
-            backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+            border-bottom: 2px solid #0a8a3e;
+            box-shadow: 0 4px 20px rgba(0, 200, 83, 0.15);
         }
 
-        nav {
+        .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 1rem 2rem;
+            padding: 0 20px;
+        }
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
         .logo {
-            font-size: 1.5rem;
-            font-weight: 800;
-            color: var(--primary);
-            text-decoration: none;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            gap: 12px;
         }
 
         .logo-icon {
-            width: 36px;
-            height: 36px;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 8px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            border-radius: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: 700;
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
         }
 
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: 1px;
         }
 
-        .nav-links a {
+        .logo-text span {
+            color: #0a8a3e;
+        }
+
+        .nav-whatsapp {
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
             text-decoration: none;
-            color: var(--dark);
-            font-weight: 500;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-            position: relative;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);
         }
 
-        .nav-links a:hover {
-            color: var(--primary);
+        .nav-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 200, 83, 0.5);
         }
 
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -4px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--dark);
-        }
-
-        /* Hero */
+        /* ===== HERO ===== */
         .hero {
-            margin-top: 80px;
-            padding: 6rem 2rem;
-            background: linear-gradient(135deg, var(--dark) 0%, var(--dark-light) 50%, var(--primary-dark) 100%);
-            color: var(--white);
-            text-align: center;
+            margin-top: 90px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 50%, #ffffff 100%);
+            padding: 120px 0 100px;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
 
         .hero::before {
             content: '';
             position: absolute;
-            top: -50%;
-            left: -50%;
-            width: 200%;
-            height: 200%;
-            background: radial-gradient(circle, rgba(0,102,255,0.1) 0%, transparent 70%);
-            animation: pulse 15s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 200, 83, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
         }
 
         .hero-content {
             position: relative;
             z-index: 1;
-            max-width: 900px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .hero-badge {
-            display: inline-block;
-            background: rgba(255,255,255,0.1);
-            backdrop-filter: blur(10px);
-            padding: 0.5rem 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 200, 83, 0.1);
+            border: 1px solid rgba(0, 200, 83, 0.3);
+            color: #086b2f;
+            padding: 10px 24px;
             border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 500;
-            margin-bottom: 2rem;
-            border: 1px solid rgba(255,255,255,0.2);
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 30px;
+            animation: pulse-badge 2s infinite;
         }
 
-        .hero h1 {
-            font-size: 3.5rem;
+        @keyframes pulse-badge {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.3); }
+            50% { box-shadow: 0 0 0 10px rgba(0, 200, 83, 0); }
+        }
+
+        .hero-text h1 {
+            font-size: 52px;
             font-weight: 800;
-            margin-bottom: 1rem;
             line-height: 1.1;
-        }
-
-        .hero h1 span {
-            background: linear-gradient(135deg, var(--secondary), #00FF88);
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #086b2f 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
         }
 
-        .hero-subtitle {
-            font-size: 1.25rem;
-            opacity: 0.9;
-            margin-bottom: 2rem;
-            font-weight: 300;
+        .hero-text p {
+            font-size: 20px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
-        .hero-info {
+        .hero-buttons {
             display: flex;
+            gap: 20px;
             justify-content: center;
-            gap: 3rem;
-            margin-top: 3rem;
             flex-wrap: wrap;
         }
 
-        .hero-info-item {
-            text-align: center;
+        .btn-primary {
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 200, 83, 0.3);
+            border: none;
+            cursor: pointer;
         }
 
-        .hero-info-item .number {
-            font-size: 2rem;
-            font-weight: 800;
-            color: var(--secondary);
-            display: block;
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 200, 83, 0.5);
         }
 
-        .hero-info-item .label {
-            font-size: 0.85rem;
-            opacity: 0.8;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+        .btn-secondary {
+            background: transparent;
+            color: #086b2f;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid #0a8a3e;
         }
 
-        /* Sections */
-        section {
-            padding: 5rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
+        .btn-secondary:hover {
+            background: rgba(0, 200, 83, 0.08);
+            transform: translateY(-3px);
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 80px 0;
+            background: #f8fdf9;
         }
 
         .section-header {
             text-align: center;
-            margin-bottom: 4rem;
+            margin-bottom: 60px;
         }
 
         .section-header h2 {
-            font-size: 2.5rem;
+            font-size: 36px;
             font-weight: 800;
-            margin-bottom: 1rem;
-            color: var(--dark);
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .section-header h2 span {
+            color: #0a8a3e;
         }
 
         .section-header p {
-            color: var(--gray);
-            font-size: 1.1rem;
+            color: #666;
+            font-size: 16px;
             max-width: 600px;
             margin: 0 auto;
         }
 
-        .section-divider {
-            width: 60px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            margin: 1rem auto;
-            border-radius: 2px;
-        }
-
-        /* Cards */
-        .cards-grid {
+        .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
-        .card {
-            background: var(--white);
-            border-radius: 16px;
-            padding: 2.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.05);
-            transition: all 0.3s ease;
+        .service-card {
+            background: linear-gradient(135deg, #ffffff, #f0fdf4);
+            border: 1px solid #e0f2e9;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
         }
 
-        .card::before {
+        .service-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            background: linear-gradient(90deg, #0a8a3e, #086b2f);
             transform: scaleX(0);
-            transition: transform 0.3s;
-            transform-origin: left;
+            transition: transform 0.4s ease;
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-        }
-
-        .card:hover::before {
+        .service-card:hover::before {
             transform: scaleX(1);
         }
 
-        .card-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 12px;
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #0a8a3e;
+            box-shadow: 0 20px 40px rgba(0, 200, 83, 0.12);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0a8a3e20, #086b2f20);
+            border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            border: 2px solid #0a8a3e40;
         }
 
-        .card h3 {
-            font-size: 1.25rem;
+        .service-card h3 {
+            font-size: 22px;
             font-weight: 700;
-            margin-bottom: 1rem;
+            margin-bottom: 12px;
+            color: #1a1a1a;
         }
 
-        .card p {
-            color: var(--gray);
-            font-size: 0.95rem;
+        .service-card p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
         }
 
-        /* Company Info */
-        .company-info {
-            background: var(--gray-light);
-            border-radius: 24px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .info-item {
-            display: flex;
-            align-items: flex-start;
-            gap: 1rem;
-        }
-
-        .info-item-icon {
-            width: 48px;
-            height: 48px;
-            background: var(--white);
-            border-radius: 12px;
-            display: flex;
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
             align-items: center;
-            justify-content: center;
-            color: var(--primary);
-            font-size: 1.25rem;
-            flex-shrink: 0;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);
         }
 
-        .info-item-content h4 {
-            font-size: 0.85rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--gray);
-            margin-bottom: 0.25rem;
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
         }
 
-        .info-item-content p {
-            font-weight: 600;
-            font-size: 1rem;
-            color: var(--dark);
-        }
-
-        /* Licenses */
-        .license-card {
-            background: linear-gradient(135deg, var(--dark), var(--dark-light));
-            color: var(--white);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 2rem;
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+            text-align: center;
             position: relative;
             overflow: hidden;
         }
 
-        .license-card::before {
+        .cta-section::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 400px;
-            height: 400px;
-            background: radial-gradient(circle, rgba(0,102,255,0.2) 0%, transparent 70%);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 200, 83, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
         }
 
-        .license-badge {
+        .cta-section h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            color: #1a1a1a;
+        }
+
+        .cta-section h2 span {
+            color: #0a8a3e;
+        }
+
+        .cta-section p {
+            color: #555;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-whatsapp {
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 18px;
             display: inline-flex;
             align-items: center;
-            gap: 0.5rem;
-            background: rgba(0,212,170,0.2);
-            color: var(--secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 200, 83, 0.4);
+            position: relative;
+            z-index: 1;
+            animation: pulse 2s infinite;
         }
 
-        .license-badge::before {
-            content: '✓';
-            width: 18px;
-            height: 18px;
-            background: var(--secondary);
-            color: var(--dark);
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 30px rgba(0, 200, 83, 0.4); }
+            50% { box-shadow: 0 8px 40px rgba(0, 200, 83, 0.7); }
+        }
+
+        .cta-whatsapp:hover {
+            transform: scale(1.05);
+        }
+
+        /* ===== FLOATING WHATSAPP ===== */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7rem;
+            text-decoration: none;
+            box-shadow: 0 6px 25px rgba(0, 200, 83, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: pulse-float 2s infinite;
         }
 
-        .license-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            position: relative;
+        .floating-whatsapp svg {
+            width: 36px;
+            height: 36px;
+            fill: #ffffff;
         }
 
-        .license-card p {
-            opacity: 0.9;
-            position: relative;
+        .floating-whatsapp:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 35px rgba(0, 200, 83, 0.6);
         }
 
-        .license-details {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 2rem;
-            position: relative;
+        @keyframes pulse-float {
+            0%, 100% { box-shadow: 0 6px 25px rgba(0, 200, 83, 0.4); }
+            50% { box-shadow: 0 6px 35px rgba(0, 200, 83, 0.7); }
         }
 
-        .license-detail-item {
-            background: rgba(255,255,255,0.05);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .license-detail-item h4 {
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            opacity: 0.7;
-            margin-bottom: 0.5rem;
-        }
-
-        .license-detail-item p {
+        .floating-whatsapp::after {
+            content: 'Fale Conosco';
+            position: absolute;
+            right: 75px;
+            background: #ffffff;
+            color: #086b2f;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
             font-weight: 600;
-            font-size: 1.1rem;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            border: 1px solid #0a8a3e40;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
         }
 
-        /* Legal Sections */
+        .floating-whatsapp:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #f0fdf4;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #e0f2e9;
+        }
+
+        footer p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        footer .footer-whatsapp {
+            color: #086b2f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .hero-text p {
+                font-size: 18px;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .nav-whatsapp span {
+                display: none;
+            }
+
+            .nav-whatsapp {
+                padding: 12px 16px;
+            }
+
+            .floating-whatsapp {
+                width: 55px;
+                height: 55px;
+            }
+
+            .floating-whatsapp svg {
+                width: 30px;
+                height: 30px;
+            }
+
+            .floating-whatsapp::after {
+                display: none;
+            }
+
+            .popup-box {
+                padding: 30px 20px;
+            }
+
+            .popup-box h2 {
+                font-size: 20px;
+            }
+        
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+                padding: 0 15px;
+            }
+
+            .service-card {
+                padding: 30px 20px;
+            }
+
+}
+
+        /* Logo image styles */
+        .logo-img {
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-logo-img {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .hero-logo-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        /* ===== LEGAL SECTIONS ===== */
         .legal-section {
-            background: var(--white);
-            border-radius: 20px;
-            padding: 3rem;
-            margin-bottom: 3rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05);
-            border: 1px solid rgba(0,0,0,0.05);
+            padding: 80px 0;
+            background: #ffffff;
+        }
+
+        .legal-section h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .legal-section h2 span {
+            color: #0a8a3e;
+        }
+
+        .legal-section .last-update {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .legal-highlight {
+            background: linear-gradient(135deg, #f0fdf4, #e8f5e9);
+            border-left: 4px solid #0a8a3e;
+            padding: 20px 25px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 40px;
+        }
+
+        .legal-highlight p {
+            color: #333;
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0;
         }
 
         .legal-section h3 {
-            font-size: 1.5rem;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--dark);
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+            color: #1a1a1a;
+            margin-top: 35px;
+            margin-bottom: 15px;
         }
 
-        .legal-section h3 .icon {
-            width: 40px;
-            height: 40px;
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        .legal-content {
-            color: var(--gray);
+        .legal-section p {
+            color: #555;
+            font-size: 15px;
             line-height: 1.8;
+            margin-bottom: 15px;
         }
 
-        .legal-content h4 {
-            color: var(--dark);
-            font-weight: 600;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            font-size: 1.1rem;
+        .legal-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
         }
 
-        .legal-content p {
-            margin-bottom: 1rem;
-        }
-
-        .legal-content ul {
-            margin-left: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .legal-content li {
-            margin-bottom: 0.5rem;
-        }
-
-        .highlight-box {
-            background: var(--gray-light);
-            border-left: 4px solid var(--primary);
-            padding: 1.5rem;
-            border-radius: 0 12px 12px 0;
-            margin: 1.5rem 0;
-        }
-
-        .highlight-box p {
-            margin: 0;
-            color: var(--dark);
-            font-weight: 500;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--dark);
-            color: var(--white);
-            padding: 4rem 2rem 2rem;
-        }
-
-        .footer-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 3rem;
-            margin-bottom: 3rem;
-        }
-
-        .footer-section h4 {
-            font-size: 1.1rem;
-            font-weight: 700;
-            margin-bottom: 1.5rem;
-            color: var(--white);
-        }
-
-        .footer-section p, .footer-section a {
-            color: rgba(255,255,255,0.7);
-            text-decoration: none;
+        .legal-section ul li {
+            color: #555;
+            font-size: 15px;
             line-height: 1.8;
-            font-size: 0.9rem;
-            transition: color 0.3s;
+            margin-bottom: 8px;
         }
 
-        .footer-section a:hover {
-            color: var(--secondary);
+        .legal-divider {
+            height: 80px;
+            background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 50%, #ffffff 100%);
         }
 
-        .footer-bottom {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding-top: 2rem;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            text-align: center;
-            color: rgba(255,255,255,0.5);
-            font-size: 0.85rem;
+        #politica-privacidade {
+            margin-top: 40px;
         }
 
-        .footer-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            background: rgba(0,212,170,0.1);
-            color: var(--secondary);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        /* Responsive */
         @media (max-width: 768px) {
-            .nav-links {
-                display: none;
+            .legal-section {
+                padding: 50px 0;
             }
-            .mobile-menu-btn {
-                display: block;
+            .legal-section h2 {
+                font-size: 26px;
             }
-            .hero h1 {
-                font-size: 2rem;
+            .legal-section h3 {
+                font-size: 18px;
             }
-            .hero-info {
-                gap: 1.5rem;
-            }
-            .section-header h2 {
-                font-size: 1.75rem;
-            }
-            .company-info, .legal-section {
-                padding: 1.5rem;
-            }
-            .license-card {
-                padding: 1.5rem;
+            .legal-divider {
+                height: 50px;
             }
         }
 
-        /* Animations */
-        .fade-in {
-            animation: fadeIn 0.8s ease-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Table */
-        .data-table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 1.5rem 0;
-        }
-
-        .data-table th {
-            background: var(--gray-light);
-            padding: 1rem;
-            text-align: left;
-            font-weight: 600;
-            color: var(--dark);
-            border-bottom: 2px solid var(--primary);
-        }
-
-        .data-table td {
-            padding: 1rem;
-            border-bottom: 1px solid rgba(0,0,0,0.05);
-            color: var(--gray);
-        }
-
-        .data-table tr:hover td {
-            background: var(--gray-light);
-            color: var(--dark);
-        }
-
-        /* Status Badge */
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.4rem;
-            padding: 0.4rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.8rem;
-            font-weight: 600;
-        }
-
-        .status-active {
-            background: rgba(0,212,170,0.15);
-            color: #059669;
-        }
-
-        .status-active::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: #059669;
-            border-radius: 50%;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 2rem;
-        }
-
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--primary), var(--secondary));
-        }
-
-        .timeline-item {
-            position: relative;
-            padding-bottom: 2rem;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -2rem;
-            top: 0.5rem;
-            width: 12px;
-            height: 12px;
-            background: var(--primary);
-            border-radius: 50%;
-            margin-left: -5px;
-        }
-
-        .timeline-item h4 {
-            font-weight: 700;
-            color: var(--dark);
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-item .date {
-            font-size: 0.85rem;
-            color: var(--primary);
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-item p {
-            color: var(--gray);
-            font-size: 0.95rem;
-        }
     </style>
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
 <base target="_blank">
 </head>
 <body>
+
     <!-- Header -->
     <header>
-        <nav>
-            <a href="#" class="logo">
-                <div class="logo-icon">C</div>
-                CELCOIN SCD
-            </a>
-            <ul class="nav-links">
-                <li><a href="#empresa">Empresa</a></li>
-                <li><a href="#licencas">Licenças</a></li>
-                <li><a href="#servicos">Serviços</a></li>
-                <li><a href="#privacidade">Privacidade</a></li>
-                <li><a href="#termos">Termos</a></li>
-                <li><a href="#contato">Contato</a></li>
-            </ul>
-            <button class="mobile-menu-btn">☰</button>
-        </nav>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAfQAAAHRCAYAAACct0sPAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6MTNCMzlFMjQ1MkMxMTFFN0I4Q0NFQTc2MjIwNzdFNzQiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6MTNCMzlFMjU1MkMxMTFFN0I4Q0NFQTc2MjIwNzdFNzQiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDoxM0IzOUUyMjUyQzExMUU3QjhDQ0VBNzYyMjA3N0U3NCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDoxM0IzOUUyMzUyQzExMUU3QjhDQ0VBNzYyMjA3N0U3NCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PrD21CYAADN1SURBVHja7N0JeFTV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" alt="Logo" class="logo-img" style="height: 50px; width: auto; object-fit: contain;">
+                    <span class="logo-title" style="font-size: 22px; font-weight: 800; color: #1a1a1a; letter-spacing: 1px; margin-left: 12px;">Portal do <span style="color: #0a8a3e;">Cliente</span></span>
+                </div>
+                <a href="https://wa.me/38991700089?text=Olá!%20Preciso%20de%20ajuda%20com%20minha%20fatura%20do%20plano%20de%20saúde." class="nav-whatsapp" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span>Falar no WhatsApp</span>
+                </a>
+            </div>
+        </div>
     </header>
 
-    <!-- Hero -->
+    <!-- Hero Section -->
     <section class="hero">
-        <div class="hero-content fade-in">
-            <div class="hero-badge">🏦 Instituição Financeira Regulada pelo Banco Central</div>
-            <h1>CELCOIN <span>SOCIEDADE DE CRÉDITO DIRETO S.A</span></h1>
-            <p class="hero-subtitle">Infraestrutura financeira completa com todas as licenças e autorizações do Banco Central do Brasil para operações de crédito e pagamentos.</p>
-            <div class="hero-info">
-                <div class="hero-info-item">
-                    <span class="number">750+</span>
-                    <span class="label">Clientes Atendidos</span>
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">🕐 Atendimento 24h</div>
+                <div class="hero-text">
+                    <h1>2ª Via de Fatura Atualizada em Segundos</h1>
+                    <p>Resolvemos sua fatura em atraso, emitimos segunda via atualizada e regularizamos seu plano de saúde sem burocracia. Atendimento rápido e humanizado.</p>
                 </div>
-                <div class="hero-info-item">
-                    <span class="number">R$380M</span>
-                    <span class="label">Patrimônio Líquido</span>
-                </div>
-                <div class="hero-info-item">
-                    <span class="number">3.500+</span>
-                    <span class="label">Municípios</span>
-                </div>
-                <div class="hero-info-item">
-                    <span class="number">B Corp</span>
-                    <span class="label">Certificação</span>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/38991700089?text=Olá!%20Preciso%20da%202ª%20via%20da%20minha%20fatura%20atualizada." class="btn-primary" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Solicitar 2ª Via
+                    </a>
+                    <a href="https://wa.me/38991700089?text=Olá!%20Gostaria%20de%20falar%20com%20um%20especialista%20sobre%20meu%20plano%20de%20saúde." class="btn-secondary" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Falar com Especialista
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Company Info -->
-    <section id="empresa">
-        <div class="section-header">
-            <h2>Informações Corporativas</h2>
-            <div class="section-divider"></div>
-            <p>Dados cadastrais e informações institucionais oficiais da CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.</p>
-        </div>
-
-        <div class="company-info">
-            <div class="info-grid">
-                <div class="info-item">
-                    <div class="info-item-icon">🏢</div>
-                    <div class="info-item-content">
-                        <h4>Razão Social</h4>
-                        <p>CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-item-icon">🆔</div>
-                    <div class="info-item-content">
-                        <h4>CNPJ</h4>
-                        <p>48.632.754/0001-90</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-item-icon">📅</div>
-                    <div class="info-item-content">
-                        <h4>Data de Fundação</h4>
-                        <p>16 de Novembro de 2022</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-item-icon">📍</div>
-                    <div class="info-item-content">
-                        <h4>Endereço</h4>
-                        <p>Alameda Xingu, 350, Conjunto 2104<br>Alphaville Centro Industrial e Empresarial<br>Barueri - SP, 06455-030, Brasil</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-item-icon">🏛️</div>
-                    <div class="info-item-content">
-                        <h4>Natureza Jurídica</h4>
-                        <p>Sociedade Anônima - Sociedade de Crédito Direto (SCD)</p>
-                    </div>
-                </div>
-                <div class="info-item">
-                    <div class="info-item-icon">✅</div>
-                    <div class="info-item-content">
-                        <h4>Status</h4>
-                        <p>Ativa - Regulada pelo Banco Central do Brasil</p>
-                    </div>
-                </div>
+    <!-- Services Section -->
+        <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossos <span>Serviços</span></h2>
+                <p>Soluções rápidas para sua fatura de plano de saúde. Sem formulários, sem complicação. Um clique e resolvemos tudo pelo WhatsApp.</p>
             </div>
-        </div>
-
-        <div class="timeline">
-            <div class="timeline-item">
-                <div class="date">2016</div>
-                <h4>Fundação do Grupo Celcoin</h4>
-                <p>Início das operações como infraestrutura de tecnologia financeira, fornecendo APIs e soluções para transações de Pix, Open Banking, pagamentos e recargas.</p>
-            </div>
-            <div class="timeline-item">
-                <div class="date">Abril 2022</div>
-                <h4>Certificação B Corporation</h4>
-                <p>Certificação internacional que reconhece empresas que atendem aos mais altos padrões de performance social e ambiental, transparência e responsabilidade.</p>
-            </div>
-            <div class="timeline-item">
-                <div class="date">Novembro 2022</div>
-                <h4>Constituição da Via Capital SCD</h4>
-                <p>Constituição da Sociedade de Crédito Direto que posteriormente seria renomeada para CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.</p>
-            </div>
-            <div class="timeline-item">
-                <div class="date">Julho 2024</div>
-                <h4>Aquisição pela Celcoin</h4>
-                <p>A Celcoin adquire participação minoritária na Via Capital SCD, iniciando o processo de consolidação da vertical de crédito do grupo.</p>
-            </div>
-            <div class="timeline-item">
-                <div class="date">Fevereiro 2026</div>
-                <h4>Aprovação do Banco Central</h4>
-                <p>Aprovação definitiva do Banco Central para a aquisição de 100% da Via Capital SCD, com aumento de capital de R$ 1,5 milhão para R$ 11,5 milhões.</p>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                    <h3>2ª Via Atualizada</h3>
+                    <p>Emitimos sua segunda via de fatura atualizada em poucos minutos. Código de barras válido e pronto para pagamento.</p>
+                    <a href="https://wa.me/38991700089?text=Olá!%20Preciso%20da%202ª%20via%20atualizada%20do%20meu%20plano%20de%20saúde." class="whatsapp-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Pedir 2ª Via
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
+                    <h3>Fatura em Atraso</h3>
+                    <p>Negociamos sua fatura em atraso com as melhores condições. Evite o cancelamento do seu plano de saúde.</p>
+                    <a href="https://wa.me/38991700089?text=Olá!%20Minha%20fatura%20está%20em%20atraso%20e%20preciso%20negociar." class="whatsapp-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Negociar Agora
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg></div>
+                    <h3>Regularização Rápida</h3>
+                    <p>Regularizamos seu plano de saúde pendente. Reativamos sua carteirinha e garantimos seu atendimento médico.</p>
+                    <a href="https://wa.me/38991700089?text=Olá!%20Preciso%20regularizar%20meu%20plano%20de%20saúde%20urgente." class="whatsapp-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg> Regularizar
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Licenses -->
-    <section id="licencas">
-        <div class="section-header">
-            <h2>Autorizações e Licenças</h2>
-            <div class="section-divider"></div>
-            <p>Todas as autorizações e licenças concedidas pelo Banco Central do Brasil para operação no Sistema Financeiro Nacional.</p>
-        </div>
-
-        <div class="license-card">
-            <div class="license-badge">Autorização Ativa</div>
-            <h3>🏛️ Sociedade de Crédito Direto (SCD)</h3>
-            <p>A CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A. opera como Sociedade de Crédito Direto, modalidade regulada pelo Banco Central do Brasil que permite a realização de operações de crédito utilizando recursos próprios, sem a captação de depósitos à vista do público.</p>
-            <div class="license-details">
-                <div class="license-detail-item">
-                    <h4>Órgão Regulador</h4>
-                    <p>Banco Central do Brasil</p>
-                </div>
-                <div class="license-detail-item">
-                    <h4>Capital Social</h4>
-                    <p>R$ 11.500.000,00</p>
-                </div>
-                <div class="license-detail-item">
-                    <h4>Status</h4>
-                    <p>Ativa e Regular</p>
-                </div>
-                <div class="license-detail-item">
-                    <h4>Atividade</h4>
-                    <p>Operações de Crédito</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="license-card" style="background: linear-gradient(135deg, #1a365d, #2c5282);">
-            <div class="license-badge" style="background: rgba(0,102,255,0.2); color: #60a5fa;">Conglomerado</div>
-            <h3>🏛️ Instituição de Pagamento (IP) - CELCOIN IP S.A.</h3>
-            <p>O grupo Celcoin também opera através da CELCOIN IP S.A., Instituição de Pagamento autorizada pelo Banco Central, permitindo a emissão de moeda eletrônica, iniciação de transações de pagamento, participação direta no Pix e emissão de cartões.</p>
-            <div class="license-details">
-                <div class="license-detail-item">
-                    <h4>Participação no Pix</h4>
-                    <p>Direta - Pontos de Saque e Troco</p>
-                </div>
-                <div class="license-detail-item">
-                    <h4>Rede Física</h4>
-                    <p>40.000+ Pontos Celcoin</p>
-                </div>
-                <div class="license-detail-item">
-                    <h4>Transações Mensais</h4>
-                    <p>15.000.000+</p>
-                </div>
-                <div class="license-detail-item">
-                    <h4>Volume Mensal</h4>
-                    <p>R$ 3.000.000.000+</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-icon">📋</div>
-                <h3>Resolução Conjunta nº 14/2026</h3>
-                <p>Conforme as normativas vigentes, a instituição mantém capital social e patrimônio líquido adequados às operações realizadas, em conformidade com a metodologia definida pelo Banco Central.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🔒</div>
-                <h3>Segregação Patrimonial</h3>
-                <p>Manutenção de patrimônio segregado conforme exigências regulatórias, garantindo a proteção dos recursos dos usuários e a redução de risco sistêmico.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">📊</div>
-                <h3>Reportes Regulatórios</h3>
-                <p>Envio automatizado de relatórios ao Banco Central (CCS, CADOCs, COSIF, DIMP) através de conexão direta com RSFN e SPB.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🛡️</div>
-                <h3>Compliance e AML</h3>
-                <p>Programas de Know Your Customer (KYC), Anti-Money Laundering (AML) e prevenção à fraude integrados aos fluxos operacionais.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🔐</div>
-                <h3>Segurança da Informação</h3>
-                <p>Infraestrutura com controles de acesso, trilhas de auditoria, segurança cibernética e laudos técnicos independentes conforme exigências do Banco Central.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🌐</div>
-                <h3>Open Finance</h3>
-                <p>Participação no ecossistema Open Finance Brasil, permitindo o compartilhamento seguro de dados financeiros com autorização expressa dos clientes.</p>
-            </div>
-        </div>
-
-        
-    </section>
-
-    <!-- Services -->
-    <section id="servicos">
-        <div class="section-header">
-            <h2>Serviços e Produtos</h2>
-            <div class="section-divider"></div>
-            <p>Soluções financeiras oferecidas através da infraestrutura regulada da CELCOIN SCD e do grupo Celcoin.</p>
-        </div>
-        <div class="cards-grid">
-            <div class="card">
-                <div class="card-icon">💳</div>
-                <h3>Crédito Direto</h3>
-                <p>Operações de crédito com capital próprio, incluindo soluções como Consignado as a Service, empréstimos pessoais e financiamentos, com motor de crédito proprietário e análise de risco com Inteligência Artificial.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">⚡</div>
-                <h3>Pix e Transferências</h3>
-                <p>Participação direta no Sistema de Pagamentos Brasileiro (SPB) com suporte a Pix, TED, pagamento de boletos e DDA, com liquidação em tempo real.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🏧</div>
-                <h3>Pix Saque e Troco</h3>
-                <p>Rede própria com mais de 40.000 pontos físicos distribuídos em mais de 3.500 municípios brasileiros para saques e trocos via Pix.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">📱</div>
-                <h3>Contas Digitais</h3>
-                <p>Infraestrutura completa para emissão de contas digitais com cartões físicos e virtuais, extratos e gestão de saldos.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🔄</div>
-                <h3>Open Finance</h3>
-                <p>Integração com o ecossistema Open Finance Brasil para compartilhamento seguro de dados e iniciação de pagamentos.</p>
-            </div>
-            <div class="card">
-                <div class="card-icon">🤖</div>
-                <h3>Banking as a Service (BaaS)</h3>
-                <p>Permite que empresas operem serviços financeiros usando a licença da Celcoin como Instituição de Pagamento e SCD, com APIs modulares e white-label.</p>
-            </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Não perca seu <span>Plano de Saúde</span></h2>
+            <p>Fatura em atraso? Precisa da 2ª via? Clique abaixo e fale direto conosco pelo WhatsApp. Resolvemos tudo em minutos, sem filas, sem espera.</p>
+            <a href="https://wa.me/38991700089?text=Olá!%20Preciso%20de%20ajuda%20urgente%20com%20minha%20fatura%20do%20plano%20de%20saúde." class="cta-whatsapp" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Falar no WhatsApp Agora
+            </a>
         </div>
     </section>
 
-    <!-- Privacy Policy -->
-    <section id="privacidade">
-        <div class="section-header">
-            <h2>Política de Privacidade</h2>
-            <div class="section-divider"></div>
-            <p>Compromisso com a proteção de dados pessoais e conformidade com a LGPD.</p>
-        </div>
 
-        <div class="legal-section">
-            <h3><span class="icon">🔐</span>Política de Privacidade da CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.</h3>
-            <div class="legal-content">
-                <p><strong>Última atualização:</strong> 23 de junho de 2026</p>
+    <!-- TERMOS DE USO -->
+    <section class="legal-section" id="termos-de-uso">
+        <div class="container">
+            <h2>Termos de <span>Uso</span></h2>
+            <p class="last-update">Última atualização: 29 de Julho de 2026</p>
 
-                <h4>1. Introdução</h4>
-                <p>A CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A., inscrita no CNPJ sob o nº 48.632.754/0001-90, com sede na Alameda Xingu, 350, Conjunto 2104, Alphaville Centro Industrial e Empresarial, Barueri/SP, CEP 06455-030, respeita a privacidade de seus usuários e está comprometida com a proteção de seus dados pessoais, em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 - LGPD).</p>
-
-                <h4>2. Dados Coletados</h4>
-                <p>Coletamos os seguintes tipos de dados pessoais:</p>
-                <ul>
-                    <li><strong>Dados de identificação:</strong> nome completo, CPF, RG, data de nascimento, filiação, nacionalidade, estado civil;</li>
-                    <li><strong>Dados de contato:</strong> endereço residencial, e-mail, telefone celular;</li>
-                    <li><strong>Dados financeiros:</strong> renda, patrimônio, informações bancárias, histórico de crédito, dados de transações;</li>
-                    <li><strong>Dados de navegação:</strong> endereço IP, cookies, logs de acesso, informações sobre dispositivo e navegador;</li>
-                    <li><strong>Dados biométricos:</strong> quando necessário para autenticação e prevenção à fraude, com consentimento específico.</li>
-                </ul>
-
-                <h4>3. Finalidades do Tratamento</h4>
-                <p>Os dados pessoais são tratados para as seguintes finalidades:</p>
-                <ul>
-                    <li>Identificação e autenticação de clientes (KYC);</li>
-                    <li>Análise de crédito e concessão de operações de financiamento;</li>
-                    <li>Cumprimento de obrigações legais e regulatórias impostas pelo Banco Central do Brasil;</li>
-                    <li>Prevenção à lavagem de dinheiro e financiamento ao terrorismo (AML);</li>
-                    <li>Prevenção e investigação de fraudes;</li>
-                    <li>Envio de comunicações sobre produtos e serviços, quando autorizado;</li>
-                    <li>Melhoria de produtos, serviços e experiência do usuário;</li>
-                    <li>Cumprimento de ordens judiciais ou administrativas.</li>
-                </ul>
-
-                <h4>4. Base Legal para o Tratamento</h4>
-                <p>O tratamento de dados pessoais é realizado com base nas seguintes hipóteses legais previstas na LGPD:</p>
-                <ul>
-                    <li><strong>Cumprimento de obrigação legal ou regulatória:</strong> obrigações impostas pelo Banco Central, Receita Federal, COAF e outras autoridades competentes;</li>
-                    <li><strong>Execução de contrato:</strong> para a prestação dos serviços financeiros contratados;</li>
-                    <li><strong>Legítimo interesse:</strong> para prevenção de fraudes e segurança da informação;</li>
-                    <li><strong>Consentimento:</strong> para finalidades de marketing, compartilhamento com parceiros e tratamento de dados sensíveis.</li>
-                </ul>
-
-                <h4>5. Compartilhamento de Dados</h4>
-                <p>Os dados pessoais poderão ser compartilhados com:</p>
-                <ul>
-                    <li>Banco Central do Brasil e demais órgãos reguladores;</li>
-                    <li>Órgãos de fiscalização e controle (COAF, Receita Federal, Procon);</li>
-                    <li>Bureaus de crédito (Serasa Experian, Boa Vista SCPC, Quod);</li>
-                    <li>Prestadores de serviços essenciais à operação (processamento de pagamentos, análise de risco, tecnologia);</li>
-                    <li>Instituições financeiras parceiras, quando necessário para a execução de serviços;</li>
-                    <li>Autoridades judiciais ou administrativas, mediante ordem legal.</li>
-                </ul>
-
-                <h4>6. Segurança da Informação</h4>
-                <p>Adotamos medidas técnicas e administrativas adequadas para proteger os dados pessoais contra acessos não autorizados, situações acidentais ou ilícitas de destruição, perda, alteração, comunicação ou difusão, incluindo:</p>
-                <ul>
-                    <li>Criptografia de dados em trânsito e em repouso;</li>
-                    <li>Controles de acesso baseados em função e necessidade;</li>
-                    <li>Autenticação multifator (MFA);</li>
-                    <li>Monitoramento contínuo e detecção de anomalias;</li>
-                    <li>Planos de resposta a incidentes de segurança;</li>
-                    <li>Treinamento periódico de colaboradores.</li>
-                </ul>
-
-                <h4>7. Retenção e Exclusão</h4>
-                <p>Os dados pessoais são mantidos pelo período necessário ao cumprimento das finalidades para as quais foram coletados, observados os prazos de retenção legal e regulatória (inclusive o prazo prescricional para exercício de direitos). Após esse período, os dados são anonimizados ou excluídos de forma segura.</p>
-
-                <h4>8. Direitos dos Titulares</h4>
-                <p>Em conformidade com a LGPD, o titular dos dados possui os seguintes direitos:</p>
-                <ul>
-                    <li>Confirmação da existência de tratamento;</li>
-                    <li>Acesso aos dados pessoais tratados;</li>
-                    <li>Correção de dados incompletos, inexatos ou desatualizados;</li>
-                    <li>Anonimização, bloqueio ou eliminação de dados desnecessários, excessivos ou tratados em desconformidade;</li>
-                    <li>Portabilidade dos dados a outro fornecedor de serviço ou produto;</li>
-                    <li>Eliminação dos dados pessoais tratados com consentimento;</li>
-                    <li>Informação sobre entidades públicas e privadas com as quais compartilhamos dados;</li>
-                    <li>Informação sobre a possibilidade de não fornecer consentimento e sobre as consequências;</li>
-                    <li>Revogação do consentimento.</li>
-                </ul>
-
-                <h4>9. Encarregado de Dados (DPO)</h4>
-                <p>A CELCOIN SCD nomeou um Encarregado de Proteção de Dados Pessoais (DPO), responsável por atuar como canal de comunicação entre a empresa, os titulares de dados e a Autoridade Nacional de Proteção de Dados (ANPD).</p>
-                <div class="highlight-box">
-                    <p><strong>Contato do DPO:</strong> dpo@celcoin.com.br</p>
-                </div>
-
-                <h4>10. Cookies e Tecnologias de Rastreamento</h4>
-                <p>Utilizamos cookies e tecnologias similares para melhorar a experiência de navegação, analisar o tráfego, personalizar conteúdo e anúncios, e fornecer recursos de mídia social. O usuário pode gerenciar suas preferências de cookies através das configurações do navegador.</p>
-
-                <h4>11. Alterações na Política</h4>
-                <p>Esta Política de Privacidade pode ser atualizada periodicamente para refletir mudanças em nossas práticas, serviços ou obrigações legais. Recomendamos a revisão regular deste documento. As alterações entrarão em vigor na data de publicação atualizada.</p>
-
-                <h4>12. Disposições Gerais</h4>
-                <p>Esta política é regida pelas leis da República Federativa do Brasil. Quaisquer dúvidas ou solicitações relacionadas a esta Política de Privacidade devem ser encaminhadas ao DPO ou através dos canais de atendimento disponibilizados.</p>
+            <div class="legal-highlight">
+                <p>Ao acessar e utilizar este site, você concorda em cumprir e estar vinculado aos seguintes Termos de Uso. Caso não concorde com qualquer parte destes termos, solicitamos que não utilize nossos serviços.</p>
             </div>
+
+            <h3>1. Aceitação dos Termos</h3>
+            <p>Ao utilizar este site e nossos canais de atendimento (incluindo WhatsApp), você declara que leu, compreendeu e aceita integralmente estes Termos de Uso, bem como nossa Política de Privacidade.</p>
+
+            <h3>2. Natureza do Serviço</h3>
+            <p>Nós atuamos como intermediadora de serviços relacionados a planos de saúde, oferecendo suporte para:</p>
+            <ul>
+                <li>Emissão de 2ª via de faturas e boletos atualizados;</li>
+                <li>Negociação de faturas em atraso;</li>
+                <li>Regularização de planos de saúde suspensos ou cancelados;</li>
+                <li>Suporte ao cliente e atualização de dados cadastrais.</li>
+            </ul>
+            <p>Os serviços são prestados em parceria com operadoras de plano de saúde, sendo que não somos uma operadora de saúde, mas sim uma empresa de atendimento e suporte ao cliente.</p>
+
+            <h3>3. Uso Adequado do Site</h3>
+            <p>O usuário se compromete a utilizar este site e nossos canais de comunicação de forma ética e lícita, abstendo-se de:</p>
+            <ul>
+                <li>Fornecer informações falsas, incompletas ou enganosas;</li>
+                <li>Tentar acessar áreas restritas do site sem autorização;</li>
+                <li>Utilizar robôs, spiders ou outros meios automatizados de acesso;</li>
+                <li>Interferir na segurança ou na integridade dos nossos sistemas;</li>
+                <li>Utilizar o site para fins ilícitos ou que violem direitos de terceiros.</li>
+            </ul>
+
+            <h3>4. Responsabilidades do Usuário</h3>
+            <p>Para utilizar nossos serviços, o usuário deve:</p>
+            <ul>
+                <li>Ser maior de 18 anos ou estar representado por responsável legal;</li>
+                <li>Fornecer dados verdadeiros, precisos e atualizados;</li>
+                <li>Manter a confidencialidade de informações sensíveis compartilhadas;</li>
+                <li>Verificar a autenticidade de comunicações recebidas em nosso nome;</li>
+                <li>Informar-nos imediatamente sobre qualquer uso não autorizado de sua conta ou dados.</li>
+            </ul>
+
+            <h3>5. Limitação de Responsabilidade</h3>
+            <p>Nos esforçamos para manter as informações do site atualizadas e precisas, porém:</p>
+            <ul>
+                <li>Não garantimos que o site estará disponível ininterruptamente ou livre de erros;</li>
+                <li>Não nos responsabilizamos por decisões tomadas por operadoras de saúde parceiras;</li>
+                <li>Não nos responsabilizamos por danos indiretos, incidentais ou consequenciais resultantes do uso ou da impossibilidade de uso dos nossos serviços;</li>
+                <li>O prazo de regularização de planos pode variar conforme a operadora e a situação cadastral.</li>
+            </ul>
+
+            <h3>6. Propriedade Intelectual</h3>
+            <p>Todo o conteúdo deste site — incluindo textos, imagens, logotipos, design, código-fonte e marca — é de propriedade exclusiva da empresa ou de seus licenciadores, protegido pelas leis de propriedade intelectual. É vedada a reprodução, distribuição ou modificação sem autorização prévia e expressa.</p>
+
+            <h3>7. Links para Terceiros</h3>
+            <p>Este site pode conter links para sites de terceiros (como operadoras de saúde e instituições financeiras). Não nos responsabilizamos pelo conteúdo, políticas de privacidade ou práticas de sites de terceiros.</p>
+
+            <h3>8. Alterações nos Termos</h3>
+            <p>Reservamo-nos o direito de modificar estes Termos de Uso a qualquer momento. Alterações significativas serão comunicadas por meio dos nossos canais oficiais. O uso continuado do site após as alterações constitui aceitação dos novos termos.</p>
+
+            <h3>9. Legislação Aplicável</h3>
+            <p>Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil. Quaisquer disputas serão resolvidas nos foros da comarca de domicílio do usuário, conforme previsto no Código de Defesa do Consumidor.</p>
+
+            <h3>10. Contato</h3>
+            <p>Para dúvidas, sugestões ou reclamações sobre estes Termos de Uso, entre em contato:</p>
+            <ul>
+                <li><strong>WhatsApp:</strong> Clique nos botões do site</li>
+                <li><strong>Atendimento:</strong> Disponível 24 horas</li>
+            </ul>
         </div>
     </section>
 
-    <!-- Terms of Use -->
-    <section id="termos">
-        <div class="section-header">
-            <h2>Termos de Uso</h2>
-            <div class="section-divider"></div>
-            <p>Condições gerais para utilização dos serviços e produtos oferecidos pela CELCOIN SCD.</p>
-        </div>
+    <div class="legal-divider"></div>
 
-        <div class="legal-section">
-            <h3><span class="icon">📜</span>Termos e Condições de Uso</h3>
-            <div class="legal-content">
-                <p><strong>Vigência:</strong> 23 de junho de 2026</p>
-                <p><strong>Version:</strong> 1.0</p>
+    <!-- POLÍTICA DE PRIVACIDADE -->
+    <section class="legal-section" id="politica-privacidade">
+        <div class="container">
+            <h2>Política de <span>Privacidade</span></h2>
+            <p class="last-update">Última atualização: 29 de Julho de 2026</p>
 
-                <h4>1. Definições</h4>
-                <p>Para fins destes Termos de Uso, aplicam-se as seguintes definições:</p>
-                <ul>
-                    <li><strong>"CELCOIN SCD"</strong> ou <strong>"Instituição"</strong>: CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A., pessoa jurídica de direito privado, inscrita no CNPJ sob o nº 48.632.754/0001-90;</li>
-                    <li><strong>"Usuário"</strong> ou <strong>"Cliente"</strong>: pessoa física ou jurídica que utiliza ou pretende utilizar os serviços oferecidos pela CELCOIN SCD;</li>
-                    <li><strong>"Serviços"</strong>: produtos e serviços financeiros oferecidos pela CELCOIN SCD, incluindo mas não se limitando a operações de crédito, pagamentos, transferências e serviços de Banking as a Service;</li>
-                    <li><strong>"Plataforma"</strong>: conjunto de sistemas, aplicativos, APIs e interfaces digitais disponibilizadas pela CELCOIN SCD;</li>
-                    <li><strong>"Parte"</strong>: CELCOIN SCD ou Usuário, individualmente considerados;</li>
-                    <li><strong>"Partes"</strong>: CELCOIN SCD e Usuário, conjuntamente considerados.</li>
-                </ul>
-
-                <h4>2. Objeto</h4>
-                <p>Estes Termos de Uso regulam o acesso e a utilização dos Serviços oferecidos pela CELCOIN SCD, estabelecendo as condições, direitos e obrigações entre as Partes. Ao acessar ou utilizar a Plataforma, o Usuário declara que leu, compreendeu e concorda com estes Termos.</p>
-
-                <h4>3. Elegibilidade e Cadastro</h4>
-                <p>3.1. Para utilizar os Serviços, o Usuário deve:</p>
-                <ul>
-                    <li>Ser pessoa física maior de 18 (dezoito) anos, plenamente capaz, ou pessoa jurídica regularmente constituída;</li>
-                    <li>Possuir CPF ou CNPJ válido e regular perante a Receita Federal;</li>
-                    <li>Fornecer informações verdadeiras, precisas, atuais e completas durante o processo de cadastro (KYC);</li>
-                    <li>Manter seus dados cadastrais atualizados;</li>
-                    <li>Não constar em listas de restrições ao crédito, sanções internacionais ou listas de pessoas e entidades vinculadas ao terrorismo.</li>
-                </ul>
-                <p>3.2. A CELCOIN SCD se reserva o direito de recusar cadastros, suspender ou cancelar contas que apresentem informações inconsistentes, falsas ou que violem estes Termos ou a legislação vigente.</p>
-
-                <h4>4. Serviços Oferecidos</h4>
-                <p>4.1. A CELCOIN SCD, enquanto Sociedade de Crédito Direto (SCD) autorizada pelo Banco Central do Brasil, oferece serviços de:</p>
-                <ul>
-                    <li>Concessão de operações de crédito com recursos próprios;</li>
-                    <li>Intermediação de operações de crédito;</li>
-                    <li>Serviços de infraestrutura financeira (BaaS) para parceiros;</li>
-                    <li>Emissão e gestão de títulos de crédito (CCBs, notas comerciais);</li>
-                    <li>Gestão de carteira de crédito e cobrança;</li>
-                    <li>Análise de risco de crédito e antifraude.</li>
-                </ul>
-                <p>4.2. A disponibilidade de serviços específicos está sujeita à análise de crédito, perfil de risco e aprovação interna da CELCOIN SCD.</p>
-
-                <h4>5. Obrigações do Usuário</h4>
-                <p>O Usuário se compromete a:</p>
-                <ul>
-                    <li>Utilizar os Serviços de forma lícita, ética e em conformidade com estes Termos e a legislação aplicável;</li>
-                    <li>Não utilizar a Plataforma para fins ilícitos, fraudulentos ou que possam causar danos à CELCOIN SCD ou a terceiros;</li>
-                    <li>Manter a confidencialidade de suas credenciais de acesso (login, senha, tokens, PINs);</li>
-                    <li>Notificar imediatamente a CELCOIN SCD sobre qualquer uso não autorizado de sua conta ou vulnerabilidade de segurança;</li>
-                    <li>Fornecer documentos e informações adicionais quando solicitado para fins de compliance, KYC ou AML;</li>
-                    <li>Honrar os compromissos financeiros assumidos nas operações de crédito contratadas.</li>
-                </ul>
-
-                <h4>6. Obrigações da CELCOIN SCD</h4>
-                <p>A CELCOIN SCD se compromete a:</p>
-                <ul>
-                    <li>Manter as licenças e autorizações necessárias para a operação regular junto ao Banco Central do Brasil;</li>
-                    <li>Prestar os Serviços com zelo, diligência e conformidade às normas regulatórias;</li>
-                    <li>Proteger os dados pessoais e financeiros do Usuário conforme sua Política de Privacidade e a LGPD;</li>
-                    <li>Informar o Usuário sobre alterações relevantes nos Serviços, Termos ou tarifas;</li>
-                    <li>Disponibilizar canais de atendimento para dúvidas, reclamações e solicitações.</li>
-                </ul>
-
-                <h4>7. Tarifas e Custos</h4>
-                <p>7.1. Os valores das tarifas, taxas de juros, encargos e demais custos dos Serviços serão informados previamente ao Usuário, de forma clara e transparente, antes da contratação.</p>
-                <p>7.2. As taxas de juros e encargos observarão os limites legais estabelecidos na legislação vigente, incluindo a Taxa Máxima de Juros (TMJ) quando aplicável.</p>
-                <p>7.3. A CELCOIN SCD poderá alterar as tarifas mediante comunicação prévia ao Usuário, nos termos e prazos regulamentares.</p>
-
-                <h4>8. Propriedade Intelectual</h4>
-                <p>8.1. Todos os direitos de propriedade intelectual relacionados à Plataforma, marcas, logotipos, softwares, APIs, conteúdos e materiais são de propriedade exclusiva da CELCOIN SCD ou de seus licenciadores.</p>
-                <p>8.2. É vedado ao Usuário copiar, modificar, distribuir, transmitir, exibir, reproduzir, publicar, licenciar, criar trabalhos derivados, transferir ou vender qualquer informação, software, produto ou serviço obtido da Plataforma sem autorização expressa.</p>
-
-                <h4>9. Limitação de Responsabilidade</h4>
-                <p>9.1. A CELCOIN SCD não será responsável por:</p>
-                <ul>
-                    <li>Danos decorrentes de uso indevido da Plataforma por parte do Usuário;</li>
-                    <li>Interrupções temporárias dos Serviços necessárias para manutenção, atualização ou por caso fortuito ou força maior;</li>
-                    <li>Atos de terceiros que violem as medidas de segurança implementadas, exceto em caso de culpa ou dolo da CELCOIN SCD;</li>
-                    <li>Decisões de investimento ou contratação de serviços tomadas pelo Usuário com base em informações disponibilizadas na Plataforma.</li>
-                </ul>
-                <p>9.2. Em nenhuma hipótese a responsabilidade da CELCOIN SCD excederá o valor total pago pelo Usuário nos últimos 12 (doze) meses ou o valor da operação específica que deu origem à reclamação.</p>
-
-                <h4>10. Rescisão e Suspensão</h4>
-                <p>10.1. A CELCOIN SCD poderá suspender ou rescindir o acesso do Usuário à Plataforma, total ou parcialmente, nas seguintes hipóteses:</p>
-                <ul>
-                    <li>Violação destes Termos ou da Política de Privacidade;</li>
-                    <li>Descumprimento de obrigações financeiras;</li>
-                    <li>Suspeita de fraude, lavagem de dinheiro ou financiamento ao terrorismo;</li>
-                    <li>Ordem judicial ou administrativa;</li>
-                    <li>Necessidade de proteger a integridade da Plataforma ou de outros usuários.</li>
-                </ul>
-                <p>10.2. O Usuário poderá solicitar o encerramento de sua conta a qualquer momento, desde que não existam obrigações pendentes.</p>
-
-                <h4>11. Disposições Regulatórias</h4>
-                <p>11.1. As operações de crédito estão sujeitas às normas do Banco Central do Brasil, incluindo:</p>
-                <ul>
-                    <li>Resolução CMN nº 4.656/2018 (regulamenta as SCDs);</li>
-                    <li>Resolução CMN nº 4.893/2021 (transparência das operações de crédito);</li>
-                    <li>Resolução Conjunta nº 14/2026 (capital mínimo e patrimônio líquido);</li>
-                    <li>Circular BCB nº 3.952/2011 (crédito ao consumidor);</li>
-                    <li>Lei nº 8.078/1990 (Código de Defesa do Consumidor).</li>
-                </ul>
-                <p>11.2. O Usuário reconhece que a CELCOIN SCD não capta depósitos à vista do público, operando exclusivamente com recursos próprios e/ou de terceiros obtidos mediante operações ativas, conforme regulamentação das SCDs.</p>
-
-                <h4>12. Resolução de Conflitos</h4>
-                <p>12.1. As Partes comprometem-se a resolver eventuais controvérsias de forma amigável, mediante negociação direta.</p>
-                <p>12.2. Persistindo o conflito, fica eleito o Foro da Comarca de Barueri, Estado de São Paulo, para dirimir quaisquer questões oriundas destes Termos, com exclusão de qualquer outro, por mais privilegiado que seja.</p>
-                <p>12.3. O Usuário poderá recorrer aos mecanismos de resolução de conflitos disponibilizados pelo Banco Central do Brasil e pelo Sistema de Defesa do Consumidor.</p>
-
-                <h4>13. Alterações dos Termos</h4>
-                <p>A CELCOIN SCD poderá alterar estes Termos de Uso a qualquer momento, mediante publicação da versão atualizada na Plataforma com prévio aviso ao Usuário. O uso continuado dos Serviços após a publicação das alterações constituirá aceitação dos novos Termos.</p>
-
-                <h4>14. Comunicações</h4>
-                <p>As comunicações entre as Partes poderão ser realizadas por meio eletrônico (e-mail, notificações na Plataforma, SMS), desde que garantida a confirmação de recebimento. O endereço de e-mail oficial da CELCOIN SCD para comunicações regulatórias é: pixcomunicados@celcoin.com.br</p>
-
-                <h4>15. Disposições Gerais</h4>
-                <p>15.1. Estes Termos de Uso constituem o acordo integral entre as Partes, substituindo quaisquer entendimentos anteriores.</p>
-                <p>15.2. A tolerância ou omissão da CELCOIN SCD em exigir o cumprimento de qualquer disposição destes Termos não constituirá renúncia ou novação.</p>
-                <p>15.3. Se qualquer disposição destes Termos for considerada inválida ou inexequível, as demais disposições permanecerão em pleno vigor e efeito.</p>
-                <p>15.4. Estes Termos são regidos pelas leis da República Federativa do Brasil.</p>
-
-                
+            <div class="legal-highlight">
+                <p>Nós valorizamos a privacidade e a segurança dos dados de seus clientes. Esta política descreve como coletamos, usamos, armazenamos e protegemos suas informações pessoais.</p>
             </div>
+
+            <h3>1. Dados Coletados</h3>
+            <p>Podemos coletar as seguintes informações quando você utiliza nossos canais de atendimento:</p>
+            <ul>
+                <li><strong>Dados de identificação:</strong> nome completo, CPF, RG e data de nascimento;</li>
+                <li><strong>Dados de contato:</strong> número de telefone, endereço de e-mail e endereço residencial;</li>
+                <li><strong>Dados do plano:</strong> número da carteirinha, operadora, tipo de plano e dependentes;</li>
+                <li><strong>Dados de pagamento:</strong> informações bancárias necessárias para emissão de boletos e faturas;</li>
+                <li><strong>Dados de comunicação:</strong> histórico de conversas pelo WhatsApp, e-mails e ligações telefônicas.</li>
+            </ul>
+
+            <h3>2. Finalidade do Tratamento</h3>
+            <p>Seus dados são coletados e utilizados exclusivamente para as seguintes finalidades:</p>
+            <ul>
+                <li>Emitir 2ª via de faturas e boletos atualizados;</li>
+                <li>Negociar faturas em atraso e regularizar planos de saúde;</li>
+                <li>Prestar atendimento ao cliente e sanar dúvidas;</li>
+                <li>Atualizar dados cadastrais junto à operadora de saúde;</li>
+                <li>Enviar comunicações sobre vencimentos, reajustes e novidades do plano.</li>
+            </ul>
+
+            <h3>3. Compartilhamento de Dados</h3>
+            <p>Seus dados pessoais <strong>não são vendidos, alugados ou comercializados</strong> a terceiros. Podemos compartilhar informações apenas com:</p>
+            <ul>
+                <li>A operadora de plano de saúde contratada, exclusivamente para fins de regularização e atualização cadastral;</li>
+                <li>Prestadores de serviços que auxiliam em nossas operações (ex: sistemas de atendimento), sob rigorosos contratos de confidencialidade;</li>
+                <li>Órgãos públicos, quando exigido por lei ou ordem judicial.</li>
+            </ul>
+
+            <h3>4. Segurança da Informação</h3>
+            <p>Adotamos medidas técnicas e administrativas para proteger seus dados contra acesso não autorizado, alteração, divulgação ou destruição:</p>
+            <ul>
+                <li>Criptografia de dados em trânsito (SSL/TLS);</li>
+                <li>Armazenamento seguro em servidores com controle de acesso;</li>
+                <li>Políticas internas de confidencialidade para nossos colaboradores;</li>
+                <li>Monitoramento contínuo de nossos sistemas.</li>
+            </ul>
+
+            <h3>5. Seus Direitos (LGPD)</h3>
+            <p>Conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você possui os seguintes direitos:</p>
+            <ul>
+                <li>Acessar seus dados pessoais que mantemos;</li>
+                <li>Solicitar correção de dados incompletos, inexatos ou desatualizados;</li>
+                <li>Solicitar anonimização, bloqueio ou eliminação de dados desnecessários;</li>
+                <li>Revogar seu consentimento a qualquer momento;</li>
+                <li>Solicitar portabilidade dos dados a outro fornecedor;</li>
+                <li>Ser informado sobre o compartilhamento de seus dados.</li>
+            </ul>
+            <p>Para exercer seus direitos, entre em contato pelo WhatsApp ou por e-mail.</p>
+
+            <h3>6. Cookies e Tecnologias de Rastreamento</h3>
+            <p>Este site pode utilizar cookies e tecnologias similares para melhorar a experiência do usuário, analisar tráfego e personalizar conteúdo. Você pode configurar seu navegador para recusar cookies, mas isso pode afetar a funcionalidade de alguns recursos.</p>
+
+            <h3>7. Alterações nesta Política</h3>
+            <p>Esta Política de Privacidade pode ser atualizada periodicamente. Recomendamos que você a revise com frequência. Alterações significativas serão comunicadas por meio dos nossos canais oficiais.</p>
+
+            <h3>8. Contato</h3>
+            <p>Em caso de dúvidas sobre esta Política de Privacidade ou sobre o tratamento de seus dados pessoais, entre em contato:</p>
+            <ul>
+                <li><strong>WhatsApp:</strong> Clique nos botões do site</li>
+                <li><strong>Atendimento:</strong> Disponível 24 horas</li>
+            </ul>
         </div>
     </section>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <div class="footer-badge">B Corporation Certified</div>
-                <h4>CELCOIN SCD</h4>
-                <p>CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A.<br>CNPJ: 48.632.754/0001-90<br>Instituição Financeira regulada pelo Banco Central do Brasil.</p>
-            </div>
-            <div class="footer-section">
-                <h4>Links Rápidos</h4>
-                <p><a href="#empresa">Sobre a Empresa</a><br><a href="#licencas">Licenças</a><br><a href="#servicos">Serviços</a><br><a href="#privacidade">Privacidade</a><br><a href="#termos">Termos de Uso</a></p>
-            </div>
-            <div class="footer-section">
-                <h4>Regulamentação</h4>
-                <p>Sociedade de Crédito Direto (SCD)<br>Autorizada pelo Banco Central<br>Resolução CMN nº 4.656/2018<br>Capital Social: R$ 11.500.000,00</p>
-            </div>
-            <div class="footer-section">
-                <h4>Contato</h4>
-                <p>Alameda Xingu, 350, CJ 2104<br>Alphaville, Barueri/SP<br>CEP: 06455-030<br>dpo@celcoin.com.br</p>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>© 2026 CELCOIN SOCIEDADE DE CRÉDITO DIRETO S.A. Todos os direitos reservados.</p>
-            <p style="margin-top: 0.5rem; font-size: 0.75rem;">Este site é fornecido para fins informativos e não constitui oferta de produtos ou serviços financeiros. As condições comerciais são estabelecidas em contratos específicos.</p>
+        <div class="container">
+            <p style="margin-bottom: 10px;">
+                <a href="#termos-de-uso" target="_self" style="color: #086b2f; text-decoration: none; font-weight: 600; margin: 0 10px;">Termos de Uso</a> |
+                <a href="#politica-privacidade" target="_self" style="color: #086b2f; text-decoration: none; font-weight: 600; margin: 0 10px;">Política de Privacidade</a>
+            </p>
+            <p>
+                © 2026 — Todos os direitos reservados.
+            </p>
         </div>
     </footer>
 
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/38991700089?text=Olá!%20Preciso%20de%20ajuda%20com%20minha%20fatura%20do%20plano%20de%20saúde." class="floating-whatsapp" target="_blank" title="Fale Conosco">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
     <script>
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
-                });
-            });
-        });
-
-        // Header scroll effect
-        window.addEventListener('scroll', () => {
-            const header = document.querySelector('header');
-            if (window.scrollY > 100) {
-                header.style.boxShadow = '0 4px 20px rgba(0,0,0,0.1)';
-            } else {
-                header.style.boxShadow = 'none';
-            }
-        });
-
-        // Mobile menu
-        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
-            const navLinks = document.querySelector('.nav-links');
-            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
-            navLinks.style.position = 'absolute';
-            navLinks.style.top = '100%';
-            navLinks.style.left = '0';
-            navLinks.style.right = '0';
-            navLinks.style.background = 'white';
-            navLinks.style.flexDirection = 'column';
-            navLinks.style.padding = '2rem';
-            navLinks.style.boxShadow = '0 10px 30px rgba(0,0,0,0.1)';
-        });
     </script>
+
 </body>
 </html>
