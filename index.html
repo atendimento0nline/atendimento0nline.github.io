@@ -1,570 +1,937 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Finança Rápida — Empréstimos Pessoal, Empresarial e Consignado</title>
-<style>
-  :root {
-    --text-primary: #1a1a1a;
-    --text-secondary: #666;
-    --text-tertiary: #999;
-    --border: #e5e5e5;
-    --surface: #fff;
-    --surface-muted: #f5f5f5;
-    --accent-green: #25D366;
-    --positive: #43a047;
-    --warning: #fb8c00;
-    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: var(--font-sans); color: var(--text-primary); line-height: 1.5; background: var(--surface); }
-  button, input, select { font: inherit; }
-  a { text-decoration: none; color: inherit; }
-  svg { display: inline-block; vertical-align: middle; }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title></title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  .header { display: flex; align-items: center; justify-content: space-between; padding: 16px 24px; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--surface); z-index: 50; max-width: 900px; margin: 0 auto; }
-  .logo { font-size: 20px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
-  .nav { display: flex; gap: 20px; }
-  .nav a { color: var(--text-secondary); font-size: 14px; transition: color 0.2s; cursor: pointer; }
-  .nav a:hover { color: var(--text-primary); }
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #ffffff;
+            color: #1a1a1a;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
 
-  .section { padding: 48px 24px; max-width: 900px; margin: 0 auto; }
-  .section-title { font-size: 28px; font-weight: 600; margin-bottom: 8px; text-align: center; }
-  .section-sub { font-size: 16px; color: var(--text-secondary); text-align: center; margin-bottom: 32px; }
+        /* ===== HEADER ===== */
+        header {
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
+            padding: 20px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 2px solid #0a8a3e;
+            box-shadow: 0 4px 20px rgba(0, 200, 83, 0.15);
+        }
 
-  .hero { text-align: center; padding: 64px 24px; max-width: 900px; margin: 0 auto; }
-  .hero h1 { font-size: 36px; font-weight: 600; margin-bottom: 12px; line-height: 1.15; }
-  .hero p { font-size: 17px; color: var(--text-secondary); max-width: 520px; margin: 0 auto 28px; }
-  .btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 24px; border-radius: 10px; font-size: 15px; font-weight: 500; cursor: pointer; border: none; transition: all 0.2s; }
-  .btn-primary { background: var(--text-primary); color: #fff; }
-  .btn-primary:hover { opacity: 0.85; }
-  .btn-ghost { background: transparent; color: var(--text-primary); border: 1px solid var(--border); }
-  .btn-ghost:hover { background: var(--surface-muted); }
-  .btn-wa { background: var(--accent-green); color: #fff; }
-  .btn-wa:hover { opacity: 0.9; }
-  .hero-badges { display: flex; justify-content: center; gap: 24px; margin-top: 32px; flex-wrap: wrap; }
-  .badge { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
 
-  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; }
-  .card { border: 1px solid var(--border); border-radius: 12px; padding: 24px; transition: all 0.2s; cursor: pointer; }
-  .card:hover { border-color: var(--text-primary); transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.06); }
-  .card.active { border-color: var(--text-primary); background: var(--surface-muted); }
-  .card-icon { width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: var(--surface-muted); margin-bottom: 12px; }
-  .card h3 { font-size: 17px; font-weight: 600; margin-bottom: 6px; }
-  .card p { font-size: 14px; color: var(--text-secondary); margin-bottom: 12px; }
-  .card .rate { font-size: 26px; font-weight: 600; margin-bottom: 4px; }
-  .card .rate-label { font-size: 12px; color: var(--text-tertiary); }
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
 
-  .sim { border: 1px solid var(--border); border-radius: 12px; padding: 28px; max-width: 560px; margin: 0 auto; }
-  .sim-row { margin-bottom: 16px; }
-  .sim-row label { display: block; font-size: 13px; color: var(--text-secondary); margin-bottom: 6px; font-weight: 500; }
-  .sim-row input, .sim-row select { width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 10px; font-size: 15px; background: var(--surface); color: var(--text-primary); }
-  .sim-row input:focus, .sim-row select:focus { outline: none; border-color: var(--text-primary); }
-  .sim-result { background: var(--surface-muted); border-radius: 10px; padding: 18px; margin-top: 18px; }
-  .sim-result-row { display: flex; justify-content: space-between; padding: 7px 0; font-size: 14px; }
-  .sim-result-row.total { font-size: 18px; font-weight: 600; border-top: 1px solid var(--border); margin-top: 10px; padding-top: 14px; }
-  .sim-result-row .val { font-weight: 500; }
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
 
-  .table-wrap { overflow-x: auto; }
-  table { width: 100%; border-collapse: collapse; font-size: 14px; }
-  th, td { padding: 12px; text-align: left; border-bottom: 1px solid var(--border); }
-  th { font-weight: 600; color: var(--text-secondary); font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; }
-  tr:hover td { background: var(--surface-muted); }
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: #ffffff;
+        }
 
-  .cta-bar { background: var(--surface-muted); border-radius: 12px; padding: 40px; text-align: center; margin: 32px auto; max-width: 900px; }
-  .cta-bar h3 { font-size: 22px; font-weight: 600; margin-bottom: 8px; }
-  .cta-bar p { font-size: 15px; color: var(--text-secondary); margin-bottom: 20px; }
+        .logo-text {
+            font-size: 22px;
+            font-weight: 800;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+        }
 
-  .feature { display: flex; gap: 12px; align-items: flex-start; padding: 16px; }
-  .feature-icon { flex-shrink: 0; width: 40px; height: 40px; display: flex; align-items: center; justify-content: center; border-radius: 10px; background: var(--surface-muted); }
-  .feature h4 { font-size: 15px; font-weight: 600; margin-bottom: 4px; }
-  .feature p { font-size: 13px; color: var(--text-secondary); margin: 0; }
+        .logo-text span {
+            color: #0a8a3e;
+        }
 
-  .testi { border: 1px solid var(--border); border-radius: 12px; padding: 22px; }
-  .testi-stars { color: var(--warning); margin-bottom: 10px; font-size: 15px; }
-  .testi-text { font-size: 14px; color: var(--text-secondary); margin-bottom: 14px; font-style: italic; line-height: 1.6; }
-  .testi-author { font-size: 14px; font-weight: 600; }
-  .testi-role { font-size: 12px; color: var(--text-tertiary); }
+        .nav-whatsapp {
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);
+        }
 
-  .faq-item { border-bottom: 1px solid var(--border); }
-  .faq-q { display: flex; justify-content: space-between; align-items: center; padding: 18px 0; cursor: pointer; font-size: 15px; font-weight: 500; }
-  .faq-q svg { transition: transform 0.2s; flex-shrink: 0; margin-left: 12px; }
-  .faq-item.open .faq-q svg { transform: rotate(180deg); }
-  .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; }
-  .faq-item.open .faq-a { max-height: 400px; }
-  .faq-a-inner { padding-bottom: 18px; font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+        .nav-whatsapp:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 25px rgba(0, 200, 83, 0.5);
+        }
 
-  .footer { border-top: 1px solid var(--border); padding: 40px 24px; text-align: center; max-width: 900px; margin: 0 auto; }
-  .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
-  .footer-links a { font-size: 13px; color: var(--text-secondary); cursor: pointer; }
-  .footer-links a:hover { color: var(--text-primary); text-decoration: underline; }
-  .footer-copy { font-size: 12px; color: var(--text-tertiary); }
+        /* ===== HERO ===== */
+        .hero {
+            margin-top: 90px;
+            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 50%, #ffffff 100%);
+            padding: 120px 0 100px;
+            position: relative;
+            overflow: hidden;
+            text-align: center;
+        }
 
-  .float-wa { position: fixed; bottom: 24px; right: 24px; z-index: 100; }
-  .float-wa a { display: flex; align-items: center; gap: 8px; background: var(--accent-green); color: #fff; padding: 14px 22px; border-radius: 50px; font-size: 14px; font-weight: 500; box-shadow: 0 4px 16px rgba(37,211,102,0.35); transition: all 0.2s; }
-  .float-wa a:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(37,211,102,0.45); }
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 200, 83, 0.08) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
 
-  .modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 200; display: none; align-items: center; justify-content: center; padding: 20px; }
-  .modal-overlay.show { display: flex; }
-  .modal { background: var(--surface); border-radius: 12px; max-width: 680px; width: 100%; max-height: 85vh; overflow-y: auto; padding: 32px; position: relative; }
-  .modal-close { position: absolute; top: 16px; right: 16px; width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; border-radius: 8px; border: none; background: transparent; cursor: pointer; color: var(--text-secondary); }
-  .modal-close:hover { background: var(--surface-muted); color: var(--text-primary); }
-  .modal h2 { font-size: 22px; font-weight: 600; margin-bottom: 16px; }
-  .modal h3 { font-size: 16px; font-weight: 600; margin: 20px 0 8px; }
-  .modal p, .modal li { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
-  .modal ul { padding-left: 20px; margin: 8px 0; }
-  .modal li { margin-bottom: 6px; }
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
+        }
 
-  @media (max-width: 600px) {
-    .hero h1 { font-size: 28px; }
-    .section-title { font-size: 24px; }
-    .nav { display: none; }
-    .grid { grid-template-columns: 1fr; }
-    .float-wa a span { display: none; }
-    .float-wa a { padding: 14px; }
-  }
-</style>
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(0, 200, 83, 0.1);
+            border: 1px solid rgba(0, 200, 83, 0.3);
+            color: #086b2f;
+            padding: 10px 24px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 30px;
+            animation: pulse-badge 2s infinite;
+        }
+
+        @keyframes pulse-badge {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.3); }
+            50% { box-shadow: 0 0 0 10px rgba(0, 200, 83, 0); }
+        }
+
+        .hero-text h1 {
+            font-size: 52px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            background: linear-gradient(135deg, #1a1a1a 0%, #086b2f 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero-text p {
+            font-size: 20px;
+            color: #555;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(0, 200, 83, 0.3);
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(0, 200, 83, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #086b2f;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 16px;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+            border: 2px solid #0a8a3e;
+        }
+
+        .btn-secondary:hover {
+            background: rgba(0, 200, 83, 0.08);
+            transform: translateY(-3px);
+        }
+
+        /* ===== SERVICES ===== */
+        .services {
+            padding: 80px 0;
+            background: #f8fdf9;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            color: #1a1a1a;
+        }
+
+        .section-header h2 span {
+            color: #0a8a3e;
+        }
+
+        .section-header p {
+            color: #666;
+            font-size: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, #ffffff, #f0fdf4);
+            border: 1px solid #e0f2e9;
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, #0a8a3e, #086b2f);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            border-color: #0a8a3e;
+            box-shadow: 0 20px 40px rgba(0, 200, 83, 0.12);
+        }
+
+        .service-icon {
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, #0a8a3e20, #086b2f20);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 28px;
+            border: 2px solid #0a8a3e40;
+        }
+
+        .service-card h3 {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            color: #1a1a1a;
+        }
+
+        .service-card p {
+            color: #555;
+            font-size: 14px;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .whatsapp-btn {
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);
+        }
+
+        .whatsapp-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
+        }
+
+        /* ===== CTA ===== */
+        .cta-section {
+            padding: 100px 0;
+            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 800px;
+            height: 800px;
+            background: radial-gradient(circle, rgba(0, 200, 83, 0.06) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .cta-section h2 {
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            position: relative;
+            z-index: 1;
+            color: #1a1a1a;
+        }
+
+        .cta-section h2 span {
+            color: #0a8a3e;
+        }
+
+        .cta-section p {
+            color: #555;
+            font-size: 18px;
+            max-width: 600px;
+            margin: 0 auto 40px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .cta-whatsapp {
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
+            text-decoration: none;
+            padding: 20px 50px;
+            border-radius: 50px;
+            font-weight: 800;
+            font-size: 18px;
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 30px rgba(0, 200, 83, 0.4);
+            position: relative;
+            z-index: 1;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 8px 30px rgba(0, 200, 83, 0.4); }
+            50% { box-shadow: 0 8px 40px rgba(0, 200, 83, 0.7); }
+        }
+
+        .cta-whatsapp:hover {
+            transform: scale(1.05);
+        }
+
+        /* ===== FLOATING WHATSAPP ===== */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background: linear-gradient(135deg, #0a8a3e, #086b2f);
+            color: #ffffff;
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            box-shadow: 0 6px 25px rgba(0, 200, 83, 0.4);
+            z-index: 999;
+            transition: all 0.3s ease;
+            animation: pulse-float 2s infinite;
+        }
+
+        .floating-whatsapp svg {
+            width: 36px;
+            height: 36px;
+            fill: #ffffff;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1) rotate(5deg);
+            box-shadow: 0 8px 35px rgba(0, 200, 83, 0.6);
+        }
+
+        @keyframes pulse-float {
+            0%, 100% { box-shadow: 0 6px 25px rgba(0, 200, 83, 0.4); }
+            50% { box-shadow: 0 6px 35px rgba(0, 200, 83, 0.7); }
+        }
+
+        .floating-whatsapp::after {
+            content: 'Fale Conosco';
+            position: absolute;
+            right: 75px;
+            background: #ffffff;
+            color: #086b2f;
+            padding: 8px 16px;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: all 0.3s ease;
+            pointer-events: none;
+            border: 1px solid #0a8a3e40;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .floating-whatsapp:hover::after {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #f0fdf4;
+            padding: 40px 0;
+            text-align: center;
+            border-top: 1px solid #e0f2e9;
+        }
+
+        footer p {
+            color: #666;
+            font-size: 14px;
+        }
+
+        footer .footer-whatsapp {
+            color: #086b2f;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .hero-text p {
+                font-size: 18px;
+            }
+
+            .section-header h2 {
+                font-size: 28px;
+            }
+
+            .cta-section h2 {
+                font-size: 28px;
+            }
+
+            .nav-whatsapp span {
+                display: none;
+            }
+
+            .nav-whatsapp {
+                padding: 12px 16px;
+            }
+
+            .floating-whatsapp {
+                width: 55px;
+                height: 55px;
+            }
+
+            .floating-whatsapp svg {
+                width: 30px;
+                height: 30px;
+            }
+
+            .floating-whatsapp::after {
+                display: none;
+            }
+
+            .popup-box {
+                padding: 30px 20px;
+            }
+
+            .popup-box h2 {
+                font-size: 20px;
+            }
+        
+            .services-grid {
+                grid-template-columns: 1fr;
+                max-width: 100%;
+                padding: 0 15px;
+            }
+
+            .service-card {
+                padding: 30px 20px;
+            }
+
+}
+
+        /* Logo image styles */
+        .logo-img {
+            transition: transform 0.3s ease;
+        }
+        .logo-img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-logo-img {
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+        }
+        .hero-logo-img:hover {
+            transform: scale(1.05);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
+        }
+
+        /* ===== LEGAL SECTIONS ===== */
+        .legal-section {
+            padding: 80px 0;
+            background: #ffffff;
+        }
+
+        .legal-section h2 {
+            font-size: 36px;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+            text-align: center;
+        }
+
+        .legal-section h2 span {
+            color: #0a8a3e;
+        }
+
+        .legal-section .last-update {
+            text-align: center;
+            color: #888;
+            font-size: 14px;
+            margin-bottom: 40px;
+        }
+
+        .legal-highlight {
+            background: linear-gradient(135deg, #f0fdf4, #e8f5e9);
+            border-left: 4px solid #0a8a3e;
+            padding: 20px 25px;
+            border-radius: 0 12px 12px 0;
+            margin-bottom: 40px;
+        }
+
+        .legal-highlight p {
+            color: #333;
+            font-size: 15px;
+            line-height: 1.7;
+            margin: 0;
+        }
+
+        .legal-section h3 {
+            font-size: 20px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-top: 35px;
+            margin-bottom: 15px;
+        }
+
+        .legal-section p {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+
+        .legal-section ul {
+            margin-bottom: 20px;
+            padding-left: 25px;
+        }
+
+        .legal-section ul li {
+            color: #555;
+            font-size: 15px;
+            line-height: 1.8;
+            margin-bottom: 8px;
+        }
+
+        .legal-divider {
+            height: 80px;
+            background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 50%, #ffffff 100%);
+        }
+
+        #politica-privacidade {
+            margin-top: 40px;
+        }
+
+        @media (max-width: 768px) {
+            .legal-section {
+                padding: 50px 0;
+            }
+            .legal-section h2 {
+                font-size: 26px;
+            }
+            .legal-section h3 {
+                font-size: 18px;
+            }
+            .legal-divider {
+                height: 50px;
+            }
+        }
+
+    </style>
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
+<base target="_blank">
 <base target="_blank">
 <base target="_blank">
 </head>
 <body>
 
-<div class="header">
-  <div class="logo">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z" fill="currentColor"/></svg>
-    Finança Rápida
-  </div>
-  <nav class="nav">
-    <a onclick="scrollToId('produtos')">Produtos</a>
-    <a onclick="scrollToId('simulador')">Simulador</a>
-    <a onclick="scrollToId('vantagens')">Vantagens</a>
-    <a onclick="scrollToId('faq')">FAQ</a>
-  </nav>
-</div>
+    <!-- Header -->
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <div class="logo-text">Portal do <span>Cliente</span></div>
+                </div>
+                <a href="https://wa.me/5568945016225?text=Olá!%20Preciso%20de%20ajuda%20com%20minha%20fatura%20do%20plano%20de%20saúde." class="nav-whatsapp" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span>Falar no WhatsApp</span>
+                </a>
+            </div>
+        </div>
+    </header>
 
-<div class="hero" id="inicio" style="position:relative;overflow:hidden;border-radius:0;">
-  <!-- Background image -->
-  <div style="position:absolute;inset:0;z-index:0;">
-    <img src="https://kimi-web-img.kimi.ai/img/loanslan.com/41f2d1e7ad3c7cd771495c575d7d0b18f10164a9.jpg" alt="Atendimento ao cliente sobre empréstimo" style="width:100%;height:100%;object-fit:cover;object-position:center;">
-    <div style="position:absolute;inset:0;background:rgba(0,0,0,0.55);"></div>
-  </div>
-  <!-- Content -->
-  <div style="position:relative;z-index:1;color:#fff;">
-    <h1 style="color:#fff;">Crédito que cabe no seu bolso</h1>
-    <p style="color:rgba(255,255,255,0.85);max-width:520px;margin:0 auto 28px;">Empréstimo pessoal, empresarial e consignado para aposentados com as menores taxas do mercado. Aprovação em minutos, dinheiro na conta em até 24h.</p>
-    <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
-      <a class="btn btn-wa" href="https://wa.me/5511999999999?text=Olá!%20Quero%20solicitar%20um%20empréstimo" target="_blank">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17.6 6.32A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.88 12.15l-1.1 4.01 4.1-1.08A7.93 7.93 0 0 0 20 12a7.85 7.85 0 0 0-2.4-5.68zM12 18.5a6.46 6.46 0 0 1-3.3-.91l-.24-.14-2.47.65.66-2.4-.16-.25a6.46 6.46 0 0 1 5.51-9.95 6.46 6.46 0 0 1 6.45 6.45 6.47 6.47 0 0 1-6.45 6.45zm3.55-4.85c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1s-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.58-.98 5.97 5.97 0 0 1-1.1-1.36c-.12-.2 0-.3.09-.4.09-.09.2-.23.3-.34.1-.12.13-.2.2-.33.06-.13.03-.24-.02-.34s-.44-1.06-.6-1.45c-.16-.38-.32-.33-.44-.34l-.37-.01a.72.72 0 0 0-.52.24c-.18.2-.68.66-.68 1.62s.7 1.88.79 2.01c.1.13 1.36 2.08 3.3 2.92.46.2.82.32 1.1.4.46.15.88.13 1.21.08.37-.05 1.17-.48 1.33-.94.17-.46.17-.85.12-.94-.05-.08-.18-.13-.38-.23z" fill="currentColor"/></svg>
-        Falar no WhatsApp
-      </a>
-      <button class="btn btn-ghost" onclick="scrollToId('simulador')" style="color:#fff;border-color:rgba(255,255,255,0.3);background:rgba(255,255,255,0.1);">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 3.08496C4.55224 3.08496 4.99993 3.53273 5 4.08496V18.0361H19.9941L20.0967 18.041C20.6008 18.0923 20.9941 18.5185 20.9941 19.0361C20.9941 19.5538 20.6008 19.9799 20.0967 20.0312L19.9941 20.0361H5C3.89546 20.0361 3.00005 19.1407 3 18.0361V4.08496C3.00007 3.53273 3.44776 3.08496 4 3.08496ZM18.2627 6.5166C18.6316 6.10561 19.2638 6.07157 19.6748 6.44043C20.0858 6.80932 20.1198 7.44153 19.751 7.85254L13.0906 15.3663C12.7217 15.7773 12.0895 15.8113 11.6785 15.4425C11.2674 15.0736 11.2334 14.4414 11.6023 14.0304L18.2627 6.5166ZM8.65911 11.1201C9.30773 11.7687 9.30773 12.8232 8.65911 13.4718L6.65911 15.4718C6.01049 16.1204 4.95595 16.1204 4.30733 15.4718C3.65871 14.8232 3.65871 13.7687 4.30733 13.1201L6.30733 11.1201C6.95595 10.4715 8.01049 10.4715 8.65911 11.1201Z" fill="currentColor"/></svg>
-        Simular agora
-      </button>
-    </div>
-    <div class="hero-badges" style="margin-top:32px;">
-      <div class="badge" style="color:rgba(255,255,255,0.85);">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M19.3027 5.9053C19.6542 5.55397 20.2247 5.55388 20.5761 5.9053C20.9273 6.25675 20.9273 6.82734 20.5761 7.17874L9.65911 18.0948C9.30773 18.4461 8.73814 18.446 8.38665 18.0948L3.42376 13.1328C3.0726 12.7814 3.07263 12.2118 3.42376 11.8604C3.77524 11.509 4.34575 11.5089 4.6972 11.8604L9.02239 16.1856L19.3027 5.9053Z" fill="var(--positive)"/></svg>
-        Aprovação em 5 min
-      </div>
-      <div class="badge" style="color:rgba(255,255,255,0.85);">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 3.8H7C5.78497 3.8 4.8 4.78497 4.8 6V15.7647C4.8 16.574 5.24438 17.318 5.95698 17.7017L10.957 20.394C11.6081 20.7446 12.3919 20.7446 13.043 20.394L18.043 17.7017C18.7556 17.318 19.2 16.574 19.2 15.7647V6C19.2 4.78497 18.215 3.8 17 3.8ZM7 2C4.79086 2 3 3.79086 3 6V15.7647C3 17.2362 3.80796 18.5889 5.1036 19.2866L10.1036 21.9789C11.2875 22.6164 12.7125 22.6164 13.8964 21.9789L18.8964 19.2866C20.192 18.5889 21 17.2362 21 15.7647V6C21 3.79086 19.2091 2 17 2H7Z" fill="var(--warning)"/></svg>
-        100% Seguro
-      </div>
-      <div class="badge" style="color:rgba(255,255,255,0.85);">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 2.1001C17.4676 2.10031 21.8994 6.53286 21.8994 12.0005C21.8992 17.4679 17.4674 21.8997 12 21.8999C6.53237 21.8999 2.09982 17.4681 2.09961 12.0005C2.09961 6.53273 6.53224 2.1001 12 2.1001ZM12 3.8999C7.52636 3.8999 3.89941 7.52684 3.89941 12.0005C3.89963 16.474 7.52649 20.1001 12 20.1001C16.4733 20.0999 20.0994 16.4738 20.0996 12.0005C20.0996 7.52697 16.4735 3.90011 12 3.8999ZM12 9.50049C12.4971 9.50049 12.9 9.90344 12.9 10.4005V16.4005C12.9 16.8975 12.4971 17.3005 12 17.3005C11.503 17.3005 11.1 16.8975 11.1 16.4005V10.4005C11.1 9.90344 11.503 9.50049 12 9.50049ZM12 7.1001C12.4971 7.1001 12.9 7.50305 12.9 8.0001C12.9 8.49714 12.4971 8.9001 12 8.9001C11.503 8.9001 11.1 8.49714 11.1 8.0001C11.1 7.50305 11.503 7.1001 12 7.1001Z" fill="var(--accent-green)"/></svg>
-        Sem consulta ao SPC/Serasa
-      </div>
-    </div>
-  </div>
-</div>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">🕐 Atendimento 24h</div>
+                <div class="hero-text">
+                    <h1>2ª Via de Fatura Atualizada em Segundos</h1>
+                    <p>Resolvemos sua fatura em atraso, emitimos segunda via atualizada e regularizamos seu plano de saúde sem burocracia. Atendimento rápido e humanizado.</p>
+                </div>
+                <div class="hero-buttons">
+                    <a href="https://wa.me/5568945016225?text=Olá!%20Preciso%20da%202ª%20via%20da%20minha%20fatura%20atualizada." class="btn-primary" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Solicitar 2ª Via
+                    </a>
+                    <a href="https://wa.me/5568945016225?text=Olá!%20Gostaria%20de%20falar%20com%20um%20especialista%20sobre%20meu%20plano%20de%20saúde." class="btn-secondary" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Falar com Especialista
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="section" id="produtos">
-  <div class="section-title">Escolha seu empréstimo</div>
-  <div class="section-sub">Três linhas de crédito pensadas para diferentes necessidades</div>
-  <div class="grid">
-    <div class="card" onclick="selectProduct('pessoal')" id="card-pessoal">
-      <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M11.9997 12.8779C16.0197 12.878 19.4393 15.3848 20.7048 18.8828C21.0812 19.9234 20.2782 20.8962 19.2038 21.0137L18.9861 21.0264H5.0134L4.79562 21.0137C3.7213 20.8961 2.91743 19.9233 3.29367 18.8828C4.55905 15.3847 7.9797 12.8781 11.9997 12.8779ZM11.9997 14.6777C8.84467 14.6779 6.17462 16.5794 5.09152 19.2256H18.9079C17.8248 16.5793 15.1549 14.6778 11.9997 14.6777ZM12.2312 3.00586C14.6088 3.12012 16.4998 5.06775 16.4998 7.49998C16.4998 9.98524 14.485 12 11.9998 12C9.51453 12 7.49976 9.98524 7.49976 7.49998C7.49976 5.06775 9.39081 3.12012 11.7684 3.00586L11.9998 3C12.0776 3 12.1546 3.00195 12.2312 3.00586ZM11.9998 4.79999C10.5086 4.79999 9.2998 6.00882 9.2998 7.49998C9.2998 8.99114 10.5086 10.2 11.9998 10.2C13.491 10.2 14.6998 8.99114 14.6998 7.49998C14.6998 6.00882 13.491 4.79999 11.9998 4.79999Z" fill="currentColor"/></svg></div>
-      <h3>Empréstimo Pessoal</h3>
-      <p>De R$ 5 mil a R$ 50 mil para qualquer finalidade. Use como quiser: viagem, reforma, dívidas ou investimento.</p>
-      <div class="rate">1,49%</div>
-      <div class="rate-label">a.m. | até 48x</div>
-    </div>
-    <div class="card" onclick="selectProduct('empresa')" id="card-empresa">
-      <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M13.5004 3.1001C13.9972 3.10031 14.3998 3.50356 14.3998 4.00049C14.3995 4.4972 13.997 4.90039 13.5004 4.90039H10.5004C10.0035 4.90039 9.6008 4.4972 9.60059 4.00049C9.60059 3.50356 10.0032 3.10031 10.5004 3.1001H13.5004ZM4.00049 7.1001H20.0005C20.4974 7.10031 20.9001 7.50356 20.9001 8.00049V20.0005C20.9001 20.4974 20.4974 20.9007 20.0005 20.9009H4.00049C3.50356 20.9007 3.1008 20.4974 3.10059 20.0005V8.00049C3.1008 7.50356 3.50356 7.10031 4.00049 7.1001ZM4.90039 19.1006H19.1004V8.90039H4.90039V19.1006Z" fill="currentColor"/></svg></div>
-      <h3>Empréstimo Empresarial</h3>
-      <p>Capital de giro, expansão ou equipamentos. De R$ 10 mil a R$ 500 mil com carência de até 90 dias.</p>
-      <div class="rate">0,99%</div>
-      <div class="rate-label">a.m. | até 60x</div>
-    </div>
-    <div class="card" onclick="selectProduct('aposentado')" id="card-aposentado">
-      <div class="card-icon"><svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 3.8H7C5.78497 3.8 4.8 4.78497 4.8 6V15.7647C4.8 16.574 5.24438 17.318 5.95698 17.7017L10.957 20.394C11.6081 20.7446 12.3919 20.7446 13.043 20.394L18.043 17.7017C18.7556 17.318 19.2 16.574 19.2 15.7647V6C19.2 4.78497 18.215 3.8 17 3.8ZM7 2C4.79086 2 3 3.79086 3 6V15.7647C3 17.2362 3.80796 18.5889 5.1036 19.2866L10.1036 21.9789C11.2875 22.6164 12.7125 22.6164 13.8964 21.9789L18.8964 19.2866C20.192 18.5889 21 17.2362 21 15.7647V6C21 3.79086 19.2091 2 17 2H7Z" fill="currentColor"/></svg></div>
-      <h3>Consignado Aposentados</h3>
-      <p>Desconto direto na folha ou benefício do INSS. Taxas reduzidas e aprovação facilitada de R$ 1 mil a R$ 30 mil.</p>
-      <div class="rate">0,99%</div>
-      <div class="rate-label">a.m. | até 72x</div>
-    </div>
-  </div>
-</div>
+    <!-- Services Section -->
+    <section class="services">
+        <div class="container">
+            <div class="section-header">
+                <h2>Nossos <span>Serviços</span></h2>
+                <p>Soluções completas para sua fatura de plano de saúde. Sem formulários, sem complicação. Um clique e resolvemos tudo pelo WhatsApp.</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
+                    <h3>2ª Via Atualizada</h3>
+                    <p>Emitimos sua segunda via de fatura atualizada em poucos minutos. Código de barras válido e pronto para pagamento.</p>
+                    <a href="https://wa.me/5568945016225?text=Olá!%20Preciso%20da%202ª%20via%20atualizada%20do%20meu%20plano%20de%20saúde." class="whatsapp-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Pedir 2ª Via
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
+                    <h3>Fatura em Atraso</h3>
+                    <p>Negociamos sua fatura em atraso com as melhores condições. Evite o cancelamento do seu plano de saúde.</p>
+                    <a href="https://wa.me/5568945016225?text=Olá!%20Minha%20fatura%20está%20em%20atraso%20e%20preciso%20negociar." class="whatsapp-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Negociar Agora
+                    </a>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg></div>
+                    <h3>Suporte ao Cliente</h3>
+                    <p>Tire suas dúvidas, altere dados cadastrais, consulte informações do plano e receba atendimento personalizado com nossa equipe.</p>
+                    <a href="https://wa.me/5568945016225?text=Olá!%20Preciso%20de%20suporte%20ao%20cliente%20e%20tenho%20algumas%20dúvidas." class="whatsapp-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg> Falar com Suporte
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path><circle cx="20" cy="10" r="2"></circle></svg></div>
+                    <h3>Agendar Exame</h3>
+                    <p>Agendamos seus exames laboratoriais e de imagem na rede credenciada da . Rápido, prático e sem filas de espera.</p>
+                    <a href="https://wa.me/5568945016225?text=Olá!%20Gostaria%20de%20agendar%20um%20exame%20na%20rede%20credenciada." class="whatsapp-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Agendar Exame
+                    </a>
+                </div>
+                <div class="service-card">
+                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg></div>
+                    <h3>Agendar Consulta</h3>
+                    <p>Marque sua consulta médica com especialistas da rede credenciada. Escolha dia, horário e local de forma simples pelo WhatsApp.</p>
+                    <a href="https://wa.me/5568945016225?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta%20médica." class="whatsapp-btn" target="_blank">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Agendar Consulta
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-<div class="section" id="simulador">
-  <div class="section-title">Simule seu empréstimo</div>
-  <div class="section-sub">Preencha os dados abaixo e veja quanto você vai pagar no total</div>
-  <div class="sim">
-    <div class="sim-row">
-      <label>Tipo de empréstimo</label>
-      <select id="sim-type" onchange="calcSim()">
-        <option value="pessoal">Empréstimo Pessoal</option>
-        <option value="empresa">Empréstimo Empresarial</option>
-        <option value="aposentado">Consignado Aposentados</option>
-      </select>
-    </div>
-    <div class="sim-row">
-      <label>Valor desejado</label>
-      <input type="text" id="sim-valor" value="R$ 10.000,00" oninput="maskMoney(this); calcSim()">
-    </div>
-    <div class="sim-row">
-      <label>Parcelas</label>
-      <select id="sim-parcelas" onchange="calcSim()">
-        <option value="12">12 meses</option>
-        <option value="24">24 meses</option>
-        <option value="36" selected>36 meses</option>
-        <option value="48">48 meses</option>
-        <option value="60">60 meses</option>
-        <option value="72">72 meses</option>
-      </select>
-    </div>
-    <div class="sim-result" id="sim-result">
-      <div class="sim-result-row"><span>Taxa de juros</span><span class="val" id="res-taxa">1,49% a.m.</span></div>
-      <div class="sim-result-row"><span>Valor da parcela</span><span class="val" id="res-parcela">R$ 360,92</span></div>
-      <div class="sim-result-row"><span>Total em juros</span><span class="val" id="res-juros">R$ 2.993,20</span></div>
-      <div class="sim-result-row total"><span>Total a pagar</span><span class="val" id="res-total">R$ 12.993,20</span></div>
-    </div>
-    <div style="margin-top:18px;display:flex;gap:10px;flex-wrap:wrap;">
-      <a class="btn btn-wa" id="sim-wa-btn" href="#" target="_blank" style="flex:1;justify-content:center;min-width:200px;">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17.6 6.32A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.88 12.15l-1.1 4.01 4.1-1.08A7.93 7.93 0 0 0 20 12a7.85 7.85 0 0 0-2.4-5.68zM12 18.5a6.46 6.46 0 0 1-3.3-.91l-.24-.14-2.47.65.66-2.4-.16-.25a6.46 6.46 0 0 1 5.51-9.95 6.46 6.46 0 0 1 6.45 6.45 6.47 6.47 0 0 1-6.45 6.45zm3.55-4.85c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1s-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.58-.98 5.97 5.97 0 0 1-1.1-1.36c-.12-.2 0-.3.09-.4.09-.09.2-.23.3-.34.1-.12.13-.2.2-.33.06-.13.03-.24-.02-.34s-.44-1.06-.6-1.45c-.16-.38-.32-.33-.44-.34l-.37-.01a.72.72 0 0 0-.52.24c-.18.2-.68.66-.68 1.62s.7 1.88.79 2.01c.1.13 1.36 2.08 3.3 2.92.46.2.82.32 1.1.4.46.15.88.13 1.21.08.37-.05 1.17-.48 1.33-.94.17-.46.17-.85.12-.94-.05-.08-.18-.13-.38-.23z" fill="currentColor"/></svg>
-        Solicitar pelo WhatsApp
-      </a>
-    </div>
-  </div>
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Não perca seu <span>Plano de Saúde</span></h2>
+            <p>Fatura em atraso? Precisa da 2ª via? Clique abaixo e fale direto conosco pelo WhatsApp. Resolvemos tudo em minutos, sem filas, sem espera.</p>
+            <a href="https://wa.me/5568945016225?text=Olá!%20Preciso%20de%20ajuda%20urgente%20com%20minha%20fatura%20do%20plano%20de%20saúde." class="cta-whatsapp" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Falar no WhatsApp Agora
+            </a>
+        </div>
+    </section>
 
-  <div style="margin-top:48px;">
-    <div style="font-size:17px;font-weight:600;margin-bottom:16px;text-align:center;">Exemplos de empréstimo</div>
-    <div class="table-wrap">
-      <table>
-        <thead>
-          <tr><th>Tipo</th><th>Valor</th><th>Parcelas</th><th>Taxa</th><th>Parcela</th><th>Total</th></tr>
-        </thead>
-        <tbody>
-          <tr><td>Pessoal</td><td>R$ 5.000</td><td>24x</td><td>1,99%</td><td>R$ 264,15</td><td>R$ 6.339,60</td></tr>
-          <tr><td>Pessoal</td><td>R$ 15.000</td><td>36x</td><td>1,79%</td><td>R$ 565,42</td><td>R$ 20.355,12</td></tr>
-          <tr><td>Empresarial</td><td>R$ 50.000</td><td>48x</td><td>1,29%</td><td>R$ 1.382,71</td><td>R$ 66.370,08</td></tr>
-          <tr><td>Empresarial</td><td>R$ 100.000</td><td>60x</td><td>0,99%</td><td>R$ 2.220,44</td><td>R$ 133.226,40</td></tr>
-          <tr><td>Consignado</td><td>R$ 10.000</td><td>36x</td><td>1,49%</td><td>R$ 357,42</td><td>R$ 12.867,12</td></tr>
-          <tr><td>Consignado</td><td>R$ 25.000</td><td>72x</td><td>1,29%</td><td>R$ 558,18</td><td>R$ 40.188,96</td></tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
-</div>
 
-<div class="cta-bar">
-  <h3>Não perca tempo em bancos</h3>
-  <p>Nossa equipe analisa seu perfil em minutos e te apresenta a melhor proposta. Sem filas, sem papelada.</p>
-  <a class="btn btn-wa" href="https://wa.me/5511999999999?text=Olá!%20Quero%20uma%20análise%20de%20crédito" target="_blank">
-    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M17.6 6.32A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.88 12.15l-1.1 4.01 4.1-1.08A7.93 7.93 0 0 0 20 12a7.85 7.85 0 0 0-2.4-5.68zM12 18.5a6.46 6.46 0 0 1-3.3-.91l-.24-.14-2.47.65.66-2.4-.16-.25a6.46 6.46 0 0 1 5.51-9.95 6.46 6.46 0 0 1 6.45 6.45 6.47 6.47 0 0 1-6.45 6.45zm3.55-4.85c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1s-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.58-.98 5.97 5.97 0 0 1-1.1-1.36c-.12-.2 0-.3.09-.4.09-.09.2-.23.3-.34.1-.12.13-.2.2-.33.06-.13.03-.24-.02-.34s-.44-1.06-.6-1.45c-.16-.38-.32-.33-.44-.34l-.37-.01a.72.72 0 0 0-.52.24c-.18.2-.68.66-.68 1.62s.7 1.88.79 2.01c.1.13 1.36 2.08 3.3 2.92.46.2.82.32 1.1.4.46.15.88.13 1.21.08.37-.05 1.17-.48 1.33-.94.17-.46.17-.85.12-.94-.05-.08-.18-.13-.38-.23z" fill="currentColor"/></svg>
-    Quero minha proposta
-  </a>
-</div>
+    <!-- TERMOS DE USO -->
+    <section class="legal-section" id="termos-de-uso">
+        <div class="container">
+            <h2>Termos de <span>Uso</span></h2>
+            <p class="last-update">Última atualização: 29 de Julho de 2026</p>
 
-<div class="section" id="vantagens">
-  <div class="section-title">Por que escolher a Finança Rápida?</div>
-  <div class="section-sub">Transparência e agilidade em cada etapa do seu empréstimo</div>
-  <div class="grid" style="grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));">
-    <div class="feature">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M19.3027 5.9053C19.6542 5.55397 20.2247 5.55388 20.5761 5.9053C20.9273 6.25675 20.9273 6.82734 20.5761 7.17874L9.65911 18.0948C9.30773 18.4461 8.73814 18.446 8.38665 18.0948L3.42376 13.1328C3.0726 12.7814 3.07263 12.2118 3.42376 11.8604C3.77524 11.509 4.34575 11.5089 4.6972 11.8604L9.02239 16.1856L19.3027 5.9053Z" fill="currentColor"/></svg></div>
-      <div><h4>Aprovação rápida</h4><p>Resposta em até 5 minutos após o envio da documentação.</p></div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M17 3.8H7C5.78497 3.8 4.8 4.78497 4.8 6V15.7647C4.8 16.574 5.24438 17.318 5.95698 17.7017L10.957 20.394C11.6081 20.7446 12.3919 20.7446 13.043 20.394L18.043 17.7017C18.7556 17.318 19.2 16.574 19.2 15.7647V6C19.2 4.78497 18.215 3.8 17 3.8ZM7 2C4.79086 2 3 3.79086 3 6V15.7647C3 17.2362 3.80796 18.5889 5.1036 19.2866L10.1036 21.9789C11.2875 22.6164 12.7125 22.6164 13.8964 21.9789L18.8964 19.2866C20.192 18.5889 21 17.2362 21 15.7647V6C21 3.79086 19.2091 2 17 2H7Z" fill="currentColor"/></svg></div>
-      <div><h4>100% Seguro</h4><p>Seus dados são criptografados e protegidos por certificado SSL.</p></div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2.1001C17.4676 2.10031 21.8994 6.53286 21.8994 12.0005C21.8992 17.4679 17.4674 21.8997 12 21.8999C6.53237 21.8999 2.09982 17.4681 2.09961 12.0005C2.09961 6.53273 6.53224 2.1001 12 2.1001ZM12 3.8999C7.52636 3.8999 3.89941 7.52684 3.89941 12.0005C3.89963 16.474 7.52649 20.1001 12 20.1001C16.4733 20.0999 20.0994 16.4738 20.0996 12.0005C20.0996 7.52697 16.4735 3.90011 12 3.8999ZM12 9.50049C12.4971 9.50049 12.9 9.90344 12.9 10.4005V16.4005C12.9 16.8975 12.4971 17.3005 12 17.3005C11.503 17.3005 11.1 16.8975 11.1 16.4005V10.4005C11.1 9.90344 11.503 9.50049 12 9.50049ZM12 7.1001C12.4971 7.1001 12.9 7.50305 12.9 8.0001C12.9 8.49714 12.4971 8.9001 12 8.9001C11.503 8.9001 11.1 8.49714 11.1 8.0001C11.1 7.50305 11.503 7.1001 12 7.1001Z" fill="currentColor"/></svg></div>
-      <div><h4>Sem surpresas</h4><p>CET transparente. Você sabe exatamente quanto vai pagar antes de contratar.</p></div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M4 3.33203C4.55224 3.33203 4.99993 3.7798 5 4.33203V18.0908H20.0674C20.6195 18.0908 21.0671 18.5388 21.0674 19.0908C21.0674 19.6431 20.6197 20.0908 20.0674 20.0908H5C3.89543 20.0908 3 19.1954 3 18.0908V4.33203C3.00007 3.7798 3.44776 3.33203 4 3.33203ZM8.19922 9.28418C8.7515 9.28418 9.19922 9.73189 9.19922 10.2842V15.6045C9.19908 16.1567 8.75142 16.6045 8.19922 16.6045C7.64719 16.6043 7.19936 16.1566 7.19922 15.6045V10.2842C7.19922 9.73189 7.64694 9.28418 8.19922 9.28418ZM12.3994 12.4863C12.396 10.8789 14.2659 9.99419 15.5068 11.0156L21.3887 15.8594C22.6251 16.8787 22.1145 18.8522 20.5918 19.1816L20.4404 19.207L17.6953 19.5889C17.6853 19.5903 17.675 19.5934 17.666 19.5977L17.6416 19.6143L15.6055 21.4961L15.4902 21.5957C14.3092 22.5333 12.5401 21.7604 12.4238 20.2568L12.417 20.1045L12.3994 12.4863ZM14.2568 12.3916C14.2298 12.4044 14.2145 12.4205 14.209 12.4287L14.2002 12.4863L14.2178 20.1045C14.2196 20.1547 14.237 20.2014 14.2676 20.2383L14.3037 20.2715C14.3486 20.3027 14.4023 20.3145 14.4541 20.3047L14.5068 20.2832L16.543 18.4014L16.5674 18.3848C16.5764 18.3805 16.5867 18.3774 16.5967 18.376L16.6211 18.3594L19.3662 17.9775C19.416 17.9707 19.4629 17.9473 19.498 17.9102L19.5332 17.8652C19.5645 17.8203 19.5762 17.7666 19.5664 17.7148L19.5449 17.6621L13.6631 12.8184C13.624 12.7852 13.5752 12.7656 13.5244 12.7617L13.4678 12.7676C13.4131 12.7793 13.3643 12.8105 13.3301 12.8555L13.2959 12.9102L13.2568 12.9473L14.2568 12.3916Z" fill="currentColor"/></svg></div>
-      <div><h4>Taxas competitivas</h4><p>Negociamos com mais de 20 instituições para garantir a melhor taxa para você.</p></div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M11.9997 12.8779C16.0197 12.878 19.4393 15.3848 20.7048 18.8828C21.0812 19.9234 20.2782 20.8962 19.2038 21.0137L18.9861 21.0264H5.0134L4.79562 21.0137C3.7213 20.8961 2.91743 19.9233 3.29367 18.8828C4.55905 15.3847 7.9797 12.8781 11.9997 12.8779ZM11.9997 14.6777C8.84467 14.6779 6.17462 16.5794 5.09152 19.2256H18.9079C17.8248 16.5793 15.1549 14.6778 11.9997 14.6777Z" fill="currentColor"/></svg></div>
-      <div><h4>Atendimento humano</h4><p>Especialistas disponíveis no WhatsApp para tirar todas as suas dúvidas.</p></div>
-    </div>
-    <div class="feature">
-      <div class="feature-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M15.4795 15.4971C15.9765 15.4971 16.3799 15.9004 16.3799 16.3975C16.3799 16.8945 15.9765 17.2978 15.4795 17.2979H8.52051C8.02345 17.2979 7.62012 16.8945 7.62012 16.3975C7.62012 15.9004 8.02345 15.4971 8.52051 15.4971H15.4795Z" fill="currentColor"/><path d="M12.3359 11.0996C12.8329 11.0997 13.2354 11.503 13.2354 12C13.2354 12.497 12.8329 12.9003 12.3359 12.9004H8.52051C8.02345 12.9004 7.62012 12.497 7.62012 12C7.62012 11.503 8.02345 11.0996 8.52051 11.0996H12.3359Z" fill="currentColor"/><path d="M15.4795 6.70215C15.9765 6.70215 16.3799 7.10547 16.3799 7.60254C16.3799 8.0996 15.9765 8.50293 15.4795 8.50293H8.52051C8.02345 8.50293 7.62012 8.0996 7.62012 7.60254C7.62012 7.10547 8.02345 6.70215 8.52051 6.70215H15.4795Z" fill="currentColor"/></svg></div>
-      <div><h4>Documentação simples</h4><p>RG, CPF e comprovante de renda. Nada além disso para a maioria dos casos.</p></div>
-    </div>
-  </div>
-</div>
+            <div class="legal-highlight">
+                <p>Ao acessar e utilizar este site, você concorda em cumprir e estar vinculado aos seguintes Termos de Uso. Caso não concorde com qualquer parte destes termos, solicitamos que não utilize nossos serviços.</p>
+            </div>
 
-<div class="section">
-  <div class="section-title">O que nossos clientes dizem</div>
-  <div class="section-sub">Mais de 10 mil pessoas já realizaram seus sonhos com a gente</div>
-  <div class="grid">
-    <div class="testi">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"Consegui quitar minhas dívidas com um empréstimo pessoal de R$ 15 mil. A parcela cabe direitinho no orçamento e o atendimento pelo WhatsApp foi impecável."</div>
-      <div class="testi-author">Mariana Souza</div>
-      <div class="testi-role">São Paulo, SP — Empréstimo Pessoal</div>
-    </div>
-    <div class="testi">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"Usei o crédito empresarial para comprar novos equipamentos para minha padaria. Em 24h o dinheiro estava na conta. Recomendo demais!"</div>
-      <div class="testi-author">Carlos Eduardo Lima</div>
-      <div class="testi-role">Belo Horizonte, MG — Empréstimo Empresarial</div>
-    </div>
-    <div class="testi">
-      <div class="testi-stars">★★★★★</div>
-      <div class="testi-text">"Sou aposentado e achava difícil conseguir crédito. A Finança Rápida me deu condições excelentes no consignado, com parcela que não comprometeu meu benefício."</div>
-      <div class="testi-author">José Antônio Pereira</div>
-      <div class="testi-role">Rio de Janeiro, RJ — Consignado</div>
-    </div>
-  </div>
-</div>
+            <h3>1. Aceitação dos Termos</h3>
+            <p>Ao utilizar este site e nossos canais de atendimento (incluindo WhatsApp), você declara que leu, compreendeu e aceita integralmente estes Termos de Uso, bem como nossa Política de Privacidade.</p>
 
-<div class="section" id="faq">
-  <div class="section-title">Perguntas frequentes</div>
-  <div class="section-sub">Tire suas dúvidas sobre nossos empréstimos</div>
-  <div style="max-width:640px;margin:0 auto;">
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Quais documentos preciso para solicitar?
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.386 21.6387C11.7378 21.988 12.3059 21.987 12.6565 21.6364L18.1949 16.098C18.5464 15.7465 18.5464 15.1766 18.1949 14.8252C17.8434 14.4737 17.2736 14.4737 16.9221 14.8252L12.9201 18.8272V3.00002C12.9201 2.50297 12.5171 2.10003 12.0201 2.10003C11.523 2.10003 11.1201 2.50297 11.1201 3.00002V18.8383L7.07554 14.8229C6.7228 14.4727 6.15295 14.4747 5.80275 14.8275C5.45255 15.1802 5.45457 15.7501 5.80731 16.1003L11.386 21.6387Z" fill="currentColor"/></svg>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">Para pessoa física: RG, CPF e comprovante de renda dos últimos 3 meses. Para empresas: CNPJ, contrato social e demonstrativos de faturamento. Aposentados precisam também do extrato do benefício INSS.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Quanto tempo leva para receber o dinheiro?
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.386 21.6387C11.7378 21.988 12.3059 21.987 12.6565 21.6364L18.1949 16.098C18.5464 15.7465 18.5464 15.1766 18.1949 14.8252C17.8434 14.4737 17.2736 14.4737 16.9221 14.8252L12.9201 18.8272V3.00002C12.9201 2.50297 12.5171 2.10003 12.0201 2.10003C11.523 2.10003 11.1201 2.50297 11.1201 3.00002V18.8383L7.07554 14.8229C6.7228 14.4727 6.15295 14.4747 5.80275 14.8275C5.45255 15.1802 5.45457 15.7501 5.80731 16.1003L11.386 21.6387Z" fill="currentColor"/></svg>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">Após a aprovação, o dinheiro cai na sua conta em até 24 horas úteis. Em casos de empréstimo consignado, o prazo pode ser de até 48 horas devido à conferência com o INSS.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Posso pagar o empréstimo antecipadamente?
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.386 21.6387C11.7378 21.988 12.3059 21.987 12.6565 21.6364L18.1949 16.098C18.5464 15.7465 18.5464 15.1766 18.1949 14.8252C17.8434 14.4737 17.2736 14.4737 16.9221 14.8252L12.9201 18.8272V3.00002C12.9201 2.50297 12.5171 2.10003 12.0201 2.10003C11.523 2.10003 11.1201 2.50297 11.1201 3.00002V18.8383L7.07554 14.8229C6.7228 14.4727 6.15295 14.4747 5.80275 14.8275C5.45255 15.1802 5.45457 15.7501 5.80731 16.1003L11.386 21.6387Z" fill="currentColor"/></svg>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">Sim! Você pode quitar seu empréstimo a qualquer momento. O valor residual é recalculado com base no saldo devedor e você paga apenas os juros proporcionais ao período em que usou o crédito.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Qual a taxa de juros real (CET)?
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.386 21.6387C11.7378 21.988 12.3059 21.987 12.6565 21.6364L18.1949 16.098C18.5464 15.7465 18.5464 15.1766 18.1949 14.8252C17.8434 14.4737 17.2736 14.4737 16.9221 14.8252L12.9201 18.8272V3.00002C12.9201 2.50297 12.5171 2.10003 12.0201 2.10003C11.523 2.10003 11.1201 2.50297 11.1201 3.00002V18.8383L7.07554 14.8229C6.7228 14.4727 6.15295 14.4747 5.80275 14.8275C5.45255 15.1802 5.45457 15.7501 5.80731 16.1003L11.386 21.6387Z" fill="currentColor"/></svg>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">A CET varia conforme o perfil do cliente e a instituição financiadora. As taxas apresentadas no simulador são referenciais. A taxa final será apresentada na proposta formal após análise de crédito.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Preciso ter conta em qual banco?
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.386 21.6387C11.7378 21.988 12.3059 21.987 12.6565 21.6364L18.1949 16.098C18.5464 15.7465 18.5464 15.1766 18.1949 14.8252C17.8434 14.4737 17.2736 14.4737 16.9221 14.8252L12.9201 18.8272V3.00002C12.9201 2.50297 12.5171 2.10003 12.0201 2.10003C11.523 2.10003 11.1201 2.50297 11.1201 3.00002V18.8383L7.07554 14.8229C6.7228 14.4727 6.15295 14.4747 5.80275 14.8275C5.45255 15.1802 5.45457 15.7501 5.80731 16.1003L11.386 21.6387Z" fill="currentColor"/></svg>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">Não precisa ter conta em banco específico. Trabalhamos com transferência via TED para qualquer instituição bancária do Brasil.</div></div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-q" onclick="toggleFaq(this)">
-        Meus dados estão protegidos?
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path fill-rule="evenodd" clip-rule="evenodd" d="M11.386 21.6387C11.7378 21.988 12.3059 21.987 12.6565 21.6364L18.1949 16.098C18.5464 15.7465 18.5464 15.1766 18.1949 14.8252C17.8434 14.4737 17.2736 14.4737 16.9221 14.8252L12.9201 18.8272V3.00002C12.9201 2.50297 12.5171 2.10003 12.0201 2.10003C11.523 2.10003 11.1201 2.50297 11.1201 3.00002V18.8383L7.07554 14.8229C6.7228 14.4727 6.15295 14.4747 5.80275 14.8275C5.45255 15.1802 5.45457 15.7501 5.80731 16.1003L11.386 21.6387Z" fill="currentColor"/></svg>
-      </div>
-      <div class="faq-a"><div class="faq-a-inner">Sim. Utilizamos criptografia SSL em todas as páginas e seus dados são tratados conforme a LGPD. Nunca vendemos ou compartilhamos seus dados com terceiros sem autorização.</div></div>
-    </div>
-  </div>
-</div>
+            <h3>2. Natureza do Serviço</h3>
+            <p>A <strong></strong> atua como intermediadora de serviços relacionados a planos de saúde, oferecendo suporte para:</p>
+            <ul>
+                <li>Emissão de 2ª via de faturas e boletos atualizados;</li>
+                <li>Negociação de faturas em atraso;</li>
+                <li>Regularização de planos de saúde suspensos ou cancelados;</li>
+                <li>Suporte ao cliente e atualização de dados cadastrais.</li>
+            </ul>
+            <p>Os serviços são prestados em parceria com operadoras de plano de saúde, sendo que a  não é uma operadora de saúde, mas sim uma empresa de atendimento e suporte ao cliente.</p>
 
-<div class="footer">
-  <div class="footer-links">
-    <a onclick="openModal('privacy')">Política de Privacidade</a>
-    <a onclick="openModal('terms')">Termos de Uso</a>
-  </div>
-  <div class="footer-copy">© 2026 Finança Rápida. Todos os direitos reservados.</div>
-  <div style="margin-top:12px;font-size:12px;color:var(--text-tertiary);line-height:1.6;">
-    <strong>Celcoin Sociedade de Crédito Direto S.A.</strong> — CNPJ 13.935.893/0001-09<br>
-    Alameda Xingu, 350, Conj. 1604, Sala 02 — Alphaville Industrial, Barueri/SP — CEP 06455-030
-  </div>
-</div>
+            <h3>3. Uso Adequado do Site</h3>
+            <p>O usuário se compromete a utilizar este site e nossos canais de comunicação de forma ética e lícita, abstendo-se de:</p>
+            <ul>
+                <li>Fornecer informações falsas, incompletas ou enganosas;</li>
+                <li>Tentar acessar áreas restritas do site sem autorização;</li>
+                <li>Utilizar robôs, spiders ou outros meios automatizados de acesso;</li>
+                <li>Interferir na segurança ou na integridade dos nossos sistemas;</li>
+                <li>Utilizar o site para fins ilícitos ou que violem direitos de terceiros.</li>
+            </ul>
 
-<div class="float-wa">
-  <a href="https://wa.me/5511999999999?text=Olá!%20Quero%20solicitar%20um%20empréstimo" target="_blank">
-    <svg width="22" height="22" viewBox="0 0 24 24" fill="none"><path d="M17.6 6.32A7.85 7.85 0 0 0 12 4a7.94 7.94 0 0 0-6.88 12.15l-1.1 4.01 4.1-1.08A7.93 7.93 0 0 0 20 12a7.85 7.85 0 0 0-2.4-5.68zM12 18.5a6.46 6.46 0 0 1-3.3-.91l-.24-.14-2.47.65.66-2.4-.16-.25a6.46 6.46 0 0 1 5.51-9.95 6.46 6.46 0 0 1 6.45 6.45 6.47 6.47 0 0 1-6.45 6.45zm3.55-4.85c-.2-.1-1.17-.58-1.35-.64-.18-.07-.31-.1-.44.1s-.5.64-.62.77-.23.15-.43.05a5.4 5.4 0 0 1-1.58-.98 5.97 5.97 0 0 1-1.1-1.36c-.12-.2 0-.3.09-.4.09-.09.2-.23.3-.34.1-.12.13-.2.2-.33.06-.13.03-.24-.02-.34s-.44-1.06-.6-1.45c-.16-.38-.32-.33-.44-.34l-.37-.01a.72.72 0 0 0-.52.24c-.18.2-.68.66-.68 1.62s.7 1.88.79 2.01c.1.13 1.36 2.08 3.3 2.92.46.2.82.32 1.1.4.46.15.88.13 1.21.08.37-.05 1.17-.48 1.33-.94.17-.46.17-.85.12-.94-.05-.08-.18-.13-.38-.23z" fill="currentColor"/></svg>
-    <span>Falar no WhatsApp</span>
-  </a>
-</div>
+            <h3>4. Responsabilidades do Usuário</h3>
+            <p>Para utilizar nossos serviços, o usuário deve:</p>
+            <ul>
+                <li>Ser maior de 18 anos ou estar representado por responsável legal;</li>
+                <li>Fornecer dados verdadeiros, precisos e atualizados;</li>
+                <li>Manter a confidencialidade de informações sensíveis compartilhadas;</li>
+                <li>Verificar a autenticidade de comunicações recebidas em nosso nome;</li>
+                <li>Informar-nos imediatamente sobre qualquer uso não autorizado de sua conta ou dados.</li>
+            </ul>
 
-<!-- Modal Política de Privacidade -->
-<div class="modal-overlay" id="modal-privacy" onclick="closeModal(event, 'privacy')">
-  <div class="modal" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModalDirect('privacy')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17.9542 4.77253C18.3056 4.42106 18.8761 4.42106 19.2276 4.77253C19.579 5.12401 19.579 5.69452 19.2276 6.04597L13.2735 12.0001L19.2276 17.9542C19.5791 18.3056 19.5791 18.8761 19.2276 19.2276C18.8761 19.5791 18.3056 19.5791 17.9542 19.2276L12.0001 13.2735L6.04595 19.2276C5.69451 19.5791 5.12399 19.579 4.77252 19.2276C4.42104 18.8761 4.42104 18.3056 4.77252 17.9542L10.7266 12.0001L4.77252 6.04595C4.42104 5.69451 4.42104 5.12399 4.77252 4.77252C5.12399 4.42104 5.69451 4.42104 6.04595 4.77252L12.0001 10.7266L17.9542 4.77253Z" fill="currentColor"/></svg>
-    </button>
-    <h2>Política de Privacidade</h2>
-    <p><strong>Última atualização:</strong> 13 de agosto de 2026</p>
-    <h3>1. Coleta de informações</h3>
-    <p>Coletamos informações pessoais que você nos fornece diretamente, como nome, CPF, endereço, renda e dados bancários, quando preenche formulários ou solicita um empréstimo. Também coletamos dados automaticamente, como endereço IP, tipo de navegador e páginas visitadas.</p>
-    <h3>2. Uso das informações</h3>
-    <p>Utilizamos seus dados para:</p>
-    <ul>
-      <li>Processar e analisar solicitações de empréstimo;</li>
-      <li>Entrar em contato sobre propostas e documentação;</li>
-      <li>Cumprir obrigações legais e regulatórias;</li>
-      <li>Melhorar nossos serviços e experiência do usuário.</li>
-    </ul>
-    <h3>3. Compartilhamento de dados</h3>
-    <p>Seus dados podem ser compartilhados com instituições financeiras parceiras para análise de crédito e formalização do contrato. Não vendemos seus dados a terceiros para fins de marketing.</p>
-    <h3>4. Segurança</h3>
-    <p>Adotamos medidas técnicas e administrativas para proteger seus dados contra acesso não autorizado, alteração, divulgação ou destruição. Utilizamos criptografia SSL em todas as transmissões de dados sensíveis.</p>
-    <h3>5. Seus direitos</h3>
-    <p>De acordo com a LGPD, você tem direito a acessar, corrigir, excluir ou portar seus dados pessoais. Para exercer esses direitos, entre em contato pelo WhatsApp ou e-mail.</p>
-    <h3>6. Cookies</h3>
-    <p>Utilizamos cookies para melhorar a navegação, personalizar conteúdo e analisar tráfego. Você pode desativar cookies nas configurações do seu navegador.</p>
-    <h3>7. Alterações</h3>
-    <p>Podemos atualizar esta política periodicamente. Recomendamos que você a revise regularmente. Alterações significativas serão comunicadas por e-mail ou aviso no site.</p>
-    <h3>8. Contato</h3>
-    <p>Dúvidas sobre esta política? Fale conosco pelo WhatsApp (11) 99999-9999 ou pelo e-mail privacidade@financarapida.com.br.</p>
-  </div>
-</div>
+            <h3>5. Limitação de Responsabilidade</h3>
+            <p>A  se esforça para manter as informações do site atualizadas e precisas, porém:</p>
+            <ul>
+                <li>Não garantimos que o site estará disponível ininterruptamente ou livre de erros;</li>
+                <li>Não nos responsabilizamos por decisões tomadas por operadoras de saúde parceiras;</li>
+                <li>Não nos responsabilizamos por danos indiretos, incidentais ou consequenciais resultantes do uso ou da impossibilidade de uso dos nossos serviços;</li>
+                <li>O prazo de regularização de planos pode variar conforme a operadora e a situação cadastral.</li>
+            </ul>
 
-<!-- Modal Termos de Uso -->
-<div class="modal-overlay" id="modal-terms" onclick="closeModal(event, 'terms')">
-  <div class="modal" onclick="event.stopPropagation()">
-    <button class="modal-close" onclick="closeModalDirect('terms')">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M17.9542 4.77253C18.3056 4.42106 18.8761 4.42106 19.2276 4.77253C19.579 5.12401 19.579 5.69452 19.2276 6.04597L13.2735 12.0001L19.2276 17.9542C19.5791 18.3056 19.5791 18.8761 19.2276 19.2276C18.8761 19.5791 18.3056 19.5791 17.9542 19.2276L12.0001 13.2735L6.04595 19.2276C5.69451 19.5791 5.12399 19.579 4.77252 19.2276C4.42104 18.8761 4.42104 18.3056 4.77252 17.9542L10.7266 12.0001L4.77252 6.04595C4.42104 5.69451 4.42104 5.12399 4.77252 4.77252C5.12399 4.42104 5.69451 4.42104 6.04595 4.77252L12.0001 10.7266L17.9542 4.77253Z" fill="currentColor"/></svg>
-    </button>
-    <h2>Termos de Uso</h2>
-    <p><strong>Última atualização:</strong> 13 de agosto de 2026</p>
-    <h3>1. Aceitação dos termos</h3>
-    <p>Ao acessar e utilizar este site, você concorda em cumprir estes Termos de Uso e todas as leis e regulamentos aplicáveis. Se não concordar com qualquer parte destes termos, não utilize nossos serviços.</p>
-    <h3>2. Serviços oferecidos</h3>
-    <p>A Finança Rápida atua como correspondente bancário, intermediando empréstimos entre clientes e instituições financeiras. Não somos uma instituição financeira e não concedemos empréstimos diretamente.</p>
-    <h3>3. Elegibilidade</h3>
-    <p>Para solicitar um empréstimo, você deve ser maior de 18 anos, residente no Brasil e possuir renda comprovada. A aprovação final depende da análise de crédito da instituição financiadora.</p>
-    <h3>4. Taxas e custos</h3>
-    <p>As taxas de juros apresentadas no site são referenciais e podem variar conforme o perfil do cliente. O CET (Custo Efetivo Total) será informado na proposta formal antes da contratação. Não cobramos taxa de adesão ou consulta prévia.</p>
-    <h3>5. Responsabilidades do usuário</h3>
-    <p>Você se compromete a fornecer informações verdadeiras, atualizadas e completas. O fornecimento de dados falsos pode caracterizar crime de falsidade ideológica e resultar na recusa do crédito.</p>
-    <h3>6. Propriedade intelectual</h3>
-    <p>Todo o conteúdo deste site (textos, imagens, logotipos, código) é de propriedade da Finança Rápida ou de seus licenciadores e está protegido por leis de direitos autorais.</p>
-    <h3>7. Limitação de responsabilidade</h3>
-    <p>A Finança Rápida não se responsabiliza por decisões de aprovação ou reprovação de crédito tomadas pelas instituições financeiras parceiras. Também não nos responsabilizamos por atrasos na liberação de recursos decorrentes de falhas bancárias.</p>
-    <h3>8. Alterações nos termos</h3>
-    <p>Podemos modificar estes termos a qualquer momento. O uso continuado do site após alterações constitui aceitação dos novos termos.</p>
-    <h3>9. Legislação aplicável</h3>
-    <p>Estes termos são regidos pelas leis da República Federativa do Brasil. Quaisquer disputas serão resolvidas no foro da comarca de São Paulo, SP.</p>
-    <h3>10. Contato</h3>
-    <p>Para dúvidas sobre estes termos, entre em contato pelo WhatsApp (11) 99999-9999.</p>
-  </div>
-</div>
+            <h3>6. Propriedade Intelectual</h3>
+            <p>Todo o conteúdo deste site — incluindo textos, imagens, logotipos, design, código-fonte e marca — é de propriedade exclusiva da  ou de seus licenciadores, protegido pelas leis de propriedade intelectual. É vedada a reprodução, distribuição ou modificação sem autorização prévia e expressa.</p>
 
-<script>
-function scrollToId(id) {
-  document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
-}
+            <h3>7. Links para Terceiros</h3>
+            <p>Este site pode conter links para sites de terceiros (como operadoras de saúde e instituições financeiras). A  não se responsabiliza pelo conteúdo, políticas de privacidade ou práticas de sites de terceiros.</p>
 
-function selectProduct(type) {
-  document.querySelectorAll('.card').forEach(c => c.classList.remove('active'));
-  document.getElementById('card-' + type).classList.add('active');
-  document.getElementById('sim-type').value = type;
-  calcSim();
-  scrollToId('simulador');
-}
+            <h3>8. Alterações nos Termos</h3>
+            <p>Reservamo-nos o direito de modificar estes Termos de Uso a qualquer momento. Alterações significativas serão comunicadas por meio dos nossos canais oficiais. O uso continuado do site após as alterações constitui aceitação dos novos termos.</p>
 
-function maskMoney(input) {
-  let v = input.value.replace(/\D/g, '');
-  v = (v / 100).toFixed(2) + '';
-  v = v.replace('.', ',');
-  v = v.replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-  input.value = 'R$ ' + v;
-}
+            <h3>9. Legislação Aplicável</h3>
+            <p>Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil. Quaisquer disputas serão resolvidas nos foros da comarca de domicílio do usuário, conforme previsto no Código de Defesa do Consumidor.</p>
 
-function parseMoney(str) {
-  return parseFloat(str.replace('R$ ', '').replace(/\./g, '').replace(',', '.'));
-}
+            <h3>10. Contato</h3>
+            <p>Para dúvidas, sugestões ou reclamações sobre estes Termos de Uso, entre em contato:</p>
+            <ul>
+                <li><strong>Atendimento:</strong> Disponível 24 horas</li>
+            </ul>
+        </div>
+    </section>
 
-function fmtMoney(n) {
-  return 'R$ ' + n.toFixed(2).replace('.', ',').replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1.');
-}
+    <div class="legal-divider"></div>
 
-function calcSim() {
-  const type = document.getElementById('sim-type').value;
-  const valor = parseMoney(document.getElementById('sim-valor').value);
-  const parcelas = parseInt(document.getElementById('sim-parcelas').value);
+    <!-- POLÍTICA DE PRIVACIDADE -->
+    <section class="legal-section" id="politica-privacidade">
+        <div class="container">
+            <h2>Política de <span>Privacidade</span></h2>
+            <p class="last-update">Última atualização: 29 de Julho de 2026</p>
 
-  const taxas = { pessoal: 1.49, empresa: 0.99, aposentado: 0.99 };
-  const taxa = taxas[type] || 1.49;
-  const i = taxa / 100;
+            <div class="legal-highlight">
+                <p>A <strong></strong> valoriza a privacidade e a segurança dos dados de seus clientes. Esta política descreve como coletamos, usamos, armazenamos e protegemos suas informações pessoais.</p>
+            </div>
 
-  let pmt;
-  if (i === 0) {
-    pmt = valor / parcelas;
-  } else {
-    pmt = valor * (i * Math.pow(1 + i, parcelas)) / (Math.pow(1 + i, parcelas) - 1);
-  }
+            <h3>1. Dados Coletados</h3>
+            <p>Podemos coletar as seguintes informações quando você utiliza nossos canais de atendimento:</p>
+            <ul>
+                <li><strong>Dados de identificação:</strong> nome completo, CPF, RG e data de nascimento;</li>
+                <li><strong>Dados de contato:</strong> número de telefone, endereço de e-mail e endereço residencial;</li>
+                <li><strong>Dados do plano:</strong> número da carteirinha, operadora, tipo de plano e dependentes;</li>
+                <li><strong>Dados de pagamento:</strong> informações bancárias necessárias para emissão de boletos e faturas;</li>
+                <li><strong>Dados de comunicação:</strong> histórico de conversas pelo WhatsApp, e-mails e ligações telefônicas.</li>
+            </ul>
 
-  const total = pmt * parcelas;
-  const juros = total - valor;
+            <h3>2. Finalidade do Tratamento</h3>
+            <p>Seus dados são coletados e utilizados exclusivamente para as seguintes finalidades:</p>
+            <ul>
+                <li>Emitir 2ª via de faturas e boletos atualizados;</li>
+                <li>Negociar faturas em atraso e regularizar planos de saúde;</li>
+                <li>Prestar atendimento ao cliente e sanar dúvidas;</li>
+                <li>Atualizar dados cadastrais junto à operadora de saúde;</li>
+                <li>Enviar comunicações sobre vencimentos, reajustes e novidades do plano.</li>
+            </ul>
 
-  document.getElementById('res-taxa').textContent = taxa.toFixed(2).replace('.', ',') + '% a.m.';
-  document.getElementById('res-parcela').textContent = fmtMoney(pmt);
-  document.getElementById('res-juros').textContent = fmtMoney(juros);
-  document.getElementById('res-total').textContent = fmtMoney(total);
+            <h3>3. Compartilhamento de Dados</h3>
+            <p>Seus dados pessoais <strong>não são vendidos, alugados ou comercializados</strong> a terceiros. Podemos compartilhar informações apenas com:</p>
+            <ul>
+                <li>A operadora de plano de saúde contratada, exclusivamente para fins de regularização e atualização cadastral;</li>
+                <li>Prestadores de serviços que auxiliam em nossas operações (ex: sistemas de atendimento), sob rigorosos contratos de confidencialidade;</li>
+                <li>Órgãos públicos, quando exigido por lei ou ordem judicial.</li>
+            </ul>
 
-  const typeNames = { pessoal: 'Empréstimo Pessoal', empresa: 'Empréstimo Empresarial', aposentado: 'Consignado Aposentados' };
-  const msg = `Olá! Quero solicitar um empréstimo.
+            <h3>4. Segurança da Informação</h3>
+            <p>Adotamos medidas técnicas e administrativas para proteger seus dados contra acesso não autorizado, alteração, divulgação ou destruição:</p>
+            <ul>
+                <li>Criptografia de dados em trânsito (SSL/TLS);</li>
+                <li>Armazenamento seguro em servidores com controle de acesso;</li>
+                <li>Políticas internas de confidencialidade para nossos colaboradores;</li>
+                <li>Monitoramento contínuo de nossos sistemas.</li>
+            </ul>
 
-Tipo: ${typeNames[type]}
-Valor: ${fmtMoney(valor)}
-Parcelas: ${parcelas}x
-Taxa: ${taxa.toFixed(2).replace('.', ',')}% a.m.
-Valor da parcela: ${fmtMoney(pmt)}
-Total a pagar: ${fmtMoney(total)}`;
+            <h3>5. Seus Direitos (LGPD)</h3>
+            <p>Conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você possui os seguintes direitos:</p>
+            <ul>
+                <li>Acessar seus dados pessoais que mantemos;</li>
+                <li>Solicitar correção de dados incompletos, inexatos ou desatualizados;</li>
+                <li>Solicitar anonimização, bloqueio ou eliminação de dados desnecessários;</li>
+                <li>Revogar seu consentimento a qualquer momento;</li>
+                <li>Solicitar portabilidade dos dados a outro fornecedor;</li>
+                <li>Ser informado sobre o compartilhamento de seus dados.</li>
+            </ul>
+            <p>Para exercer seus direitos, entre em contato por e-mail.</p>
 
-  document.getElementById('sim-wa-btn').href = 'https://wa.me/5511999999999?text=' + encodeURIComponent(msg);
-}
+            <h3>6. Cookies e Tecnologias de Rastreamento</h3>
+            <p>Este site pode utilizar cookies e tecnologias similares para melhorar a experiência do usuário, analisar tráfego e personalizar conteúdo. Você pode configurar seu navegador para recusar cookies, mas isso pode afetar a funcionalidade de alguns recursos.</p>
 
-function toggleFaq(el) {
-  const item = el.parentElement;
-  const wasOpen = item.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
-  if (!wasOpen) item.classList.add('open');
-}
+            <h3>7. Alterações nesta Política</h3>
+            <p>Esta Política de Privacidade pode ser atualizada periodicamente. Recomendamos que você a revise com frequência. Alterações significativas serão comunicadas por meio dos nossos canais oficiais.</p>
 
-function openModal(id) {
-  document.getElementById('modal-' + id).classList.add('show');
-  document.body.style.overflow = 'hidden';
-}
+            <h3>8. Contato</h3>
+            <p>Em caso de dúvidas sobre esta Política de Privacidade ou sobre o tratamento de seus dados pessoais, entre em contato:</p>
+            <ul>
+                <li><strong>Atendimento:</strong> Disponível 24 horas</li>
+            </ul>
+        </div>
+    </section>
 
-function closeModal(event, id) {
-  if (event.target === document.getElementById('modal-' + id)) {
-    document.getElementById('modal-' + id).classList.remove('show');
-    document.body.style.overflow = '';
-  }
-}
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p style="margin-bottom: 10px;">
+                <a href="#termos-de-uso" target="_self" style="color: #086b2f; text-decoration: none; font-weight: 600; margin: 0 10px;">Termos de Uso</a> |
+                <a href="#politica-privacidade" target="_self" style="color: #086b2f; text-decoration: none; font-weight: 600; margin: 0 10px;">Política de Privacidade</a>
+            </p>
+            <p>
+                © 2026  — Todos os direitos reservados.
+            </p>
+        </div>
+    </footer>
 
-function closeModalDirect(id) {
-  document.getElementById('modal-' + id).classList.remove('show');
-  document.body.style.overflow = '';
-}
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/5568945016225?text=Olá!%20Preciso%20de%20ajuda%20com%20minha%20fatura%20do%20plano%20de%20saúde." class="floating-whatsapp" target="_blank" title="Fale Conosco">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
 
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') {
-    document.querySelectorAll('.modal-overlay').forEach(m => m.classList.remove('show'));
-    document.body.style.overflow = '';
-  }
-});
-
-window.addEventListener('load', calcSim);
-</script>
+    <script>
+    </script>
 
 </body>
 </html>
