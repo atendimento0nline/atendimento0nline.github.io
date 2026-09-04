@@ -1,939 +1,442 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal do Cliente</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Montserrat', sans-serif;
-            background-color: #ffffff;
-            color: #1a1a1a;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
-        /* ===== HEADER ===== */
-        header {
-            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%);
-            padding: 20px 0;
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
-            border-bottom: 2px solid #0a8a3e;
-            box-shadow: 0 4px 20px rgba(0, 200, 83, 0.15);
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .header-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .logo-icon {
-            width: 50px;
-            height: 50px;
-            background: linear-gradient(135deg, #0a8a3e, #086b2f);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            font-weight: 800;
-            color: #ffffff;
-        }
-
-        .logo-text {
-            font-size: 22px;
-            font-weight: 800;
-            color: #1a1a1a;
-            letter-spacing: 1px;
-        }
-
-        .logo-text span {
-            color: #0a8a3e;
-        }
-
-        .nav-whatsapp {
-            background: linear-gradient(135deg, #0a8a3e, #086b2f);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);
-        }
-
-        .nav-whatsapp:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(0, 200, 83, 0.5);
-        }
-
-        /* ===== HERO ===== */
-        .hero {
-            margin-top: 90px;
-            background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 50%, #ffffff 100%);
-            padding: 120px 0 100px;
-            position: relative;
-            overflow: hidden;
-            text-align: center;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0, 200, 83, 0.08) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .hero-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(0, 200, 83, 0.1);
-            border: 1px solid rgba(0, 200, 83, 0.3);
-            color: #086b2f;
-            padding: 10px 24px;
-            border-radius: 50px;
-            font-weight: 600;
-            font-size: 14px;
-            margin-bottom: 30px;
-            animation: pulse-badge 2s infinite;
-        }
-
-        @keyframes pulse-badge {
-            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 200, 83, 0.3); }
-            50% { box-shadow: 0 0 0 10px rgba(0, 200, 83, 0); }
-        }
-
-        .hero-text h1 {
-            font-size: 52px;
-            font-weight: 800;
-            line-height: 1.1;
-            margin-bottom: 25px;
-            background: linear-gradient(135deg, #1a1a1a 0%, #086b2f 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .hero-text p {
-            font-size: 20px;
-            color: #555;
-            line-height: 1.7;
-            margin-bottom: 40px;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 20px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        .btn-primary {
-            background: linear-gradient(135deg, #0a8a3e, #086b2f);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 20px rgba(0, 200, 83, 0.3);
-            border: none;
-            cursor: pointer;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 30px rgba(0, 200, 83, 0.5);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: #086b2f;
-            text-decoration: none;
-            padding: 18px 40px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 16px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            transition: all 0.3s ease;
-            border: 2px solid #0a8a3e;
-        }
-
-        .btn-secondary:hover {
-            background: rgba(0, 200, 83, 0.08);
-            transform: translateY(-3px);
-        }
-
-        /* ===== SERVICES ===== */
-        .services {
-            padding: 80px 0;
-            background: #f8fdf9;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: 60px;
-        }
-
-        .section-header h2 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 15px;
-            color: #1a1a1a;
-        }
-
-        .section-header h2 span {
-            color: #0a8a3e;
-        }
-
-        .section-header p {
-            color: #666;
-            font-size: 16px;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 30px;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .service-card {
-            background: linear-gradient(135deg, #ffffff, #f0fdf4);
-            border: 1px solid #e0f2e9;
-            border-radius: 20px;
-            padding: 40px 30px;
-            text-align: center;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #0a8a3e, #086b2f);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            border-color: #0a8a3e;
-            box-shadow: 0 20px 40px rgba(0, 200, 83, 0.12);
-        }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #0a8a3e20, #086b2f20);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 20px;
-            font-size: 28px;
-            border: 2px solid #0a8a3e40;
-        }
-
-        .service-card h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
-            color: #1a1a1a;
-        }
-
-        .service-card p {
-            color: #555;
-            font-size: 14px;
-            line-height: 1.6;
-            margin-bottom: 25px;
-        }
-
-        .whatsapp-btn {
-            background: linear-gradient(135deg, #0a8a3e, #086b2f);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 12px 28px;
-            border-radius: 50px;
-            font-weight: 700;
-            font-size: 14px;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.3);
-        }
-
-        .whatsapp-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.5);
-        }
-
-        /* ===== CTA ===== */
-        .cta-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #f0fdf4 0%, #ffffff 100%);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-section::before {
-            content: '';
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(0, 200, 83, 0.06) 0%, transparent 70%);
-            border-radius: 50%;
-        }
-
-        .cta-section h2 {
-            font-size: 42px;
-            font-weight: 800;
-            margin-bottom: 20px;
-            position: relative;
-            z-index: 1;
-            color: #1a1a1a;
-        }
-
-        .cta-section h2 span {
-            color: #0a8a3e;
-        }
-
-        .cta-section p {
-            color: #555;
-            font-size: 18px;
-            max-width: 600px;
-            margin: 0 auto 40px;
-            position: relative;
-            z-index: 1;
-        }
-
-        .cta-whatsapp {
-            background: linear-gradient(135deg, #0a8a3e, #086b2f);
-            color: #ffffff;
-            text-decoration: none;
-            padding: 20px 50px;
-            border-radius: 50px;
-            font-weight: 800;
-            font-size: 18px;
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            transition: all 0.3s ease;
-            box-shadow: 0 8px 30px rgba(0, 200, 83, 0.4);
-            position: relative;
-            z-index: 1;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { box-shadow: 0 8px 30px rgba(0, 200, 83, 0.4); }
-            50% { box-shadow: 0 8px 40px rgba(0, 200, 83, 0.7); }
-        }
-
-        .cta-whatsapp:hover {
-            transform: scale(1.05);
-        }
-
-        /* ===== FLOATING WHATSAPP ===== */
-        .floating-whatsapp {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            background: linear-gradient(135deg, #0a8a3e, #086b2f);
-            color: #ffffff;
-            width: 65px;
-            height: 65px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            box-shadow: 0 6px 25px rgba(0, 200, 83, 0.4);
-            z-index: 999;
-            transition: all 0.3s ease;
-            animation: pulse-float 2s infinite;
-        }
-
-        .floating-whatsapp svg {
-            width: 36px;
-            height: 36px;
-            fill: #ffffff;
-        }
-
-        .floating-whatsapp:hover {
-            transform: scale(1.1) rotate(5deg);
-            box-shadow: 0 8px 35px rgba(0, 200, 83, 0.6);
-        }
-
-        @keyframes pulse-float {
-            0%, 100% { box-shadow: 0 6px 25px rgba(0, 200, 83, 0.4); }
-            50% { box-shadow: 0 6px 35px rgba(0, 200, 83, 0.7); }
-        }
-
-        .floating-whatsapp::after {
-            content: 'Fale Conosco';
-            position: absolute;
-            right: 75px;
-            background: #ffffff;
-            color: #086b2f;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 13px;
-            font-weight: 600;
-            white-space: nowrap;
-            opacity: 0;
-            transform: translateX(10px);
-            transition: all 0.3s ease;
-            pointer-events: none;
-            border: 1px solid #0a8a3e40;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-        }
-
-        .floating-whatsapp:hover::after {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        /* ===== FOOTER ===== */
-        footer {
-            background: #f0fdf4;
-            padding: 40px 0;
-            text-align: center;
-            border-top: 1px solid #e0f2e9;
-        }
-
-        footer p {
-            color: #666;
-            font-size: 14px;
-        }
-
-        footer .footer-whatsapp {
-            color: #086b2f;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        /* ===== RESPONSIVE ===== */
-        @media (max-width: 768px) {
-            .hero-text h1 {
-                font-size: 36px;
-            }
-
-            .hero-text p {
-                font-size: 18px;
-            }
-
-            .section-header h2 {
-                font-size: 28px;
-            }
-
-            .cta-section h2 {
-                font-size: 28px;
-            }
-
-            .nav-whatsapp span {
-                display: none;
-            }
-
-            .nav-whatsapp {
-                padding: 12px 16px;
-            }
-
-            .floating-whatsapp {
-                width: 55px;
-                height: 55px;
-            }
-
-            .floating-whatsapp svg {
-                width: 30px;
-                height: 30px;
-            }
-
-            .floating-whatsapp::after {
-                display: none;
-            }
-
-            .popup-box {
-                padding: 30px 20px;
-            }
-
-            .popup-box h2 {
-                font-size: 20px;
-            }
-        
-            .services-grid {
-                grid-template-columns: 1fr;
-                max-width: 100%;
-                padding: 0 15px;
-            }
-
-            .service-card {
-                padding: 30px 20px;
-            }
-
-}
-
-        /* Logo image styles */
-        .logo-img {
-            transition: transform 0.3s ease;
-        }
-        .logo-img:hover {
-            transform: scale(1.05);
-        }
-
-        .hero-logo-img {
-            transition: transform 0.4s ease, box-shadow 0.4s ease;
-        }
-        .hero-logo-img:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.15);
-        }
-
-        /* ===== LEGAL SECTIONS ===== */
-        .legal-section {
-            padding: 80px 0;
-            background: #ffffff;
-        }
-
-        .legal-section h2 {
-            font-size: 36px;
-            font-weight: 800;
-            margin-bottom: 10px;
-            color: #1a1a1a;
-            text-align: center;
-        }
-
-        .legal-section h2 span {
-            color: #0a8a3e;
-        }
-
-        .legal-section .last-update {
-            text-align: center;
-            color: #888;
-            font-size: 14px;
-            margin-bottom: 40px;
-        }
-
-        .legal-highlight {
-            background: linear-gradient(135deg, #f0fdf4, #e8f5e9);
-            border-left: 4px solid #0a8a3e;
-            padding: 20px 25px;
-            border-radius: 0 12px 12px 0;
-            margin-bottom: 40px;
-        }
-
-        .legal-highlight p {
-            color: #333;
-            font-size: 15px;
-            line-height: 1.7;
-            margin: 0;
-        }
-
-        .legal-section h3 {
-            font-size: 20px;
-            font-weight: 700;
-            color: #1a1a1a;
-            margin-top: 35px;
-            margin-bottom: 15px;
-        }
-
-        .legal-section p {
-            color: #555;
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 15px;
-        }
-
-        .legal-section ul {
-            margin-bottom: 20px;
-            padding-left: 25px;
-        }
-
-        .legal-section ul li {
-            color: #555;
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 8px;
-        }
-
-        .legal-divider {
-            height: 80px;
-            background: linear-gradient(180deg, #ffffff 0%, #f0fdf4 50%, #ffffff 100%);
-        }
-
-        #politica-privacidade {
-            margin-top: 40px;
-        }
-
-        @media (max-width: 768px) {
-            .legal-section {
-                padding: 50px 0;
-            }
-            .legal-section h2 {
-                font-size: 26px;
-            }
-            .legal-section h3 {
-                font-size: 18px;
-            }
-            .legal-divider {
-                height: 50px;
-            }
-        }
-
-    </style>
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
-<base target="_blank">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Celcoin — Infraestrutura Financeira | Banking, Payments & Credit</title>
+<meta name="description" content="Celcoin Sociedade de Crédito Direto S.A. — Infraestrutura financeira completa: Banking, Credit e Payments via APIs modulares.">
+<style>
+  :root{
+    --bg:#0b0f2a;
+    --bg2:#121640;
+    --accent:#00e6a8;
+    --accent2:#6c5ce7;
+    --text:#f4f6ff;
+    --muted:#aab2d8;
+    --card:#161d4d;
+    --card-border:#262f63;
+  }
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{font-family:'Segoe UI',system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--text);line-height:1.6}
+  a{color:inherit;text-decoration:none}
+  .container{max-width:1140px;margin:0 auto;padding:0 24px}
+
+  /* NAV */
+  header{position:fixed;top:0;width:100%;z-index:100;background:rgba(11,15,42,.85);backdrop-filter:blur(12px);border-bottom:1px solid var(--card-border)}
+  nav{display:flex;align-items:center;justify-content:space-between;height:72px}
+  .logo{font-size:1.4rem;font-weight:800;letter-spacing:1px}
+  .logo span{color:var(--accent)}
+  nav ul{display:flex;gap:32px;list-style:none}
+  nav ul a{color:var(--muted);font-size:.95rem;transition:color .2s}
+  nav ul a:hover{color:var(--accent)}
+  .btn{display:inline-block;padding:12px 28px;border-radius:8px;font-weight:700;font-size:.95rem;transition:all .25s;cursor:pointer;border:none}
+  .btn-primary{background:var(--accent);color:#04150f}
+  .btn-primary:hover{background:#0ff7bb;transform:translateY(-2px)}
+  .btn-outline{border:1px solid var(--accent);color:var(--accent)}
+  .btn-outline:hover{background:var(--accent);color:#04150f}
+  .nav-cta{display:none}
+  @media(min-width:900px){.nav-cta{display:inline-block}}
+
+  /* HERO */
+  .hero{padding:180px 0 110px;background:radial-gradient(ellipse at 70% 20%,rgba(108,92,231,.25),transparent 55%),radial-gradient(ellipse at 20% 80%,rgba(0,230,168,.12),transparent 50%)}
+  .hero-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+  @media(min-width:900px){.hero-grid{grid-template-columns:1.15fr .85fr}}
+  .tag{display:inline-block;padding:6px 16px;border:1px solid var(--card-border);border-radius:999px;font-size:.8rem;color:var(--accent);background:rgba(0,230,168,.06);margin-bottom:24px}
+  h1{font-size:clamp(2.2rem,5vw,3.6rem);line-height:1.15;font-weight:800}
+  h1 em{font-style:normal;color:var(--accent)}
+  .hero p{margin:24px 0 36px;color:var(--muted);font-size:1.1rem;max-width:560px}
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap}
+  .hero-card{background:linear-gradient(145deg,var(--card),var(--bg2));border:1px solid var(--card-border);border-radius:20px;padding:36px;box-shadow:0 30px 60px rgba(0,0,0,.35)}
+  .hero-card h3{font-size:.85rem;text-transform:uppercase;letter-spacing:2px;color:var(--muted);margin-bottom:20px}
+  .hero-card li{list-style:none;display:flex;align-items:center;gap:14px;padding:12px 0;border-bottom:1px dashed var(--card-border);color:var(--muted);font-size:.95rem}
+  .hero-card li:last-child{border-bottom:none}
+  .dot{width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0;box-shadow:0 0 10px var(--accent)}
+
+  /* STATS */
+  .stats{background:var(--bg2);border-block:1px solid var(--card-border)}
+  .stats-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:48px 0}
+  @media(min-width:900px){.stats-grid{grid-template-columns:repeat(4,1fr)}}
+  .stat{text-align:center;padding:24px 12px}
+  .stat b{display:block;font-size:clamp(1.8rem,3.5vw,2.6rem);color:var(--accent);font-weight:800}
+  .stat span{color:var(--muted);font-size:.9rem}
+
+  /* SECTIONS */
+  section{padding:96px 0}
+  .section-head{max-width:640px;margin-bottom:56px}
+  .section-head .kicker{color:var(--accent);font-size:.8rem;text-transform:uppercase;letter-spacing:2px;font-weight:700}
+  h2{font-size:clamp(1.8rem,3.5vw,2.5rem);margin:12px 0 16px;font-weight:800}
+  .section-head p{color:var(--muted)}
+
+  .cards{display:grid;grid-template-columns:1fr;gap:24px}
+  @media(min-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1024px){.cards{grid-template-columns:repeat(3,1fr)}}
+  .card{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:32px;transition:transform .25s,border-color .25s}
+  .card:hover{transform:translateY(-6px);border-color:var(--accent)}
+  .icon{width:52px;height:52px;border-radius:12px;display:flex;align-items:center;justify-content:center;background:rgba(0,230,168,.1);margin-bottom:20px}
+  .icon svg{width:26px;height:26px;stroke:var(--accent);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .card h3{font-size:1.15rem;margin-bottom:10px}
+  .card p{color:var(--muted);font-size:.95rem}
+  .card ul{margin-top:16px;list-style:none}
+  .card ul li{color:var(--muted);font-size:.9rem;padding:4px 0 4px 22px;position:relative}
+  .card ul li::before{content:"✓";color:var(--accent);position:absolute;left:0;font-weight:700}
+
+  /* BAND CREDITO */
+  .band{background:linear-gradient(120deg,var(--accent2),#4834d4);border-radius:24px;padding:56px;display:grid;grid-template-columns:1fr;gap:32px;align-items:center}
+  @media(min-width:900px){.band{grid-template-columns:1.2fr .8fr}}
+  .band h2{color:#fff}
+  .band p{color:#e6e2ff;margin-top:12px}
+  .band .btn{align-self:center;justify-self:start;background:#fff;color:#3d2fb8;text-align:center}
+  @media(min-width:900px){.band .btn{justify-self:end}}
+
+  /* REGULATÓRIO */
+  .reg-grid{display:grid;grid-template-columns:1fr;gap:24px}
+  @media(min-width:900px){.reg-grid{grid-template-columns:1fr 1fr}}
+  .reg-item{background:var(--card);border-left:4px solid var(--accent);border-radius:0 12px 12px 0;padding:24px}
+  .reg-item h4{margin-bottom:6px}
+  .reg-item p{color:var(--muted);font-size:.92rem}
+
+  /* SOBRE */
+  .about{background:var(--bg2)}
+  .about-grid{display:grid;grid-template-columns:1fr;gap:48px;align-items:center}
+  @media(min-width:900px){.about-grid{grid-template-columns:1fr 1fr}}
+  .about ul{list-style:none;margin-top:24px}
+  .about ul li{padding:10px 0 10px 34px;position:relative;color:var(--muted)}
+  .about ul li::before{content:"●";color:var(--accent);position:absolute;left:0;top:10px;font-size:.8rem}
+
+  /* CTA / FOOTER */
+  .cta{text-align:center;padding:110px 0;background:radial-gradient(ellipse at center,rgba(0,230,168,.12),transparent 60%)}
+  .cta p{color:var(--muted);margin:16px auto 36px;max-width:520px}
+  footer{border-top:1px solid var(--card-border);padding:56px 0 32px;background:#080b20}
+  .foot-grid{display:grid;grid-template-columns:1fr;gap:40px;margin-bottom:48px}
+  @media(min-width:900px){.foot-grid{grid-template-columns:1.4fr 1fr 1fr 1fr}}
+  footer h5{font-size:.85rem;text-transform:uppercase;letter-spacing:1.5px;color:var(--text);margin-bottom:16px}
+  footer ul{list-style:none}
+  footer ul li{margin-bottom:10px}
+  footer ul a{color:var(--muted);font-size:.92rem}
+  footer ul a:hover{color:var(--accent)}
+  .legal-page{background:#0a0d26;padding:150px 0 96px}
+  .legal-page h2{margin-bottom:8px}
+  .legal-page .updated{color:var(--accent);font-size:.85rem;margin-bottom:40px}
+  .legal-page h4{color:var(--text);margin:32px 0 12px;font-size:1.05rem}
+  .legal-page p{color:var(--muted);font-size:.95rem;margin-bottom:12px}
+  .legal-page ul{color:var(--muted);font-size:.95rem;margin:0 0 12px 20px}
+  .legal-page li{margin-bottom:6px}
+  .legal-page a{color:var(--accent)}
+  .legal-page .block{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:40px}
+  .legal-nav{display:flex;gap:16px;margin-bottom:40px;flex-wrap:wrap}
+  .legal-nav a{padding:8px 20px;border:1px solid var(--card-border);border-radius:999px;font-size:.85rem;color:var(--muted)}
+  .legal-nav a:hover{border-color:var(--accent);color:var(--accent)}
+  .legal{border-top:1px solid var(--card-border);padding-top:28px;color:var(--muted);font-size:.8rem;display:flex;flex-wrap:wrap;gap:16px;justify-content:space-between}
+</style>
 <base target="_blank">
 </head>
 <body>
 
-    <!-- Header -->
-    <header>
-        <div class="container">
-            <div class="header-content">
-                <div class="logo">
-                    <div class="logo-text">Portal do <span>Cliente</span></div>
-                </div>
-                <a href="https://wa.me/5512982164279?text=Olá!%20Gostaria%20de%20solicitar%20atendimento." class="nav-whatsapp" target="_blank">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> <span>Falar no WhatsApp</span>
-                </a>
-            </div>
-        </div>
-    </header>
+<header>
+  <div class="container">
+    <nav>
+      <a class="logo" href="#">CEL<span>COIN</span></a>
+      <ul>
+        <li><a href="#solucoes">Soluções</a></li>
+        <li><a href="#credito">Crédito</a></li>
+        <li><a href="#regulatorio">Regulatório</a></li>
+        <li><a href="#sobre">Sobre</a></li>
+        <li><a href="#contato">Contato</a></li>
+      </ul>
+      <a class="btn btn-primary nav-cta" href="#contato">Fale com a gente</a>
+    </nav>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section class="hero">
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-badge">🕐 Atendimento 24h</div>
-                <div class="hero-text">
-                    <h1>2ª Via de Fatura Atualizada em Segundos</h1>
-                    <p>Resolvemos sua fatura em atraso, emitimos segunda via atualizada e regularizamos seu plano de saúde sem burocracia. Atendimento rápido e humanizado.</p>
-                </div>
-                <div class="hero-buttons">
-                    <a href="https://wa.me/5512982164279?text=Olá!%20Gostaria%20de%20solicitar%20atendimento." class="btn-primary" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Solicitar 2ª Via
-                    </a>
-                    <a href="https://wa.me/5512982164279?text=Olá!%20Gostaria%20de%20solicitar%20atendimento." class="btn-secondary" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Falar com Especialista
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- HERO -->
+<div class="hero">
+  <div class="container hero-grid">
+    <div>
+      <span class="tag">Infraestrutura financeira · Infratech · Desde 2016</span>
+      <h1>A infraestrutura financeira <em>mais completa</em> do mercado</h1>
+      <p>A Celcoin Sociedade de Crédito Direto S.A. oferece Banking, Credit e Payments via APIs modulares, para que empresas de qualquer setor lancem serviços financeiros com a própria marca — de forma rápida, segura e em conformidade regulatória.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#solucoes">Conheça as soluções</a>
+        <a class="btn btn-outline" href="#contato">Solicite uma demo</a>
+      </div>
+    </div>
+    <div class="hero-card">
+      <h3>Confiança regulatória</h3>
+      <ul>
+        <li><span class="dot"></span>Sociedade de Crédito Direto (SCD) autorizada pelo Banco Central</li>
+        <li><span class="dot"></span>Instituição de Pagamento (IP) licenciada</li>
+        <li><span class="dot"></span>Participante direta no Pix</li>
+        <li><span class="dot"></span>Iniciadora de Pagamentos no Open Finance</li>
+        <li><span class="dot"></span>Conectada ao SPB e à RSFN</li>
+      </ul>
+    </div>
+  </div>
+</div>
 
-    <!-- Services Section -->
-    <section class="services">
-        <div class="container">
-            <div class="section-header">
-                <h2>Nossos <span>Serviços</span></h2>
-                <p>Soluções completas para sua fatura de plano de saúde. Sem formulários, sem complicação. Um clique e resolvemos tudo pelo WhatsApp.</p>
-            </div>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg></div>
-                    <h3>2ª Via Atualizada</h3>
-                    <p>Emitimos sua segunda via de fatura atualizada em poucos minutos. Código de barras válido e pronto para pagamento.</p>
-                    <a href="https://wa.me/5512982164279?text=Olá!%20Preciso%20da%202ª%20via%20atualizada%20do%20meu%20plano%20de%20saúde." class="whatsapp-btn" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg> Pedir 2ª Via
-                    </a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"></path><line x1="12" y1="9" x2="12" y2="13"></line><line x1="12" y1="17" x2="12.01" y2="17"></line></svg></div>
-                    <h3>Fatura em Atraso</h3>
-                    <p>Negociamos sua fatura em atraso com as melhores condições. Evite o cancelamento do seu plano de saúde.</p>
-                    <a href="https://wa.me/5512982164279?text=Olá!%20Minha%20fatura%20está%20em%20atraso%20e%20preciso%20negociar." class="whatsapp-btn" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><line x1="12" y1="1" x2="12" y2="23"></line><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Negociar Agora
-                    </a>
-                </div>
-                
-                <div class="service-card">
-                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg></div>
-                    <h3>Suporte ao Cliente</h3>
-                    <p>Tire suas dúvidas, altere dados cadastrais, consulte informações do plano e receba atendimento personalizado com nossa equipe.</p>
-                    <a href="https://wa.me/5512982164279?text=Olá!%20Preciso%20de%20suporte%20ao%20cliente%20e%20tenho%20algumas%20dúvidas." class="whatsapp-btn" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:18px;height:18px;flex-shrink:0;"><path d="M3 18v-6a9 9 0 0 1 18 0v6"></path><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3zM3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path></svg> Falar com Suporte
-                    </a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><path d="M4.8 2.3A.3.3 0 1 0 5 2H4a2 2 0 0 0-2 2v5a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6V4a2 2 0 0 0-2-2h-1a.2.2 0 1 0 .3.3"></path><path d="M8 15v1a6 6 0 0 0 6 6v0a6 6 0 0 0 6-6v-4"></path><circle cx="20" cy="10" r="2"></circle></svg></div>
-                    <h3>Agendar Exame</h3>
-                    <p>Agendamos seus exames laboratoriais e de imagem na rede credenciada da . Rápido, prático e sem filas de espera.</p>
-                    <a href="https://wa.me/5512982164279?text=Olá!%20Gostaria%20de%20agendar%20um%20exame%20na%20rede%20credenciada." class="whatsapp-btn" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Agendar Exame
-                    </a>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:32px;height:32px;"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line><path d="M8 14h.01"></path><path d="M12 14h.01"></path><path d="M16 14h.01"></path><path d="M8 18h.01"></path><path d="M12 18h.01"></path><path d="M16 18h.01"></path></svg></div>
-                    <h3>Agendar Consulta</h3>
-                    <p>Marque sua consulta médica com especialistas da rede credenciada. Escolha dia, horário e local de forma simples pelo WhatsApp.</p>
-                    <a href="https://wa.me/5512982164279?text=Olá!%20Gostaria%20de%20agendar%20uma%20consulta%20médica." class="whatsapp-btn" target="_blank">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Agendar Consulta
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- STATS -->
+<div class="stats">
+  <div class="container stats-grid">
+    <div class="stat"><b>R$ 30+ bi</b><span>mediados em transações por mês</span></div>
+    <div class="stat"><b>6.000+</b><span>clientes e empresas atendidas</span></div>
+    <div class="stat"><b>750+</b><span>bancos digitais e fintechs conectados</span></div>
+    <div class="stat"><b>400</b><span>colaboradores</span></div>
+  </div>
+</div>
 
-    <!-- CTA Section -->
-    <section class="cta-section">
-        <div class="container">
-            <h2>Não perca seu <span>Plano de Saúde</span></h2>
-            <p>Fatura em atraso? Precisa da 2ª via? Clique abaixo e fale direto conosco pelo WhatsApp. Resolvemos tudo em minutos, sem filas, sem espera.</p>
-            <a href="https://wa.me/5512982164279?text=Olá!%20Preciso%20de%20ajuda%20urgente%20com%20minha%20fatura%20do%20plano%20de%20saúde." class="cta-whatsapp" target="_blank">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" style="width:18px;height:18px;flex-shrink:0;"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg> Falar no WhatsApp Agora
-            </a>
-        </div>
-    </section>
+<!-- SOLUÇÕES -->
+<section id="solucoes">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Nossas soluções</span>
+      <h2>Building blocks financeiros para o seu negócio</h2>
+      <p>Escolha os módulos que precisa e construa sua operação financeira com a mesma base tecnológica — do MVP à escala.</p>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M3 10l9-6 9 6v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/><path d="M9 20v-6h6v6"/></svg></div>
+        <h3>Banking as a Service</h3>
+        <p>Contas digitais completas para a sua marca, com KYC, compliance e liquidação por nossa conta.</p>
+        <ul>
+          <li>Contas digitais white-label</li>
+          <li>Cartões pré e pós-pagos</li>
+          <li>TED, boletos e recargas</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M13 2L3 14h7l-1 8L19 10h-7l1-8z"/></svg></div>
+        <h3>Payments</h3>
+        <p>Alta performance em meios de pagamento diversos, como participante direta no arranjo Pix.</p>
+        <ul>
+          <li>Pix (recebimento e envio)</li>
+          <li>Gateway de pagamento</li>
+          <li>ITP — Iniciador de Pagamentos</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 3"/></svg></div>
+        <h3>Crédito as a Service</h3>
+        <p>Motor completo de crédito para originar, aprovar e escalar operações sem virar um banco.</p>
+        <ul>
+          <li>Esteira digital de crédito</li>
+          <li>Emissão de CCB</li>
+          <li>BNPL e crédito embutido</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M9 12h6M12 9v6"/><circle cx="12" cy="12" r="9"/></svg></div>
+        <h3>Pagamento de Contas</h3>
+        <p>Infraestrutura de TPV e boletos que move milhões de contas todos os meses, com conciliação automatizada.</p>
+        <ul>
+          <li>Boleto e boletim de cobrança</li>
+          <li>Conciliação automática</li>
+          <li>APIs de alta disponibilidade</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7z"/><path d="M9 12l2 2 4-4"/></svg></div>
+        <h3>Open Finance</h3>
+        <p>Conecte-se ao ecossistema de dados abertos como Iniciadora de Pagamentos e amplie suas ofertas.</p>
+        <ul>
+          <li>Pagamento via Open Finance</li>
+          <li>Dados para ofertas personalizadas</li>
+          <li>Conformidade com o regulador</li>
+        </ul>
+      </div>
+      <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M4 19V5M4 15c3-4 5 2 8-2s5 2 8-2"/></svg></div>
+        <h3>Core Banking</h3>
+        <p>Quando sua empresa conquistar a licença própria do BCB, migre sem reconstruir a infraestrutura.</p>
+        <ul>
+          <li>Migração sem fricção</li>
+          <li>Escalabilidade na nuvem</li>
+          <li>Alta disponibilidade</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CRÉDITO -->
+<section id="credito" style="padding-top:0">
+  <div class="container">
+    <div class="band">
+      <div>
+        <h2>Consignado as a Service</h2>
+        <p>Uma única API conecta sua empresa aos principais gestores de margem do país — Dataprev, Caixa, Zetra e Sigepe — com consulta de margem, averbação e conciliação automatizadas. Mais de 400 convênios protocolados sob as licenças IP e SCD da Celcoin.</p>
+      </div>
+      <a class="btn" href="#contato">Quero escalar meu crédito</a>
+    </div>
+  </div>
+</section>
+
+<!-- REGULATÓRIO -->
+<section id="regulatorio" style="padding-top:0">
+  <div class="container">
+    <div class="section-head">
+      <span class="kicker">Segurança e compliance</span>
+      <h2>Operação regulada e auditável</h2>
+      <p>A Celcoin atua com portfólio completo de licenças regulatórias, assumindo compliance, PLD/FTP, KYC e relatórios regulatórios pela sua empresa.</p>
+    </div>
+    <div class="reg-grid">
+      <div class="reg-item">
+        <h4>Sociedade de Crédito Direto (SCD)</h4>
+        <p>Instituição financeira autorizada pelo Banco Central para conceder crédito com recursos próprios, operando 100% de forma digital.</p>
+      </div>
+      <div class="reg-item">
+        <h4>Instituição de Pagamento (IP)</h4>
+        <p>Licença para emissão de moeda eletrônica e prestação de serviços de pagamento, conforme as Resoluções BCB nº 80 e 81.</p>
+      </div>
+      <div class="reg-item">
+        <h4>Pix e Open Finance</h4>
+        <p>Participante direta no arranjo Pix e Iniciadora de Pagamentos no Open Finance, conectada ao SPB e à RSFN.</p>
+      </div>
+      <div class="reg-item">
+        <h4>Prevenção a fraudes</h4>
+        <p>Monitoramento baseado em IA, autenticação robusta e controles de risco que reduzem perdas e exposição regulatória.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="about">
+  <div class="container about-grid">
+    <div>
+      <span class="kicker" style="color:var(--accent);font-size:.8rem;text-transform:uppercase;letter-spacing:2px;font-weight:700">Sobre a Celcoin</span>
+      <h2>O motor invisível por trás do novo crédito digital</h2>
+      <p style="color:var(--muted);margin-top:16px">Fundada em 2016, a Celcoin nasceu com a missão de democratizar o acesso a serviços financeiros no Brasil. Começamos com pagamentos, avançamos para banking e, hoje, somos uma das principais infratechs do país — permitindo que qualquer empresa ofereça crédito de forma segura, digital e escalável, sem precisar se tornar um banco.</p>
+      <ul>
+        <li>Quem concede o crédito é o nosso cliente — nós fornecemos a infraestrutura</li>
+        <li>+400 convênios públicos e privados protocolados</li>
+        <li>Cases: Americanas, Bankme, SuperSim, Robbin, Pipeimob, Bull Banker e mais</li>
+        <li>Esteiras de crédito implementadas em dias, não meses</li>
+      </ul>
+    </div>
+    <div class="hero-card" style="padding:44px">
+      <h3>Palavra do CEO</h3>
+      <p style="color:var(--text);font-size:1.15rem;font-style:italic">"Estamos vivendo um ciclo inédito de desconcentração do crédito. Nossa missão é permitir que qualquer empresa ofereça crédito de forma segura, digital e escalável, sem precisar se tornar um banco."</p>
+      <p style="color:var(--muted);margin-top:20px;font-size:.9rem">— Marcelo França, CEO e fundador da Celcoin</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section id="contato" class="cta">
+  <div class="container">
+    <span class="tag">Vamos construir juntos</span>
+    <h2>Pronto para lançar sua operação financeira?</h2>
+    <p>Fintechs, bancos digitais, ERPs, varejistas e instituições de todos os portes operam com a infraestrutura da Celcoin. Fale com nosso time e receba uma proposta sob medida.</p>
+    <div class="hero-actions" style="justify-content:center">
+      <a class="btn btn-primary" href="mailto:contato@celcoin.com.br">contato@celcoin.com.br</a>
+    </div>
+  </div>
+</section>
 
 
-    <!-- TERMOS DE USO -->
-    <section class="legal-section" id="termos-de-uso">
-        <div class="container">
-            <h2>Termos de <span>Uso</span></h2>
-            <p class="last-update">Última atualização: 29 de Julho de 2026</p>
+<!-- POLÍTICA DE PRIVACIDADE -->
+<section id="privacidade" class="legal-page">
+  <div class="container">
+    <span class="kicker" style="color:var(--accent);font-size:.8rem;text-transform:uppercase;letter-spacing:2px;font-weight:700">Documentos legais</span>
+    <h2>Política de Privacidade</h2>
+    <p class="updated">Última atualização: setembro de 2026</p>
+    <div class="block">
+      <h4>1. Quem somos</h4>
+      <p>A Celcoin Sociedade de Crédito Direto S.A. ("Celcoin"), pessoa jurídica de direito privado, instituição financeira autorizada pelo Banco Central do Brasil, é a controladora dos dados pessoais coletados por meio deste site e de suas plataformas.</p>
+      <h4>2. Dados que coletamos</h4>
+      <ul>
+        <li>Dados de identificação: nome, CPF/CNPJ, e-mail, telefone;</li>
+        <li>Dados de navegação: endereço IP, cookies, páginas visitadas e dispositivo utilizado;</li>
+        <li>Dados cadastrais fornecidos voluntariamente em formulários de contato e demonstrações.</li>
+      </ul>
+      <h4>3. Finalidades do tratamento</h4>
+      <ul>
+        <li>Responder a solicitações de contato e enviar propostas comerciais;</li>
+        <li>Melhorar a experiência de navegação e analisar o desempenho do site;</li>
+        <li>Cumprir obrigações regulatórias e de prevenção à lavagem de dinheiro (PLD/FTP);</li>
+        <li>Prevenir fraudes e garantir a segurança das informações.</li>
+      </ul>
+      <h4>4. Compartilhamento</h4>
+      <p>Os dados pessoais podem ser compartilhados com operadores estritamente necessários à prestação dos serviços, com autoridades regulatórias (incluindo o Banco Central do Brasil) e com parceiros de tecnologia, sempre em conformidade com a Lei Geral de Proteção de Dados (Lei nº 13.709/2018 — LGPD).</p>
+      <h4>5. Seus direitos</h4>
+      <p>Nos termos da LGPD, você pode solicitar a confirmação, o acesso, a correção, a anonimização, a portabilidade ou a eliminação dos seus dados pessoais, bem como revogar consentimentos concedidos, a qualquer momento.</p>
+      <h4>6. Encarregado de dados (DPO)</h4>
+      <p>Para exercer seus direitos ou esclarecer dúvidas sobre esta Política, entre em contato com nosso Encarregado de Proteção de Dados pelo e-mail: <a href="mailto:encarregado@celcoin.com.br">encarregado@celcoin.com.br</a>.</p>
+      <h4>7. Alterações</h4>
+      <p>Esta Política pode ser atualizada periodicamente. A versão vigente estará sempre disponível nesta página.</p>
+    </div>
+  </div>
+</section>
 
-            <div class="legal-highlight">
-                <p>Ao acessar e utilizar este site, você concorda em cumprir e estar vinculado aos seguintes Termos de Uso. Caso não concorde com qualquer parte destes termos, solicitamos que não utilize nossos serviços.</p>
-            </div>
+<!-- TERMOS DE USO -->
+<section id="termos" class="legal-page" style="padding-top:0">
+  <div class="container">
+    <span class="kicker" style="color:var(--accent);font-size:.8rem;text-transform:uppercase;letter-spacing:2px;font-weight:700">Documentos legais</span>
+    <h2>Termos de Uso</h2>
+    <p class="updated">Última atualização: setembro de 2026</p>
+    <div class="block">
+      <h4>1. Aceitação</h4>
+      <p>Ao acessar e utilizar este site, o usuário declara ter lido, compreendido e aceitado integralmente estes Termos de Uso. Caso não concorde com qualquer disposição, deve interromper a utilização do site.</p>
+      <h4>2. Objeto</h4>
+      <p>Este site tem caráter institucional e informativo, destinado à apresentação das soluções de infraestrutura financeira oferecidas pela Celcoin Sociedade de Crédito Direto S.A., incluindo Banking, Payments e Credit.</p>
+      <h4>3. Propriedade intelectual</h4>
+      <p>Todos os textos, marcas, logotipos, layouts, imagens e demais conteúdos deste site são de titularidade da Celcoin ou licenciados a ela, sendo vedada a reprodução, distribuição ou modificação sem autorização prévia e expressa.</p>
+      <h4>4. Limitação de responsabilidade</h4>
+      <ul>
+        <li>As informações contidas neste site são fornecidas "como estão", podendo ser alteradas sem aviso prévio;</li>
+        <li>A Celcoin não garante a ausência de erros, interrupções ou indisponibilidades temporárias do site;</li>
+        <li>Nenhum conteúdo deste site constitui oferta vinculante de produtos ou serviços financeiros.</li>
+      </ul>
+      <h4>5. Conteúdo de terceiros</h4>
+      <p>Este site pode conter referências a marcas e serviços de terceiros, que permanecem de titularidade de seus respectivos detentores, sem qualquer vínculo de associação ou endosso, salvo indicação em contrário.</p>
+      <h4>6. Legislação aplicável</h4>
+      <p>Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil, sendo eleito o foro da comarca de São Paulo/SP para dirimir eventuais controvérsias.</p>
+      <h4>7. Contato</h4>
+      <p>Em caso de dúvidas sobre estes Termos de Uso, entre em contato pelo e-mail: <a href="mailto:contato@celcoin.com.br">contato@celcoin.com.br</a>.</p>
+    </div>
+  </div>
+</section>
 
-            <h3>1. Aceitação dos Termos</h3>
-            <p>Ao utilizar este site e nossos canais de atendimento (incluindo WhatsApp), você declara que leu, compreendeu e aceita integralmente estes Termos de Uso, bem como nossa Política de Privacidade.</p>
-
-            <h3>2. Natureza do Serviço</h3>
-            <p>A <strong></strong> atua como intermediadora de serviços relacionados a planos de saúde, oferecendo suporte para:</p>
-            <ul>
-                <li>Emissão de 2ª via de faturas e boletos atualizados;</li>
-                <li>Negociação de faturas em atraso;</li>
-                <li>Regularização de planos de saúde suspensos ou cancelados;</li>
-                <li>Suporte ao cliente e atualização de dados cadastrais.</li>
-            </ul>
-            <p>Os serviços são prestados em parceria com operadoras de plano de saúde, sendo que a  não é uma operadora de saúde, mas sim uma empresa de atendimento e suporte ao cliente.</p>
-
-            <h3>3. Uso Adequado do Site</h3>
-            <p>O usuário se compromete a utilizar este site e nossos canais de comunicação de forma ética e lícita, abstendo-se de:</p>
-            <ul>
-                <li>Fornecer informações falsas, incompletas ou enganosas;</li>
-                <li>Tentar acessar áreas restritas do site sem autorização;</li>
-                <li>Utilizar robôs, spiders ou outros meios automatizados de acesso;</li>
-                <li>Interferir na segurança ou na integridade dos nossos sistemas;</li>
-                <li>Utilizar o site para fins ilícitos ou que violem direitos de terceiros.</li>
-            </ul>
-
-            <h3>4. Responsabilidades do Usuário</h3>
-            <p>Para utilizar nossos serviços, o usuário deve:</p>
-            <ul>
-                <li>Ser maior de 18 anos ou estar representado por responsável legal;</li>
-                <li>Fornecer dados verdadeiros, precisos e atualizados;</li>
-                <li>Manter a confidencialidade de informações sensíveis compartilhadas;</li>
-                <li>Verificar a autenticidade de comunicações recebidas em nosso nome;</li>
-                <li>Informar-nos imediatamente sobre qualquer uso não autorizado de sua conta ou dados.</li>
-            </ul>
-
-            <h3>5. Limitação de Responsabilidade</h3>
-            <p>A  se esforça para manter as informações do site atualizadas e precisas, porém:</p>
-            <ul>
-                <li>Não garantimos que o site estará disponível ininterruptamente ou livre de erros;</li>
-                <li>Não nos responsabilizamos por decisões tomadas por operadoras de saúde parceiras;</li>
-                <li>Não nos responsabilizamos por danos indiretos, incidentais ou consequenciais resultantes do uso ou da impossibilidade de uso dos nossos serviços;</li>
-                <li>O prazo de regularização de planos pode variar conforme a operadora e a situação cadastral.</li>
-            </ul>
-
-            <h3>6. Propriedade Intelectual</h3>
-            <p>Todo o conteúdo deste site — incluindo textos, imagens, logotipos, design, código-fonte e marca — é de propriedade exclusiva da  ou de seus licenciadores, protegido pelas leis de propriedade intelectual. É vedada a reprodução, distribuição ou modificação sem autorização prévia e expressa.</p>
-
-            <h3>7. Links para Terceiros</h3>
-            <p>Este site pode conter links para sites de terceiros (como operadoras de saúde e instituições financeiras). A  não se responsabiliza pelo conteúdo, políticas de privacidade ou práticas de sites de terceiros.</p>
-
-            <h3>8. Alterações nos Termos</h3>
-            <p>Reservamo-nos o direito de modificar estes Termos de Uso a qualquer momento. Alterações significativas serão comunicadas por meio dos nossos canais oficiais. O uso continuado do site após as alterações constitui aceitação dos novos termos.</p>
-
-            <h3>9. Legislação Aplicável</h3>
-            <p>Estes Termos de Uso são regidos pelas leis da República Federativa do Brasil. Quaisquer disputas serão resolvidas nos foros da comarca de domicílio do usuário, conforme previsto no Código de Defesa do Consumidor.</p>
-
-            <h3>10. Contato</h3>
-            <p>Para dúvidas, sugestões ou reclamações sobre estes Termos de Uso, entre em contato:</p>
-            <ul>
-                <li><strong>Atendimento:</strong> Disponível 24 horas</li>
-            </ul>
-        </div>
-    </section>
-
-    <div class="legal-divider"></div>
-
-    <!-- POLÍTICA DE PRIVACIDADE -->
-    <section class="legal-section" id="politica-privacidade">
-        <div class="container">
-            <h2>Política de <span>Privacidade</span></h2>
-            <p class="last-update">Última atualização: 29 de Julho de 2026</p>
-
-            <div class="legal-highlight">
-                <p>A <strong></strong> valoriza a privacidade e a segurança dos dados de seus clientes. Esta política descreve como coletamos, usamos, armazenamos e protegemos suas informações pessoais.</p>
-            </div>
-
-            <h3>1. Dados Coletados</h3>
-            <p>Podemos coletar as seguintes informações quando você utiliza nossos canais de atendimento:</p>
-            <ul>
-                <li><strong>Dados de identificação:</strong> nome completo, CPF, RG e data de nascimento;</li>
-                <li><strong>Dados de contato:</strong> número de telefone, endereço de e-mail e endereço residencial;</li>
-                <li><strong>Dados do plano:</strong> número da carteirinha, operadora, tipo de plano e dependentes;</li>
-                <li><strong>Dados de pagamento:</strong> informações bancárias necessárias para emissão de boletos e faturas;</li>
-                <li><strong>Dados de comunicação:</strong> histórico de conversas pelo WhatsApp, e-mails e ligações telefônicas.</li>
-            </ul>
-
-            <h3>2. Finalidade do Tratamento</h3>
-            <p>Seus dados são coletados e utilizados exclusivamente para as seguintes finalidades:</p>
-            <ul>
-                <li>Emitir 2ª via de faturas e boletos atualizados;</li>
-                <li>Negociar faturas em atraso e regularizar planos de saúde;</li>
-                <li>Prestar atendimento ao cliente e sanar dúvidas;</li>
-                <li>Atualizar dados cadastrais junto à operadora de saúde;</li>
-                <li>Enviar comunicações sobre vencimentos, reajustes e novidades do plano.</li>
-            </ul>
-
-            <h3>3. Compartilhamento de Dados</h3>
-            <p>Seus dados pessoais <strong>não são vendidos, alugados ou comercializados</strong> a terceiros. Podemos compartilhar informações apenas com:</p>
-            <ul>
-                <li>A operadora de plano de saúde contratada, exclusivamente para fins de regularização e atualização cadastral;</li>
-                <li>Prestadores de serviços que auxiliam em nossas operações (ex: sistemas de atendimento), sob rigorosos contratos de confidencialidade;</li>
-                <li>Órgãos públicos, quando exigido por lei ou ordem judicial.</li>
-            </ul>
-
-            <h3>4. Segurança da Informação</h3>
-            <p>Adotamos medidas técnicas e administrativas para proteger seus dados contra acesso não autorizado, alteração, divulgação ou destruição:</p>
-            <ul>
-                <li>Criptografia de dados em trânsito (SSL/TLS);</li>
-                <li>Armazenamento seguro em servidores com controle de acesso;</li>
-                <li>Políticas internas de confidencialidade para nossos colaboradores;</li>
-                <li>Monitoramento contínuo de nossos sistemas.</li>
-            </ul>
-
-            <h3>5. Seus Direitos (LGPD)</h3>
-            <p>Conforme a Lei Geral de Proteção de Dados (Lei nº 13.709/2018), você possui os seguintes direitos:</p>
-            <ul>
-                <li>Acessar seus dados pessoais que mantemos;</li>
-                <li>Solicitar correção de dados incompletos, inexatos ou desatualizados;</li>
-                <li>Solicitar anonimização, bloqueio ou eliminação de dados desnecessários;</li>
-                <li>Revogar seu consentimento a qualquer momento;</li>
-                <li>Solicitar portabilidade dos dados a outro fornecedor;</li>
-                <li>Ser informado sobre o compartilhamento de seus dados.</li>
-            </ul>
-            <p>Para exercer seus direitos, entre em contato por e-mail.</p>
-
-            <h3>6. Cookies e Tecnologias de Rastreamento</h3>
-            <p>Este site pode utilizar cookies e tecnologias similares para melhorar a experiência do usuário, analisar tráfego e personalizar conteúdo. Você pode configurar seu navegador para recusar cookies, mas isso pode afetar a funcionalidade de alguns recursos.</p>
-
-            <h3>7. Alterações nesta Política</h3>
-            <p>Esta Política de Privacidade pode ser atualizada periodicamente. Recomendamos que você a revise com frequência. Alterações significativas serão comunicadas por meio dos nossos canais oficiais.</p>
-
-            <h3>8. Contato</h3>
-            <p>Em caso de dúvidas sobre esta Política de Privacidade ou sobre o tratamento de seus dados pessoais, entre em contato:</p>
-            <ul>
-                <li><strong>Atendimento:</strong> Disponível 24 horas</li>
-            </ul>
-        </div>
-    </section>
-
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p style="margin-bottom: 10px;">
-                <a href="#termos-de-uso" target="_self" style="color: #086b2f; text-decoration: none; font-weight: 600; margin: 0 10px;">Termos de Uso</a> |
-                <a href="#politica-privacidade" target="_self" style="color: #086b2f; text-decoration: none; font-weight: 600; margin: 0 10px;">Política de Privacidade</a>
-            </p>
-            <p>
-                © 2026  — Todos os direitos reservados.
-            </p>
-        </div>
-    </footer>
-
-    <!-- Floating WhatsApp Button -->
-    <a href="https://wa.me/5512982164279?text=Olá!%20Gostaria%20de%20solicitar%20atendimento." class="floating-whatsapp" target="_blank" title="Fale Conosco">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.358-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
-        </svg>
-    </a>
-
-    <script>
-    </script>
+<footer>
+  <div class="container">
+    <div class="foot-grid">
+      <div>
+        <a class="logo" href="#" style="font-size:1.2rem">CEL<span>COIN</span></a>
+        <p style="color:var(--muted);font-size:.9rem;margin-top:16px;max-width:320px">Celcoin Sociedade de Crédito Direto S.A. — Infraestrutura financeira para banking, pagamentos e crédito.</p>
+      </div>
+      <div>
+        <h5>Soluções</h5>
+        <ul>
+          <li><a href="#solucoes">Banking as a Service</a></li>
+          <li><a href="#solucoes">Payments</a></li>
+          <li><a href="#credito">Crédito</a></li>
+          <li><a href="#solucoes">Open Finance</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Empresa</h5>
+        <ul>
+          <li><a href="#sobre">Sobre nós</a></li>
+          <li><a href="#regulatorio">Regulatório</a></li>
+          <li><a href="#contato">Carreiras</a></li>
+          <li><a href="#contato">Imprensa</a></li>
+          <li><a href="#privacidade">Política de Privacidade</a></li>
+          <li><a href="#termos">Termos de Uso</a></li>
+        </ul>
+      </div>
+      <div>
+        <h5>Contato</h5>
+        <ul>
+          <li><a href="mailto:contato@celcoin.com.br">contato@celcoin.com.br</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>© 2026 Celcoin Sociedade de Crédito Direto S.A. Todos os direitos reservados.</span>
+      <span>Instituição autorizada pelo Banco Central do Brasil.</span>
+    </div>
+  </div>
+</footer>
 
 </body>
 </html>
